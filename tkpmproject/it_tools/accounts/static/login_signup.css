@@ -10,7 +10,7 @@ body {
     margin: 0;
 }
 
-#loginBox {
+#box {
     background-color: #F2EFE7;
     width: 600px;
     display: flex;
@@ -20,18 +20,18 @@ body {
     border-radius: 8px;
 }   
 
-#loginBox h1 {
+#box h1 {
     color: #006A71;
 }
 
-#loginBox input {
+#box input {
     background-color: #D9D9D9;
     border: 0px;
     padding: 10px;      
     border-radius: 8px;
 }
 
-#loginBox input[type="submit"] {
+#box input[type="submit"] {
     background-color: #48A6A7;
     font-weight: bold;
     color: white;

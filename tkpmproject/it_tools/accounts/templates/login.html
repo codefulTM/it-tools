@@ -1,17 +1,17 @@
-<!-- {% load static %} -->
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log in</title>
-    <!-- <link rel="stylesheet" href="{% static 'login.css' %}"> -->
-    <link rel="stylesheet" href="login.css"/>
+    <link rel="stylesheet" href="{% static 'login_signup.css' %}">
+    <!-- <link rel="stylesheet" href="login_signup.css"/> -->
 </head>
 <body>
-    <div id="loginBox">
+    <div id="box">
         <h1>Log in</h1>
-        <form action="/login" method="post">
+        <form action="/accounts/login" method="post">
             <div>
                 <label for="username">Username:</label><br>
                 <input type="text" id="username" name="username"><br><br>   
