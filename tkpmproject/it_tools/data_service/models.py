@@ -39,7 +39,7 @@ class Tool(models.Model):
     name = models.CharField(max_length=100, unique=True, null=False)
     description = models.TextField(null=True)
     category_id = models.ForeignKey('ToolCategory', on_delete=models.CASCADE)
-    is_premium = models.BooleanField(default=False)
+    is_premium = models.BooleanField(default=False) 
     is_enabled = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
