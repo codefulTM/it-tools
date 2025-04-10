@@ -14,7 +14,7 @@ class User(models.Model):
     username = models.CharField(max_length=50, unique=True, null=False)
     email = models.CharField(max_length=100, unique=True, null=False)
     password_hash = models.TextField(null=False)
-    role_id = models.ForeignKey('UserRole', on_delete=models.CASCADE)
+    role = models.ForeignKey('UserRole', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
 # CREATE TABLE user_roles (
@@ -38,7 +38,7 @@ class Tool(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, unique=True, null=False)
     description = models.TextField(null=True)
-    category_id = models.ForeignKey('ToolCategory', on_delete=models.CASCADE)
+    category = models.ForeignKey('ToolCategory', on_delete=models.CASCADE)
     is_premium = models.BooleanField(default=False) 
     is_enabled = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -59,10 +59,8 @@ class ToolCategory(models.Model):
 # );
 class Favorite(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey('User', on_delete=models.CASCADE)
-    tool_id = models.ForeignKey('Tool', on_delete=models.CASCADE)
-    class Meta:
-        unique_together = ('user_id', 'tool_id')
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    tool = models.ForeignKey('Tool', on_delete=models.CASCADE)
 
 # CREATE TABLE subscriptions (
 #     id SERIAL PRIMARY KEY,
@@ -73,8 +71,8 @@ class Favorite(models.Model):
 # );
 class Subscription(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey('User', on_delete=models.CASCADE)
-    status_id = models.ForeignKey('SubscriptionStatus', on_delete=models.CASCADE)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    status = models.ForeignKey('SubscriptionStatus', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)    
 
