@@ -11,7 +11,11 @@
 <body>
     <div id="box">
         <h1>Log in</h1>
-        <form action="/accounts/login" method="post">
+        {% if message %} 
+            <p>{{message}}</p>
+        {% endif %}
+        <form action="/login/" method="post">
+            {% csrf_token %}
             <div>
                 <label for="username">Username:</label><br>
                 <input type="text" id="username" name="username"><br><br>   
@@ -24,6 +28,7 @@
                 <input type="submit" value="Log in">
             </div>
         </form>
+        <p>Haven't created an account? <a href="{% url 'signup' %}">Sign up</a> here</p>
     </div>
 </body>
 </html>

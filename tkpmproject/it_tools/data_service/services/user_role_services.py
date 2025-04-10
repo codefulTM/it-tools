@@ -1,4 +1,4 @@
-from ..models import UserRole
+from data_service.models import UserRole
 
 # Get all function
 def get_all_user_roles():
@@ -13,6 +13,16 @@ def get_user_role_by_id(user_role_id):
     except UserRole.DoesNotExist:
         return None
     
+def get_user_role_by_name(user_role_name):
+    try:
+        user_role = UserRole.objects.get(role=user_role_name)
+        return user_role
+    except UserRole.DoesNotExist:
+        if(user_role_name != 'admin' and user_role_name != 'regular' and user_role_name != 'premium'):
+            return None
+        else:
+            return create_user_role(user_role_name)
+
 # Create user role
 def create_user_role(user_role):
     # If the user role has existed

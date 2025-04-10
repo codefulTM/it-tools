@@ -10,7 +10,10 @@
 <body>
     <div id="box">
         <h1>Sign up</h1>
-        <form action="/accounts/signup" method="post">
+        {% if message %}
+            <p>{{message}}</p>
+        {% endif %}
+        <form action="/signup/" method="post">
             {% csrf_token %}
             <div>
                 <label for="email">Email:</label><br>
@@ -28,6 +31,7 @@
                 <input type="submit" value="Sign up">
             </div>
         </form>
+        <p>Already have an account? <a href="{% url 'login' %}">Log in</a> here</p>
     </div>
 </body>
 </html>
