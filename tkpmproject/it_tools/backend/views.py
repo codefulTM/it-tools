@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.template import loader
 import bcrypt
+from backend.decorators import login_required
 from data_service.services.user_services import *
 from data_service.services.user_role_services import *
 
@@ -61,6 +62,7 @@ def login(request):
     else:
         return render(request, 'login.html')
     
+@login_required
 def logout(request):
     request.session.flush()
-    return redirect('login')
+    return redirect('login')    
