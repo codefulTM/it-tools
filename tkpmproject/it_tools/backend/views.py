@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.template import loader
 import bcrypt
+from backend.decorators import login_required
 from data_service.services.user_services import *
 from data_service.services.user_role_services import *
 
@@ -51,6 +52,8 @@ def login(request):
             user = users.get(username=username)
             if bcrypt.checkpw(password.encode('utf-8'), user.password_hash.encode('utf-8')):
                 request.session['user_id'] = user.id
+                request.session['username'] = user.username
+                request.session['user_role'] = user.role.id
                 return HttpResponse("Login successful")
             else:
                 return render(request, 'login.html', {'message': 'Invalid password'})
@@ -58,3 +61,8 @@ def login(request):
             return render(request, 'login.html', {'message': 'Username does not exist'})
     else:
         return render(request, 'login.html')
+    
+@login_required
+def logout(request):
+    request.session.flush()
+    return redirect('login')    
