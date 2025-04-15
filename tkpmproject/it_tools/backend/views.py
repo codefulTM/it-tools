@@ -51,6 +51,8 @@ def login(request):
             user = users.get(username=username)
             if bcrypt.checkpw(password.encode('utf-8'), user.password_hash.encode('utf-8')):
                 request.session['user_id'] = user.id
+                request.session['username'] = user.username
+                request.session['user_role'] = user.role.id
                 return HttpResponse("Login successful")
             else:
                 return render(request, 'login.html', {'message': 'Invalid password'})
@@ -58,3 +60,7 @@ def login(request):
             return render(request, 'login.html', {'message': 'Username does not exist'})
     else:
         return render(request, 'login.html')
+    
+def logout(request):
+    request.session.flush()
+    return redirect('login')
