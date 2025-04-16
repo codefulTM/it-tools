@@ -9,7 +9,7 @@
     </div>
     <h1>All the tools</h1>
     <div class="toolGallery">
-        <div v-for="tool in tools" :id="tool.id" :key="tool.id">
+        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id">
             <h2>{{ tool.name }}</h2>
             <p>{{ tool.description }}</p>
         </div>
@@ -23,6 +23,12 @@
                 tools: JSON.parse('{{it_tools|safe|escapejs}}')
             }
         },
+        computed: {
+            filteredTools() {
+                const keyword = this.search_keyword.toLowerCase()
+                return this.tools.filter(tool => tool.name.toLowerCase().includes(keyword))
+            }
+        }
     });
 
     app.mount("#content");
