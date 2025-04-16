@@ -18,6 +18,10 @@ aside {
 #title {
     text-align: center;
     margin: 20px 0px;
+}
+
+#title a {
+    text-decoration: none;
     color: #006A71;
 }
 
@@ -56,4 +60,12 @@ main {
     height: 40px;
     width: 80%;
     padding-left: 10px;
+}
+
+#content {
+    padding: 20px;  
+}
+
+#content h1 {
+    color: #006A71;   
 }

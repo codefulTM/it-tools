@@ -1,13 +1,30 @@
 {% extends "master.html" %}
 
 {% block content %}
-<h1>Tools</h1>
-<div>
-    {% for tool in it_tools %}
-    <div id="{{ tool.id }}">
-        <h2>{{ tool.name }}</h2>
-        <p>{{ tool.description }}</p>
+<div id="content">
+    <div id="toolbar">
+        <a href="/"><i class="fa-solid fa-house"></i></a>
+        <input type="search" placeholder="Search for tools..." v-model="search_keyword"> 
+        <i class="fa-solid fa-circle-user"></i>
     </div>
-    {% endfor %}
+    <h1>All the tools</h1>
+    <div class="toolGallery">
+        <div v-for="tool in tools" :id="tool.id" :key="tool.id">
+            <h2>{{ tool.name }}</h2>
+            <p>{{ tool.description }}</p>
+        </div>
+    </div>
 </div>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                search_keyword: '',
+                tools: JSON.parse('{{it_tools|safe|escapejs}}')
+            }
+        },
+    });
+
+    app.mount("#content");
+</script>
 {% endblock %}

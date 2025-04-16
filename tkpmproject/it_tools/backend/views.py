@@ -5,6 +5,7 @@ import bcrypt
 from backend.decorators import login_required
 from data_service.services.user_services import *
 from data_service.services.user_role_services import *
+from data_service.services.tool_services import *
 
 # Create your views here.
 def signup(request):    
@@ -68,6 +69,11 @@ def logout(request):
     return redirect('login')    
 
 def it_tools(request):
-    
+    it_tools = get_all_tools()  
+    # Convert query set to a list of objects
+    it_tools_list = list(it_tools)
+    context = {
+        'it_tools': it_tools_list
+    }
 
-    return render(request, 'it_tools.html', )
+    return render(request, 'it_tools.html', context)
