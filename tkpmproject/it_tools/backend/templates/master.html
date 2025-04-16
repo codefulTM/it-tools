@@ -12,9 +12,9 @@
         <h1 id="title">IT Tools</h1>
         <nav>
             <ul>
-                <li><a href="#">Tools</a></li>
-                <li><a href="#">Favorites</a></li>
-                <li><a href="#">Manage tools</a></li>
+                <li><a href="/tools">Tools</a></li>
+                <li><a href="/favorites">Favorites</a></li>
+                <li><a href="/managetools">Manage tools</a></li>
             </ul>
         </nav>
     </aside>
@@ -23,7 +23,9 @@
             <i class="fa-solid fa-house"></i>
             <input type="search" placeholder="Search for tools...">
             <i class="fa-solid fa-circle-user"></i>
-        </div>  
+        </div>
+        {% block content %}
+        {% endblock %}
     </main>
 </body>
 </html>

@@ -1,0 +1,13 @@
+{% extends "master.html" %}
+
+{% block content %}
+<h1>Tools</h1>
+<div>
+    {% for tool in it_tools %}
+    <div id="{{ tool.id }}">
+        <h2>{{ tool.name }}</h2>
+        <p>{{ tool.description }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
