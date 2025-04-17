@@ -63,7 +63,7 @@ main {
 }
 
 #toolbar {
-    margin: 20px 0;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-evenly;
 }
