@@ -15,7 +15,7 @@
         <div id="get_premium_options">
             <p>Do you want to upgrade to premium?</p>
             <div style="display: flex; justify-content: space-evenly;">
-                <button onclick="getPremium()">Yes</button>
+                <button onclick="getPremium({{ user_id }})">Yes</button>
                 <button onclick="closeBox()">No</button>
             </div>
         </div>
@@ -58,6 +58,47 @@
             }
             box.classList.remove("show");
             box_overlay.classList.remove("show");
+        }
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== "") {
+                const cookies = document.cookie.split(";");
+                for (const cookie of cookies) {
+                    const trimmed = cookie.trim();
+                    if (trimmed.startsWith(name + "=")) {
+                        cookieValue = decodeURIComponent(trimmed.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function getPremium(user_id) {
+            const csrftoken = getCookie('csrftoken');
+
+            fetch(`/api/user/${user_id}/go_premium/`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    alert("Your account is now premium");
+                    // Refresh the page
+                    window.location.reload();
+                }
+                else {
+                    alert(data.error);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
         }
     </script>
 </body>
