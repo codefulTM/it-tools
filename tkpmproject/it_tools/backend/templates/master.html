@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="master.css"> -->
+    <link rel="stylesheet" href="{% static 'master.css' %}">
+    <title>IT tools</title>
+    <script src="https://kit.fontawesome.com/e88fd7b48a.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <aside>
+        <h1 id="title"><a href="/">IT Tools</a></h1>
+        {% if not user_id %}
+        <div id="user_authentication_box">
+            <a href="/signup">Sign up</a>
+            <a href="/login">Login</a>
+        </div>
+        {% endif %}
+        <nav>
+            <ul>
+                {% if user_role == 'regular' or user_role == 'premium' or user_role == 'admin' %}
+                <li><a href="/favorites">Favorites</a></li>
+                {% endif %}
+                {% if user_role == 'admin' %}
+                <li><a href="/managetools">Manage tools</a></li>
+                {% endif %}
+                {% for tool_category in it_tool_categories %}
+                <li><a href="/categories/{{tool_category.id}}">{{tool_category.name}}</a></li>    
+                {% endfor %}
+            </ul>
+        </nav>
+    </aside>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
