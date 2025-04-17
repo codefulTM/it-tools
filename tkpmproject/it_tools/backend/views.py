@@ -100,11 +100,13 @@ def it_tools(request):
 
     return render(request, 'it_tools.html', context)
 
+# api views
 def go_premium(request, user_id):
     try:
         user = get_user_by_id(user_id)
         user.role = get_user_role_by_name('premium')
         user.save()
+        request.session['user_role'] = 'premium'
         return JsonResponse({
             'success': True
         })
