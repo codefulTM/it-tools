@@ -88,3 +88,31 @@ main {
 #content h1 {
     color: #006A71;   
 }
+
+.menu-wrapper {
+    position: relative;
+    background-color: red;
+}
+
+.menu {
+    position: absolute;
+    top: 10%;
+    right: 0;
+    display: none;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #006A71;
+}
+
+.menu nav a {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.menu.show {
+    display: block;
+}
+
+.menu-wrapper i {
+    cursor: pointer;
+}

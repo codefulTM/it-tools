@@ -5,7 +5,19 @@
     <div id="toolbar">
         <a href="/"><i class="fa-solid fa-house"></i></a>
         <input type="search" placeholder="Search for tools..." v-model="search_keyword"> 
-        <i class="fa-solid fa-circle-user"></i>
+        <div class="menu_wrapper">
+            <i class="fa-solid fa-circle-user" onclick="toggleMenu()"></i>
+            <div class="menu">
+                <nav>
+                    {% if user_id %}
+                    <a href="/logout">Log out</a>
+                    {% endif %}
+                    {% if user_role == 'regular' %}
+                    <a href="#">Make a subscription</a>
+                    {% endif %}
+                </nav>
+            </div>
+        </div>
     </div>
     <h1>All the tools</h1>
     <div class="toolGallery">
@@ -16,6 +28,11 @@
     </div>
 </div>
 <script>
+    function toggleMenu() {
+        const menu = document.querySelector(".menu");
+        menu.classList.toggle("show");
+    }
+
     const app = Vue.createApp({
         data() {
             return {
