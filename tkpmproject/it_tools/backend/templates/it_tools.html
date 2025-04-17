@@ -13,7 +13,7 @@
                     <a href="/logout">Log out</a>
                     {% endif %}
                     {% if user_role == 'regular' %}
-                    <a href="#">Make a subscription</a>
+                    <a href="#" onclick="showPremiumBox()">Get premium</a>
                     {% endif %}
                 </nav>
             </div>
@@ -31,6 +31,15 @@
     function toggleMenu() {
         const menu = document.querySelector(".menu");
         menu.classList.toggle("show");
+    }
+
+    function showPremiumBox() {
+        const box = document.querySelector(".box");
+        const box_overlay = document.querySelector(".box_overlay");
+        const get_premium_options = document.querySelector("#get_premium_options");
+        box.classList.add("show");
+        box_overlay.classList.add("show");
+        get_premium_options.classList.add("show");
     }
 
     const app = Vue.createApp({

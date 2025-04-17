@@ -11,6 +11,16 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
+    <div class="box">
+        <div id="get_premium_options">
+            <p>Do you want to upgrade to premium?</p>
+            <div style="display: flex; justify-content: space-evenly;">
+                <button onclick="getPremium()">Yes</button>
+                <button onclick="closeBox()">No</button>
+            </div>
+        </div>
+    </div>
+    <div class="box_overlay" onclick="closeBox()"></div>
     <aside>
         <h1 id="title"><a href="/">IT Tools</a></h1>
         {% if not user_id %}
@@ -37,5 +47,18 @@
         {% block content %}
         {% endblock %}
     </main>
+    <script>
+        function closeBox() {
+            const box = document.querySelector(".box");
+            const box_overlay = document.querySelector(".box_overlay");
+            // Get child nodes of the box
+            const child_nodes = box.children;
+            for(let child of child_nodes) {
+                child.classList.remove("show");
+            }
+            box.classList.remove("show");
+            box_overlay.classList.remove("show");
+        }
+    </script>
 </body>
 </html>
