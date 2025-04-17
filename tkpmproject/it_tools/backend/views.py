@@ -115,3 +115,18 @@ def go_premium(request, user_id):
             'success': False,
             'error': 'User not found'
         })
+    
+def go_free(request, user_id):
+    try:
+        user = get_user_by_id(user_id)
+        user.role = get_user_role_by_name('regular')
+        user.save()
+        request.session['user_role'] = 'regular'
+        return JsonResponse({
+            'success': True
+        })
+    except User.DoesNotExist:
+        return JsonResponse({
+            'success': False,
+            'error': 'User not found'
+        })
