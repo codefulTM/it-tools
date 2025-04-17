@@ -13,13 +13,21 @@
 <body>
     <aside>
         <h1 id="title"><a href="/">IT Tools</a></h1>
+        <div id="user_authentication_box">
+            <a href="/signup">Sign up</a>
+            <a href="/login">Login</a>
+        </div>
         <nav>
             <ul>
+                {% if user_role == 'regular' or user_role == 'premium' or user_role == 'admin' %}
+                <li><a href="/favorites">Favorites</a></li>
+                {% endif %}
+                {% if user_role == 'admin' %}
+                <li><a href="/managetools">Manage tools</a></li>
+                {% endif %}
                 {% for tool_category in it_tool_categories %}
                 <li><a href="/categories/{{tool_category.id}}">{{tool_category.name}}</a></li>    
                 {% endfor %}
-                <li><a href="/favorites">Favorites</a></li>
-                <li><a href="/managetools">Manage tools</a></li>
             </ul>
         </nav>
     </aside>
