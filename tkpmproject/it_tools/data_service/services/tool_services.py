@@ -3,8 +3,7 @@ from . import tool_category_services
 
 # Get all function
 def get_all_tools():
-    return Tool.objects.all()
-
+    return Tool.objects.all().values().order_by('id')
 # Get tool by id function
 def get_tool_by_id(tool_id):
     try:

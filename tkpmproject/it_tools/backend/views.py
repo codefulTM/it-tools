@@ -1,7 +1,9 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.template import loader
+from django.core import serializers
 import bcrypt
+import json
 from backend.decorators import login_required
 from data_service.services.user_services import *
 from data_service.services.user_role_services import *
@@ -73,10 +75,8 @@ def logout(request):
     return redirect('login')
 
 def it_tools(request):
-    # Get all it tools
-    it_tools = get_all_tools()  
-    # Convert query set to a list of objects
-    it_tools_list = list(it_tools)
+    # Get all it tools and convert query set to a list of objects
+    it_tools = json.dumps(list(get_all_tools()), default=str)
     
     # Get user information in session
     user_id = None
@@ -91,7 +91,7 @@ def it_tools(request):
     tool_categories = list(get_all_tool_categories())
 
     context = {
-        'it_tools': it_tools_list,
+        'it_tools': it_tools,
         'user_id': user_id,
         'username': username,
         'user_role': user_role,

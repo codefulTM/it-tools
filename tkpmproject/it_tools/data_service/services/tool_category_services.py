@@ -2,7 +2,7 @@ from data_service.models import ToolCategory
 
 # Get all function
 def get_all_tool_categories():
-    return ToolCategory.objects.all()
+    return ToolCategory.objects.all().values().order_by('id')
 
 # Get by name function
 def get_tool_category_by_name(name):

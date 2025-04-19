@@ -27,7 +27,7 @@
                 {% if user_role == 'admin' %}
                 <li><a href="/managetools">Manage tools</a></li>
                 {% endif %}
-                {% for tool_category in it_tool_categories %}
+                {% for tool_category in tool_categories %}
                 <li><a href="/categories/{{tool_category.id}}">{{tool_category.name}}</a></li>    
                 {% endfor %}
             </ul>
