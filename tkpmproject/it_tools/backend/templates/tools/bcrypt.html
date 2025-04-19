@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bcrypt</title>
+</head>
+<body>
+    <main>
+        <h2 style="margin-bottom:5px;">Bcrypt</h2>
+        <p style="color:#aaa; margin-top:0; margin-bottom:20px;">
+            Hash and compare text string using bcrypt. Bcrypt is a password‑hashing function based on the Blowfish cipher.
+        </p>
+
+        <!-- Hash section -->
+        <div style="padding:15px; border-radius:5px; margin-bottom:30px;">
+            <h3 style="margin-top:0; margin-bottom:10px; font-weight:normal;">Hash</h3>
+            <label style="display:block; margin-bottom:8px;">
+            Your string:
+            <input id="hashString" type="text" placeholder="Enter text…" style="width:100%; padding:8px; margin-top:4px; border:1px solid #444; border-radius:4px;">
+            </label>
+
+            <label style="display:flex; align-items:center; margin-bottom:15px; gap:10px;">
+            Salt count:
+            <button onclick="decSalt()" style="width:24px; height:24px; background:#444; color:white; border:none; border-radius:4px; cursor:pointer;">–</button>
+            <input id="saltCount" type="number" value="10" min="4" max="16"
+                    style="width:50px; text-align:center; background:#1e1e1e; color:white; border:1px solid #444; border-radius:4px;">
+            <button onclick="incSalt()" style="width:24px; height:24px; background:#444; color:white; border:none; border-radius:4px; cursor:pointer;">+</button>
+            </label>
+
+            <input id="hashOutput" readonly
+                style="width:100%; padding:8px; color:#0f0; border:1px solid #444; border-radius:4px; font-family:monospace; margin-bottom:10px;">
+
+            <button onclick="copyHash()" 
+                    style="display:block; margin:auto; padding:8px 16px; background:#444; color:white; border:none; border-radius:4px; cursor:pointer;">
+            Copy hash
+            </button>
+        </div>
+
+        <!-- Compare section -->
+        <div style="padding:15px; border-radius:5px;">
+            <h3 style="margin-top:0; margin-bottom:10px; font-weight:normal;">Compare string with hash</h3>
+
+            <label style="display:block; margin-bottom:8px;">
+            Your string:
+            <input id="compareString" type="text" placeholder="Enter text…"
+                    style="width:100%; padding:8px; margin-top:4px; border:1px solid #444; border-radius:4px;">
+            </label>
+
+            <label style="display:block; margin-bottom:15px;">
+            Your hash:
+            <input id="compareHash" type="text" placeholder="Paste hash…"
+                    style="width:100%; padding:8px; margin-top:4px; border:1px solid #444; border-radius:4px;">
+            </label>
+
+            <div style="font-size:1.1em;">
+            Do they match ? 
+            <span id="matchResult" style="font-weight:bold; margin-left:5px;">No</span>
+            </div>
+        </div>
+
+        <!-- bcrypt.js CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
+        <script>
+            const hashString = document.getElementById('hashString');
+            const saltCount  = document.getElementById('saltCount');
+            const hashOutput = document.getElementById('hashOutput');
+            const compareString = document.getElementById('compareString');
+            const compareHash   = document.getElementById('compareHash');
+            const matchResult   = document.getElementById('matchResult');
+
+            function generateHash() {
+                const text = hashString.value || '';
+                const rounds = parseInt(saltCount.value, 10) || 10;
+                // sync version for simplicity
+                const salt = dcodeIO.bcrypt.genSaltSync(rounds);
+                const h = dcodeIO.bcrypt.hashSync(text, salt);
+                hashOutput.value = h;
+                compareHashes(); // update compare result if needed
+            }
+
+            function incSalt() {
+                let v = parseInt(saltCount.value, 10) || 10;
+                if (v < 16) saltCount.value = ++v;
+                generateHash();
+            }
+            function decSalt() {
+                let v = parseInt(saltCount.value, 10) || 10;
+                if (v > 4) saltCount.value = --v;
+                generateHash();
+            }
+
+            function copyHash() {
+                hashOutput.select();
+                document.execCommand('copy');
+                alert("Copied!");
+            }
+
+            function compareHashes() {
+                const txt = compareString.value || '';
+                const hsh = compareHash.value || '';
+                if (!txt || !hsh) {
+                    matchResult.textContent = 'No';
+                    matchResult.style.color = 'inherit';
+                    return;
+                }
+                const ok = dcodeIO.bcrypt.compareSync(txt, hsh);
+                matchResult.textContent = ok ? 'Yes' : 'No';
+                matchResult.style.color = ok ? '#0f0' : '#f44';
+            }
+
+            // listeners
+            hashString.addEventListener('input', generateHash);
+            saltCount.addEventListener('change', generateHash);
+            compareString.addEventListener('input', compareHashes);
+            compareHash.addEventListener('input', compareHashes);
+
+            // initial
+            generateHash();
+        </script>
+    </main>
+</body>
+</html>
