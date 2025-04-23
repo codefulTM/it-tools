@@ -1,0 +1,85 @@
+.tool-name {
+    margin-top: 40px;
+    margin-left: 32px;
+    font-size: 40px;
+}
+
+.tool-des {
+    margin-top: 10px;
+    margin-left: 32px;
+    font-size: 24px;
+    color: #AAAAAA;
+}
+
+.tool-body {
+    margin-top: 80px;
+    margin-left: 32px;
+}
+
+#qr-code-generator-container {
+    display: grid; 
+    grid-template-columns: 20% 30%;
+    column-gap: 10px;
+    row-gap: 16px;
+    border-radius: 5px;
+}
+
+#normal-label {
+    font-size: 24px
+}
+
+#normal-label-down {
+    margin-top: 8px;
+    font-size: 24px;
+}
+
+#normal-input {
+    padding: 8px; 
+    font-size: 24px;
+    border: 1px solid #444; 
+    border-radius: 4px;
+}
+
+.color-picker-wrapper {
+    display: flex;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 10px;
+    font-family: sans-serif;
+    color: white;
+}
+
+.hex-value {
+    background: #333;
+    color: #fff;
+    border: none;
+    margin-left: 12px;
+    padding: 8px;
+    width: 100px;
+    font-family: monospace;
+}
+
+#dropdown {
+    padding: 8px; 
+    font-size: 24px;
+    border: 1px solid #444; 
+    border-radius: 4px;
+}
+
+
+#normal-btn {
+    display: inline-block;
+    margin-left: 30px;
+    margin-top: 20px;
+    font-size: 24px;
+    padding: 8px 16px; 
+    background: #444; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer;
+}
+
+#normal-btn:hover {
+    background: #666; 
+}

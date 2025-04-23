@@ -1,0 +1,69 @@
+{% extends "master.html" %}
+
+{% block content %}
+<h2 class="tool-name">QR Code Generator</h2>
+
+<p class="tool-des">
+    Create QR code from a URL or text
+</p>
+
+<form action="/generate_qr_code/" method="post">
+    <div class="tool-body" id="qr-code-generator-container">
+        {% csrf_token %}
+        <label id="normal-label">Text:</label>
+        <textarea id="normal-input" type="text"></textarea>
+    
+        <label id="normal-label-down">Foreground color: </label>
+        <div class="color-picker-wrapper">
+            <input type="color" id="input-foreground" value="#000000">
+            <input type="text" id="foreground-hex" class="hex-value" readonly>
+        </div>
+
+        <label id="normal-label-down">Background color: </label>
+        <div class="color-picker-wrapper">
+            <input type="color" id="input-background" value="#ffffff">
+            <input type="text" id="background-hex" class="hex-value" readonly>
+        </div>
+
+        <label id="normal-label-down">Error resistance:</label>
+        <select name="Error resistance" id="dropdown">
+            <option value="low">low (7%)</option>
+            <option value="medium">medium (15%)</option>
+            <option value="quartile">quartile (25%)</option>
+            <option value="high">high (30%)</option>
+        </select>
+    </div>  
+
+    <span>
+        <input type="submit" value="Generate QR Code" id="normal-btn">
+        <input type="button" value="Download QR Code" id="normal-btn">
+    </span>
+</form>
+
+<script>
+    const foregroundColorInput = document.getElementById('input-foreground');
+    const backgroundColorInput = document.getElementById('input-background');
+    const foregroundHex = document.getElementById('foreground-hex');
+    const backgroundHex = document.getElementById('background-hex');
+
+    function updateForegroundColor(hex) {
+        foregroundHex.value = hex;
+    }
+
+    foregroundColorInput.addEventListener('input', (e) => {
+        updateForegroundColor(e.target.value);
+    });
+
+    updateForegroundColor(foregroundColorInput.value);
+
+    function updateBackgroundColor(hex) {
+        backgroundHex.value = hex;
+    }
+
+    backgroundColorInput.addEventListener('input', (e) => {
+        updateBackgroundColor(e.target.value);
+    });
+
+    updateBackgroundColor(backgroundColorInput.value);
+</script>
+{% endblock %}
