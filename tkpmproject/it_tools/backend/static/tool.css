@@ -16,7 +16,7 @@
     margin-left: 32px;
 }
 
-#qr-code-generator-container {
+.qr-code-generator-container {
     display: grid; 
     grid-template-columns: 20% 30%;
     column-gap: 10px;
@@ -24,16 +24,16 @@
     border-radius: 5px;
 }
 
-#normal-label {
+.normal-label {
     font-size: 24px
 }
 
-#normal-label-down {
+.normal-label-down {
     margin-top: 8px;
     font-size: 24px;
 }
 
-#normal-input {
+.normal-input {
     padding: 8px; 
     font-size: 24px;
     border: 1px solid #444; 
@@ -59,7 +59,7 @@
     font-family: monospace;
 }
 
-#dropdown {
+.dropdown {
     padding: 8px; 
     font-size: 24px;
     border: 1px solid #444; 
@@ -67,7 +67,7 @@
 }
 
 
-#normal-btn {
+.normal-btn {
     display: inline-block;
     margin-left: 30px;
     margin-top: 20px;
@@ -80,6 +80,6 @@
     cursor: pointer;
 }
 
-#normal-btn:hover {
+.normal-btn:hover {
     background: #666; 
 }

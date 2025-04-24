@@ -1,17 +1,29 @@
-{% extends "master.html" %}
+{% extends 'master.html' %}
 
 {% block content %}
-<h2 class="tool-name">QR Code Generator</h2>
+<h2 class="tool-name">WiFi QR Code Generator</h2>
 
 <p class="tool-des">
-    Create QR code from a URL or text
+    Generate QR code to quickly connect to WiFi networks.
+    <br> Just enter the SSID and password, and the QR code will be generated for you.
 </p>
 
 <form action="/generate_qr_code/" method="post">
     <div class="tool-body qr-code-generator-container">
         {% csrf_token %}
-        <label class="normal-label">Text:</label>
-        <textarea class="normal-input" type="text"></textarea>
+        <label class="normal-label-down">Encryption method:</label>
+        <select name="encryption-method" class="dropdown" id="encryption">
+            <option value="no">No password</option>
+            <option value="wpa" selected>WPA/WPA2</option>
+            <option value="wep">WEP</option>
+            <option value="eap">WPA2-EAP</option>
+        </select>
+
+        <label class="normal-label">SSID:</label>
+        <input class="normal-input" type="text">
+        
+        <label class="normal-label">Password:</label>
+        <input class="normal-input" type="password" id="input-password">
     
         <label class="normal-label-down">Foreground color:</label>
         <div class="color-picker-wrapper">
@@ -25,13 +37,8 @@
             <input type="text" id="background-hex" class="hex-value" readonly>
         </div>
 
-        <label class="normal-label-down">Error resistance:</label>
-        <select name="error-resistance" class="dropdown">
-            <option value="low">low (7%)</option>
-            <option value="medium">medium (15%)</option>
-            <option value="quartile">quartile (25%)</option>
-            <option value="high">high (30%)</option>
-        </select>
+        <label class="normal-label">Hidden SSID</label>
+        <input type="checkbox" name="hidden-ssid" checked="checked">
     </div>  
 
     <span>
@@ -43,8 +50,12 @@
 <script>
     const foregroundColorInput = document.getElementById('input-foreground');
     const backgroundColorInput = document.getElementById('input-background');
+
     const foregroundHex = document.getElementById('foreground-hex');
     const backgroundHex = document.getElementById('background-hex');
+
+    const encryptionValue = document.getElementById('encryption');
+    const passwordInput = document.getElementById('input-password');
 
     function updateForegroundColor(hex) {
         foregroundHex.value = hex;
@@ -65,5 +76,18 @@
     });
 
     updateBackgroundColor(backgroundColorInput.value);
+
+    encryptionValue.addEventListener('change', (e) => {
+        changeEncryption();
+    });
+    
+    function changeEncryption() {
+        if (encryptionValue.value == "no") {
+            passwordInput.value = "";
+            passwordInput.disabled = true;
+        } else {
+            passwordInput.disabled = false;
+        }
+    }
 </script>
 {% endblock %}
