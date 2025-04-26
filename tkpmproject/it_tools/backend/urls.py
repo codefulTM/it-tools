@@ -10,6 +10,7 @@ urlpatterns = [
     path('category/7/random-date-generator', views.random_date_generator_tool, name='random_date_generator'),
     path('category/8/text-difference-checker', views.text_difference_checker_tool, name='text_difference_checker'),
     path('category/8/text-statistics', views.text_statistics_tool, name='text_statistics'),
+    path('category/8/lorem-ipsum-generator', views.lorem_ipsum_generator_tool, name='lorem_ipsum_generator'),
     path('login/', views.login, name="login"),
     path('signup/', views.signup, name="signup"),
     path('logout/', views.logout, name='logout'),

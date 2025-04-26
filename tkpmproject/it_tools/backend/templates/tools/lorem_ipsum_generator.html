@@ -1,0 +1,82 @@
+{% extends "master.html" %}
+
+{% block content %}
+<h2 class="tool-name">Lorem Ipsum Generator</h2>
+
+<p class="tool-des">
+    Generate lorem ipsum placeholder string of given length
+</p>
+
+<form action="/lorem_ipsum_generator/" method="post">
+    <div class="tool-body lorem-ipsum-generator-container">
+        {% csrf_token %}
+        <label class="normal-label-down">Paragraphs</label>
+        <div class="range-wrap">
+            <div class="range-value" id="paragraphV"></div>
+            <input type="range" name="paragraph" id="paragraph" min="1" max="20" value="2">
+        </div>
+
+        <label class="normal-label-down">Sentences per paragraph</label>
+        <div class="range-wrap">
+            <div class="range-value" id="sentenceV"></div>
+            <input type="range" name="sentence" id="sentence" min="1" max="50" value="5">
+        </div>
+
+        <label class="normal-label-down">Words per sentence</label>
+        <div class="range-wrap">
+            <div class="range-value" id="wordV"></div>
+            <input type="range" name="word" id="word" min="1" max="50" value="10">
+        </div>
+
+        <label class="normal-label">Start with lorem ipsum?</label>
+        <input type="checkbox" id="start-with-lorem" name="start-with-lorem" checked>
+
+        <label class="normal-label">As HTML?</label>
+        <input type="checkbox" id="as-html" name="as-html">
+
+        <label class="normal-label">Text</label>
+        <textarea class="normal-input" name="output" rows="5" id="output" placeholder="Lorem ipsum..." readonly></textarea>
+    </div>
+    <span>
+        <input type="submit" value="Generate Text" class="normal-btn">
+        <input type="button" value="Copy Text" class="normal-btn">
+    </span>
+</form>
+<script>
+    const paragraph = document.getElementById('paragraph');
+    const paragraphV = document.getElementById('paragraphV');
+
+    const sentence = document.getElementById('sentence');
+    const sentenceV = document.getElementById('sentenceV');
+
+    const word = document.getElementById('word');
+    const wordV = document.getElementById('wordV');
+
+    setParagraphValue = ()=>{
+        const newValue = Number((paragraph.value - paragraph.min) * 100 / (paragraph.max - paragraph.min));
+        const newPosition = 10 - (newValue * 0.2);
+        paragraphV.innerHTML = `<span>${paragraph.value}</span>`;
+        paragraphV.style.left = `calc(${newValue}% + (${newPosition}px))`;
+    };
+    document.addEventListener("DOMContentLoaded", setParagraphValue);
+    paragraph.addEventListener("input", setParagraphValue);
+
+    setSentenceValue = ()=>{
+        const newValue = Number((sentence.value - sentence.min) * 100 / (sentence.max - sentence.min));
+        const newPosition = 10 - (newValue * 0.2);
+        sentenceV.innerHTML = `<span>${sentence.value}</span>`;
+        sentenceV.style.left = `calc(${newValue}% + (${newPosition}px))`;
+    };
+    document.addEventListener("DOMContentLoaded", setSentenceValue);
+    sentence.addEventListener("input", setSentenceValue);
+
+    setWordValue = ()=>{
+        const newValue = Number((word.value - word.min) * 100 / (word.max - word.min));
+        const newPosition = 10 - (newValue * 0.2);
+        wordV.innerHTML = `<span>${word.value}</span>`;
+        wordV.style.left = `calc(${newValue}% + (${newPosition}px))`;
+    };
+    document.addEventListener("DOMContentLoaded", setWordValue);
+    word.addEventListener("input", setWordValue);
+</script>
+{% endblock %}

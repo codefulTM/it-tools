@@ -8,7 +8,7 @@
     margin-top: 10px;
     margin-left: 32px;
     font-size: 24px;
-    color: #AAAAAA;
+    color: #aaaaaa;
 }
 
 .tool-body {
@@ -183,4 +183,55 @@
     column-gap: 10px;
     row-gap: 16px;
     border-radius: 5px;
+}
+
+.lorem-ipsum-generator-container {
+    display: grid; 
+    grid-template-columns: 30% 60%;
+    column-gap: 10px;
+    row-gap: 16px;
+    border-radius: 5px;
+}
+
+input[type=range] {
+    margin: 20px 0;
+    width: 100%;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+.range-wrap{
+    position: relative;
+}
+
+.range-value{
+    position: absolute;
+    top: -20%;
+}
+
+.range-value span{
+    width: 30px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background: #03a9f4;
+    color: #fff;
+    font-size: 12px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-radius: 6px;
+}
+.range-value span:before{
+    content: "";
+    position: absolute;
+    border-top: 10px solid #03a9f4;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
 }
