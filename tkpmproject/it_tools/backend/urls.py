@@ -8,6 +8,7 @@ urlpatterns = [
     path('category/7/random-prime-generator', views.random_prime_generator_tool, name='random_prime_generator'),
     path('category/7/random-name-generator', views.random_name_generator_tool, name='random_name_generator'),
     path('category/7/random-date-generator', views.random_date_generator_tool, name='random_date_generator'),
+    path('category/8/text-difference-checker', views.text_difference_checker_tool, name='text_difference_checker'),
     path('login/', views.login, name="login"),
     path('signup/', views.signup, name="signup"),
     path('logout/', views.logout, name='logout'),

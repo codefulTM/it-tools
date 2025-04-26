@@ -168,3 +168,11 @@
     row-gap: 16px;
     border-radius: 5px;
 }
+
+.text-difference-checker-container {
+    display: grid; 
+    grid-template-columns: 10% 80%;
+    column-gap: 10px;
+    row-gap: 16px;
+    border-radius: 5px;
+}

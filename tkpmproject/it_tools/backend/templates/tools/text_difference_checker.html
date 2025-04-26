@@ -1,0 +1,61 @@
+{% extends "master.html" %}
+
+{% block content %}
+<h2 class="tool-name">Text difference check</h2>
+
+<p class="tool-des">
+    Compare two text files and show the difference between them
+    <br>
+    User can either upload two files or copy and paste the text into the text area
+</p>
+
+<form action="/text_difference_check/" method="post" enctype="multipart/form-data">
+    <div class="tool-body text-difference-checker-container">
+        {% csrf_token %}
+        <label class="normal-label-down">File 1:</label>
+        <input class="normal-input" type="file" name="file1" id="file1" required>
+
+        <label class="normal-label"></label>
+        <textarea class="normal-input" name="text1" rows="5" id="text1" placeholder="Or paste text here..."></textarea>
+
+        <label class="normal-label-down">File 2:</label>
+        <input class="normal-input" type="file" name="file2" id="file2" required>
+
+        <label class="normal-label"></label>
+        <textarea class="normal-input" name="text2" rows="5" id="text2" placeholder="Or paste text here..."></textarea>
+    </div>
+    <span>
+        <input type="submit" value="Check Difference" class="normal-btn">
+    </span>
+</form>
+<script>
+    const file1Input = document.getElementById('file1');
+    const file2Input = document.getElementById('file2');
+    const text1Area = document.getElementById('text1');
+    const text2Area = document.getElementById('text2');
+
+    file1Input.addEventListener('change', () => {
+        if (file1Input.files.length > 0) {
+            text1Area.value = ''; // Clear the text area if a file is selected
+        }
+    });
+
+    file2Input.addEventListener('change', () => {
+        if (file2Input.files.length > 0) {
+            text2Area.value = ''; // Clear the text area if a file is selected
+        }
+    });
+
+    text1Area.addEventListener('input', () => {
+        if (text1Area.value.trim() !== '') {
+            file1Input.value = ''; // Clear the file input if text is entered
+        }
+    });
+
+    text2Area.addEventListener('input', () => {
+        if (text2Area.value.trim() !== '') {
+            file2Input.value = ''; // Clear the file input if text is entered
+        }
+    });
+</script>
+{% endblock %}
