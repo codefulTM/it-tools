@@ -98,6 +98,10 @@ def random_name_generator_tool(request):
     context = get_master_context(request)
     return render(request, 'tools/random_name_generator.html', context)
 
+def random_date_generator_tool(request):
+    context = get_master_context(request)
+    return render(request, 'tools/random_date_generator.html', context)
+
 def get_master_context(request):
     # Get all it tools and convert query set to a list of objects
     it_tools = json.dumps(list(get_all_tools()), default=str)

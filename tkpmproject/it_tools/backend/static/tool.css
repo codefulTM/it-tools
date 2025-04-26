@@ -160,3 +160,11 @@
     row-gap: 16px;
     border-radius: 5px;
 }
+
+.date-generator-container {
+    display: grid; 
+    grid-template-columns: 10% 45%;
+    column-gap: 10px;
+    row-gap: 16px;
+    border-radius: 5px;
+}
