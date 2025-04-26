@@ -3,12 +3,14 @@ from django.http import HttpResponse
 from django.template import loader
 import bcrypt
 from backend.decorators import login_required
-from data_service.services.user_services import *
-from data_service.services.user_role_services import *
-from data_service.services.tool_services import *
-from data_service.services.tool_category_services import *
+from classes import *
+# from data_service.services.user_services import *
+# from data_service.services.user_role_services import *
+# from data_service.services.tool_services import *
+# from data_service.services.tool_category_services import *
 
 # Create your views here.
+
 def signup(request):    
     if(request.method == 'POST'):
         # Get username, email and password
@@ -16,29 +18,14 @@ def signup(request):
         email = request.POST['email']
         password = request.POST['password']
 
-        users = get_all_users()
-        # Check if the username already exists
-        user = users.filter(username=username)
-        if user.exists():
-            # return HttpResponse("Username already exists")
-            return render(request, 'signup.html', {'message': 'Username already exists'})
-        # Check if the email already exists
-        user = users.filter(email=email)
-        if user.exists():
-            # return HttpResponse("Email already exists")
-            return render(request, 'signup.html', {'message': 'Email already exists'})
-        
-        user_roles = get_all_user_roles()
-        
-        # Create user
-        if email == 'ntminh22@clc.fitus.edu.vn':    
-            user_role = get_user_role_by_name('admin')
-            user = create_user(username, email, password, user_role)
-        else:
-            user_role = get_user_role_by_name('regular')
-            user = create_user(username, email, password, user_role)  
+        guest_user = GuestUser()
+        result = guest_user.sign_up(email, username, password)
 
-        return render(request, 'signup.html', {'message': 'User created successfully'})
+        # Failed to sign up
+        if result[0] == False:
+            return render(request, 'signup.html', {'message': result[1]})
+
+        return render(request, 'signup.html', {'message': result[1]})
     else:
         return render(request, 'signup.html')
     
