@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <h1 style="font-size: 24px;">🧮 Percentage Calculator</h1>
+
+        <!-- First Calculator -->
+        <div style="background: #ccc; padding: 20px; border-radius: 10px; margin-top: 20px;">
+            <label>What is</label>
+            <input id="x1" type="number" style="width: 80px; margin: 0 5px;">
+            <label>% of</label>
+            <input id="y1" type="number" style="width: 80px; margin: 0 5px;">
+            <button onclick="calcPercentOf()"
+                style="margin-left:10px; padding: 5px 10px; border-radius: 5px; background: #444; color: white; border: none;">Result</button>
+            <input id="result1" type="text" readonly style="width: 100px; margin-left: 10px;">
+            <button onclick="copyResult('result1')" style="padding: 5px;">📋</button>
+        </div>
+
+        <!-- Second Calculator -->
+        <div style="background: #ccc; padding: 20px; border-radius: 10px; margin-top: 20px;">
+            <input id="x2" type="number" style="width: 80px; margin: 0 5px;">
+            <label>is what percent of</label>
+            <input id="y2" type="number" style="width: 80px; margin: 0 5px;">
+            <button onclick="calcWhatPercent()"
+                style="margin-left:10px; padding: 5px 10px; border-radius: 5px; background: #444; color: white; border: none;">Result</button>
+            <input id="result2" type="text" readonly style="width: 100px; margin-left: 10px;">
+            <button onclick="copyResult('result2')" style="padding: 5px;">📋</button>
+        </div>
+
+        <!-- Third Calculator -->
+        <div style="background: #ccc; padding: 20px; border-radius: 10px; margin-top: 20px;">
+            <label>What is the percentage increase/decrease</label><br><br>
+            <label>From</label>
+            <input id="from" type="number" style="width: 80px; margin: 0 5px;">
+            <label>To</label>
+            <input id="to" type="number" style="width: 80px; margin: 0 5px;">
+            <button onclick="calcIncreaseDecrease()"
+                style="margin-left:10px; padding: 5px 10px; border-radius: 5px; background: #444; color: white; border: none;">Result</button>
+            <input id="result3" type="text" readonly style="width: 100px; margin-left: 10px;">
+            <button onclick="copyResult('result3')" style="padding: 5px;">📋</button>
+        </div>
+
+        <script>
+            function calcPercentOf() {
+                let x = parseFloat(document.getElementById("x1").value);
+                let y = parseFloat(document.getElementById("y1").value);
+                if (!isNaN(x) && !isNaN(y)) {
+                    document.getElementById("result1").value = ((x / 100) * y).toFixed(2);
+                }
+            }
+
+            function calcWhatPercent() {
+                let x = parseFloat(document.getElementById("x2").value);
+                let y = parseFloat(document.getElementById("y2").value);
+                if (!isNaN(x) && !isNaN(y) && y !== 0) {
+                    document.getElementById("result2").value = ((x / y) * 100).toFixed(2) + "%";
+                }
+            }
+
+            function calcIncreaseDecrease() {
+                let from = parseFloat(document.getElementById("from").value);
+                let to = parseFloat(document.getElementById("to").value);
+                if (!isNaN(from) && !isNaN(to) && from !== 0) {
+                    let change = ((to - from) / from) * 100;
+                    document.getElementById("result3").value = change.toFixed(2) + "%";
+                }
+            }
+
+            function copyResult(id) {
+                let copyText = document.getElementById(id);
+                copyText.select();
+                copyText.setSelectionRange(0, 99999); // For mobile devices
+                document.execCommand("copy");
+                alert("Copied: " + copyText.value);
+            }
+        </script>
+    </main>
+</body>
+
+</html>
