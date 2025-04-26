@@ -176,3 +176,11 @@
     row-gap: 16px;
     border-radius: 5px;
 }
+
+.text-statistics-container {
+    display: grid; 
+    grid-template-columns: 15% 75%;
+    column-gap: 10px;
+    row-gap: 16px;
+    border-radius: 5px;
+}

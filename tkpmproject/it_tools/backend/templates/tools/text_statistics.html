@@ -1,0 +1,56 @@
+{% extends "master.html" %}
+
+{% block content %}
+<h2 class="tool-name">Text Statistics</h2>
+
+<p class="tool-des">
+    Count the number of characters, words, lines and size in a document
+</p>
+
+<form action="/text_statistics/" method="post" enctype="multipart/form-data">
+    <div class="tool-body text-statistics-container">
+        {% csrf_token %}
+        <label class="normal-label-down">File:</label>
+        <input class="normal-input" type="file" accept=".txt,.doc,.docx,.pdf" name="file" id="file" required>
+        
+        <label class="normal-label"></label>
+        <textarea class="normal-input" name="text" rows="5" id="text" placeholder="Or paste text here..."></textarea>
+
+        <label class="normal-label-down">Characters:</label>
+        <input class="normal-input" type="number" name="characters" id="characters" readonly>
+
+        <label class="normal-label-down">Words:</label>
+        <input class="normal-input" type="number" name="words" id="words" readonly>
+
+        <label class="normal-label-down">Lines:</label>
+        <input class="normal-input" type="number" name="lines" id="lines" readonly>
+
+        <label class="normal-label-down">Size (KB):</label>
+        <input class="normal-input" type="number" name="size" id="size" readonly>
+    </div>
+    <span>
+        <input type="submit" value="Check Statistics" class="normal-btn">
+    </span>
+</form>
+<script>
+    const fileInput = document.getElementById('file');
+    const textArea = document.getElementById('text');
+
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            textArea.value = ''; // Clear the text area if a file is selected
+            fileInput.setAttribute('required', true);
+            textArea.removeAttribute('required');
+        }
+    });
+
+    textArea.addEventListener('input', () => {
+        if (textArea.value.trim() !== '') {
+            fileInput.value = ''; // Clear the file input if text is entered
+            textArea.setAttribute('required', true);
+            fileInput.removeAttribute('required');
+        }
+    });
+
+</script>
+{% endblock %}
