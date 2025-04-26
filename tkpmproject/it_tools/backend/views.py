@@ -3,11 +3,11 @@ from django.http import HttpResponse
 from django.template import loader
 import bcrypt
 from backend.decorators import login_required
-from classes import *
+from backend.classes.User import *
 # from data_service.services.user_services import *
 # from data_service.services.user_role_services import *
-# from data_service.services.tool_services import *
-# from data_service.services.tool_category_services import *
+from data_service.services.tool_services import *
+from data_service.services.tool_category_services import *
 
 # Create your views here.
 
@@ -34,20 +34,23 @@ def login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        # Get a list of users
-        users = get_all_users()
-        # Get the user with the corresponding username
-        try:
-            user = users.get(username=username)
-            if bcrypt.checkpw(password.encode('utf-8'), user.password_hash.encode('utf-8')):
-                request.session['user_id'] = user.id
-                request.session['username'] = user.username
-                request.session['user_role'] = user.role.role
-                return redirect('it_tools')
-            else:
-                return render(request, 'login.html', {'message': 'Invalid password'})
-        except User.DoesNotExist:
-            return render(request, 'login.html', {'message': 'Username does not exist'})
+        guest_user = GuestUser()
+        result = guest_user.sign_in(username, password)
+
+        # Failed to sign in
+        if result[0] == False:
+            return render(request, 'login.html', {'message': result[1]})
+
+        # Sign in successfully
+        user = result[2]
+
+        # Add login information to request session
+        request.session['user_id'] = user.id
+        request.session['username'] = user.username
+        request.session['user_role'] = user.role
+
+        # Redirect to home page
+        return redirect('it_tools')
     else:
         # If the request session already has login information -> redirect to home page
         if 'user_id' in request.session:
@@ -61,7 +64,7 @@ def logout(request):
 
 def it_tools(request):
     # Get all it tools
-    it_tools = get_all_tools()  
+    it_tools = get_all_tools()
     # Convert query set to a list of objects
     it_tools_list = list(it_tools)
     

@@ -1,12 +1,34 @@
 from data_service.services.user_services import *
 from data_service.services.user_role_services import *
+import bcrypt
 
 class User:
     pass
 
 class GuestUser(User):
     def sign_in(self, username, password):
-        pass
+        # Get a list of all users
+        users = get_all_users()
+
+        # Check if the username exists
+        if not users.filter(username=username).exists():
+            return False, "Username does not exist"
+        
+        # Check if the password matches the account's password
+        user = users.get(username=username)
+        if not bcrypt.checkpw(password.encode('utf-8'), user.password_hash.encode('utf-8')):
+            return False, "Incorrect password"
+        
+        # Check the user's role
+        if user.role.role == 'admin':
+            return True, "User signed in successfully", AdminUser(user.id, user.email, user.username, user.password_hash)
+        elif user.role.role == 'regular':
+            return True, "User signed in successfully", FreeUser(user.id, user.email, user.username, user.password_hash)
+        elif user.role.role == 'premium':
+            return True, "User signed in successfully", PremiumUser(user.id, user.email, user.username, user.password_hash)
+        
+        return False, "Unidentified role"
+
     
     def sign_up(self, email, username, password):
         # Get a list of all users
@@ -40,6 +62,7 @@ class AccountUser(User):
         self.email = email
         self.username = username
         self.password = password
+        self.role = None
 
     def log_out(self):
         pass
@@ -47,6 +70,7 @@ class AccountUser(User):
 class FreeUser(AccountUser):
     def __init__(self, id, email, username, password):
         super().__init__(id, email, username, password)
+        self.role = 'regular'
 
     def upgrade(self):
         pass
@@ -54,6 +78,7 @@ class FreeUser(AccountUser):
 class PremiumUser(AccountUser):
     def __init__(self, id, email, username, password):
         super().__init__(id, email, username, password)
+        self.role = 'premium'
 
     def cancel_upgrade(self):
         pass
@@ -61,6 +86,7 @@ class PremiumUser(AccountUser):
 class AdminUser(AccountUser):
     def __init__(self, id, email, username, password):
         super().__init__(id, email, username, password)
+        self.role = 'admin'
         
     def toggle_tool(self, tool):
         pass
