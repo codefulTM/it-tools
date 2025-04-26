@@ -13,7 +13,7 @@
         <label class="normal-label-down">Width (in px):</label>
         <div class="number-input">
             <button class="btn decrement" id="width-decrease-btn">−</button>
-            <input type="number" id="svg-width" value="100">
+            <input type="number" id="svg-width" value="100" required>
             <button class="btn increment" id="width-increase-btn">+</button>
         </div>
 
@@ -26,7 +26,7 @@
         <label class="normal-label-down">Height (in px):</label>
         <div class="number-input">
             <button class="btn decrement" id="height-decrease-btn">−</button>
-            <input type="number" id="svg-height" value="100">
+            <input type="number" id="svg-height" value="100" required>
             <button class="btn increment" id="height-increase-btn">+</button>
         </div>
     
@@ -37,10 +37,14 @@
         </div>
 
         <label class="normal-label-down">Font size:</label>
-        <input class="normal-input" type="numbwe" placeholder="Font size...">
+        <div class="number-input">
+            <button class="btn decrement" id="size-decrease-btn">−</button>
+            <input type="number" id="font-size" value="20" required>
+            <button class="btn increment" id="size-increase-btn">+</button>
+        </div>
 
         <label class="normal-label-down">Custom text</label>
-        <input class="normal-input" type="text" placeholder="Default">
+        <input class="normal-input" type="text" placeholder="Default" required>
     </div>
 
     <input type="submit" value="Generate SVG Placeholder" class="normal-btn">
@@ -65,8 +69,15 @@
 
     const widthDecreaseBtn = document.getElementById('width-decrease-btn');
     const widthIncreaseBtn = document.getElementById('width-increase-btn');
+    const svgWidthInput = document.getElementById('svg-width');
+
     const heightDecreaseBtn = document.getElementById('height-decrease-btn');
     const heightIncreaseBtn = document.getElementById('height-increase-btn');
+    const svgHeightInput = document.getElementById('svg-height');
+
+    const sizeDecreaseBtn = document.getElementById('size-decrease-btn');
+    const sizeIncreaseBtn = document.getElementById('size-increase-btn');
+    const fontSizeInput = document.getElementById('font-size');
 
     function updateForegroundColor(hex) {
         foregroundHex.value = hex;
@@ -90,39 +101,50 @@
 
     widthDecreaseBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const widthInput = document.getElementById('svg-width');
-        let currentValue = parseInt(widthInput.value, 10);
+        let currentValue = parseInt(svgWidthInput.value, 10);
         if (!isNaN(currentValue)) {
-            widthInput.value = Math.max(0, currentValue - 1);
+            svgWidthInput.value = Math.max(0, currentValue - 1);
         }
     });
 
     widthIncreaseBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const widthInput = document.getElementById('svg-width');
-        let currentValue = parseInt(widthInput.value, 10);
+        let currentValue = parseInt(svgWidthInput.value, 10);
         if (!isNaN(currentValue)) {
-            widthInput.value = currentValue + 1;
+            svgWidthInput.value = currentValue + 1;
         }
     });
 
     heightDecreaseBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const heightInput = document.getElementById('svg-height');
-        let currentValue = parseInt(heightInput.value, 10);
+        let currentValue = parseInt(svgHeightInput.value, 10);
         if (!isNaN(currentValue)) {
-            heightInput.value = Math.max(0, currentValue - 1);
+            svgHeightInput.value = Math.max(0, currentValue - 1);
         }
     });
 
     heightIncreaseBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const heightInput = document.getElementById('svg-height');
-        let currentValue = parseInt(heightInput.value, 10);
+        let currentValue = parseInt(svgHeightInput.value, 10);
         if (!isNaN(currentValue)) {
-            heightInput.value = currentValue + 1;
+            svgHeightInput.value = currentValue + 1;
         }
     });
 
+    sizeDecreaseBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        let currentValue = parseInt(fontSizeInput.value, 10);
+        if (!isNaN(currentValue)) {
+            fontSizeInput.value = Math.max(6, currentValue - 1);
+        }
+    });
+
+    sizeIncreaseBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        let currentValue = parseInt(fontSizeInput.value, 10);
+        if (!isNaN(currentValue)) {
+            fontSizeInput.value = currentValue + 1;
+        }
+    });
 </script>
 {% endblock %}

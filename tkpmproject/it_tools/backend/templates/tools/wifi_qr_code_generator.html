@@ -20,10 +20,10 @@
         </select>
 
         <label class="normal-label">SSID:</label>
-        <input class="normal-input" type="text">
+        <input class="normal-input" type="text" required>
         
-        <label class="normal-label">Password:</label>
-        <input class="normal-input" type="password" id="input-password">
+        <label class="normal-label" id="label-password">Password:</label>
+        <input class="normal-input" type="password" id="input-password" required>
     
         <label class="normal-label-down">Foreground color:</label>
         <div class="color-picker-wrapper">
@@ -55,6 +55,8 @@
     const backgroundHex = document.getElementById('background-hex');
 
     const encryptionValue = document.getElementById('encryption');
+
+    const passwordLabel = document.getElementById('label-password');
     const passwordInput = document.getElementById('input-password');
 
     function updateForegroundColor(hex) {
@@ -85,8 +87,14 @@
         if (encryptionValue.value == "no") {
             passwordInput.value = "";
             passwordInput.disabled = true;
+            passwordInput.removeAttribute('required');
+            passwordInput.setAttribute('hidden', true);
+            passwordLabel.setAttribute('hidden', true);
         } else {
             passwordInput.disabled = false;
+            passwordInput.setAttribute('required', true);
+            passwordInput.removeAttribute('hidden');
+            passwordLabel.removeAttribute('hidden');
         }
     }
 </script>
