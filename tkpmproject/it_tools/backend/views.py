@@ -122,6 +122,10 @@ def website_load_time_tester_tool(request):
     context = get_master_context(request)
     return render(request, 'tools/website_load_time_tester.html', context)
 
+def chronometer_tool(request):
+    context = get_master_context(request)
+    return render(request, 'tools/chronometer.html', context)
+
 def get_master_context(request):
     # Get all it tools and convert query set to a list of objects
     it_tools = json.dumps(list(get_all_tools()), default=str)

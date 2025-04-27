@@ -1,0 +1,19 @@
+{% extends "master.html" %}
+
+{% block content %}
+<h2 class="tool-name">Chronometer</h2>
+
+<p class="tool-des">
+    A simple chronometer to measure time intervals of anything.
+</p>
+
+<div class="tool-body">
+    <label id="clock" class="chronometer-clock">00:00.000</label>
+    <button type="button" id="start-btn" class="normal-btn">Start</button>
+    <button hidden type="button" id="stop-btn" class="normal-btn">Stop</button>
+    <button type="button" id="reset-btn" class="normal-btn">Reset</button>
+</div>
+
+{% load static %}
+<script src="{% static 'javascript/chronometer.js' %}"></script>
+{% endblock %}

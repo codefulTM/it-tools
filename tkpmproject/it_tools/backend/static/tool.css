@@ -68,7 +68,6 @@
 
 
 .normal-btn {
-    display: inline-block;
     margin-left: 30px;
     margin-top: 20px;
     font-size: 24px;
@@ -251,4 +250,16 @@ input[type=range]:focus {
     column-gap: 10px;
     row-gap: 16px;
     border-radius: 5px;
+}
+
+.chronometer-clock {
+    display: block;
+    margin: 40px 0px 40px 30px;
+    width: 50%;
+    font-size: 64px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #fff;
+    background-color: #444;
+    padding: 20px;
+    border-radius: 4px;
 }
