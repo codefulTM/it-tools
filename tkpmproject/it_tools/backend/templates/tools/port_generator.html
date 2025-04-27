@@ -1,0 +1,19 @@
+{% extends "master.html" %}
+
+{% block content %}
+<h2 class="tool-name">Port Generator
+</h2>
+
+<p class="tool-des">
+    Random port number generator outside the system port range (0 – 1023).
+</p>
+
+<form action="/port_generator/" method="post">
+    <div class="tool-body">
+        {% csrf_token %}
+        <p class="random-port" id="port" name="port">10000</p>
+    </div>
+    <input type="submit" value="Copy port" class="normal-btn">
+    <input type="button" value="Refresh port" class="normal-btn">
+</form>
+{% endblock %}

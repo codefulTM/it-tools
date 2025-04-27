@@ -134,6 +134,10 @@ def json_formatting_tool(request):
     context = get_master_context(request)
     return render(request, 'tools/json_formatting.html', context)
 
+def port_generator_tool(request):
+    context = get_master_context(request)
+    return render(request, 'tools/port_generator.html', context)
+
 def get_master_context(request):
     # Get all it tools and convert query set to a list of objects
     it_tools = json.dumps(list(get_all_tools()), default=str)
