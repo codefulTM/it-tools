@@ -12,6 +12,7 @@ urlpatterns = [
     path('category/8/text-statistics', views.text_statistics_tool, name='text_statistics'),
     path('category/8/lorem-ipsum-generator', views.lorem_ipsum_generator_tool, name='lorem_ipsum_generator'),
     path('category/9/measurement-unit-converter', views.measurement_unit_converter_tool, name='measurement_unit_converter'),
+    path('category/9/website-load-time-tester', views.website_load_time_tester_tool, name='website_load_time_tester'),
     path('login/', views.login, name="login"),
     path('signup/', views.signup, name="signup"),
     path('logout/', views.logout, name='logout'),

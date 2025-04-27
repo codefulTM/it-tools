@@ -1,0 +1,27 @@
+{% extends "master.html" %}
+
+{% block content %}
+<h2 class="tool-name">Website load time tester</h2>
+
+<p class="tool-des">
+    Check the loading time of any website
+</p>
+
+<form action="/website_load_time_tester/" method="post">
+    <div class="tool-body website-load-time-tester-container">
+        {% csrf_token %}
+        <label class="normal-label-down">URL:</label>
+        <input class="normal-input" type="text" name="url" required placeholder="Enter URL here...">
+
+        <label class="normal-label-down">Load time (seconds):</label>
+        <input class="normal-input" type="number" name="load-time" readonly step="0.001" min="0">
+
+        <label class="normal-label-down">Page size (MB):</label>
+        <input class="normal-input" type="number" name="page-size" readonly>
+
+        <label class="normal-label-down">Requests:</label>
+        <input class="normal-input" type="number" name="requests" readonly>
+    </div>
+    <button type="submit" class="normal-btn">Start Test</button>
+</form>
+{% endblock %}

@@ -244,3 +244,11 @@ input[type=range]:focus {
     row-gap: 16px;
     border-radius: 5px;
 }
+
+.website-load-time-tester-container {
+    display: grid; 
+    grid-template-columns: 20% 70%;
+    column-gap: 10px;
+    row-gap: 16px;
+    border-radius: 5px;
+}
