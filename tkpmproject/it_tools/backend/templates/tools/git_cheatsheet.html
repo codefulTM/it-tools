@@ -1,0 +1,39 @@
+{% extends "master.html" %}
+
+{% block content %}
+<h2 class="tool-name">Git Cheatsheat</h2>
+
+<p class="tool-des">
+    Show all the command related to Git.
+</p>
+
+<div class="tool-body">
+    <h4>Configuration</h4> 
+    <label class="normal-label">Set the global config</label><br>
+    <small class="git-code">git config --global user.name "[name]"</small><br>
+    <small class="git-code">git config --global user.email "[email]"</small>
+    
+    <h4>Get started</h4>
+    <label class="normal-label">Create a git repository</label><br>
+    <small class="git-code">git init</small><br>
+    <label class="normal-label">Clone an existing git repository</label><br>
+    <small class="git-code">git clone [url]</small>
+    
+    <h4>I've made a mistake</h4>
+    <label class="normal-label">Change last commit message</label><br>
+    <small class="git-code">git commit --amend</small><br>
+    <label class="normal-label">Undo most recent commit and keep changes</label><br>
+    <small class="git-code">git reset HEAD~1</small><br>
+    <label class="normal-label">Undo the N most recent commit and keep changes</label><br>
+    <small class="git-code">git reset HEAD~N</small><br>
+    <label class="normal-label">Undo the N most recent commit and get rid of changes</label><br>
+    <small class="git-code">git reset HEAD~N --hard</small><br>
+    <label class="normal-label">Reset branch to remote state</label><br>
+    <small class="git-code">git fetch origin</small><br>
+    <small class="git-code">git reset --hard origin/[branch-name]</small>
+
+    <h4>Miscellaneous</h4>
+    <label class="normal-label">Renaming to local master branch to main</label><br>
+    <small class="git-code">git branch-m master main</small>
+</div>
+{% endblock %}

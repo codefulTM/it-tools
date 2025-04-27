@@ -263,3 +263,19 @@ input[type=range]:focus {
     padding: 20px;
     border-radius: 4px;
 }
+
+.git-code {
+    display: inline-block;
+    font-family: monospace;
+    font-size: 16px;
+    padding: 12px;
+    color: #fff;
+    background-color: #444;
+    width: 60%;
+}
+
+h4 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 16px;
+}
