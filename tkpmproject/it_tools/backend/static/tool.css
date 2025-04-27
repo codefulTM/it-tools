@@ -279,3 +279,11 @@ h4 {
     font-weight: bold;
     margin-top: 16px;
 }
+
+.json-formatting-container {
+    display: grid;
+    grid-template-columns: 20% 75%;
+    column-gap: 10px;
+    row-gap: 16px;
+    border-radius: 5px;
+}

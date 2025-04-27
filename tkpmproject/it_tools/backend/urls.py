@@ -15,6 +15,7 @@ urlpatterns = [
     path('category/9/website-load-time-tester', views.website_load_time_tester_tool, name='website_load_time_tester'),
     path('category/9/chronometer', views.chronometer_tool, name='chronometer'),
     path('category/10/git-cheatsheet', views.git_cheatsheet_tool, name='git_cheatsheet'),
+    path('category/10/json-formatting', views.json_formatting_tool, name='json_formatting'),
     path('login/', views.login, name="login"),
     path('signup/', views.signup, name="signup"),
     path('logout/', views.logout, name='logout'),

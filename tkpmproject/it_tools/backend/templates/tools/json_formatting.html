@@ -1,0 +1,27 @@
+{% extends "master.html" %}
+
+{% block content %}
+<h2 class="tool-name">JSON Formatting</h2>
+
+<p class="tool-des">
+    Reformat JSON to be more readable and user friendly.
+</p>
+
+<form action="/json_formatting/" method="post">
+    <div class="tool-body json-formatting-container">
+        {% csrf_token %}
+        <label class="normal-label-down">Paste the JSON file:</label>
+        <input class="normal-input" type="file" name="file" id="file" required accept=".txt,.json">
+
+        <label class="normal-label"></label>
+        <textarea class="normal-input" name="text" rows="5" id="text" placeholder="Or paste the JSON code here..."></textarea>
+
+        <label class="normal-label-down">Formated JSON code:</label>
+        <textarea class="normal-input" name="formatted-text" rows="5" id="formatted-text" placeholder="Formatted code goes here..." readonly></textarea>
+    </div>
+    <input type="submit" value="Format JSON code" class="normal-btn">
+    <input type="button" value="Download JSON code" class="normal-btn">
+</form>
+{% load static %}
+<script src="{% static 'javascript/json_formatting.js' %}"></script>
+{% endblock %}

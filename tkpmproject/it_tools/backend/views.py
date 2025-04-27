@@ -130,6 +130,10 @@ def git_cheatsheet_tool(request):
     context = get_master_context(request)
     return render(request, 'tools/git_cheatsheet.html', context)
 
+def json_formatting_tool(request):
+    context = get_master_context(request)
+    return render(request, 'tools/json_formatting.html', context)
+
 def get_master_context(request):
     # Get all it tools and convert query set to a list of objects
     it_tools = json.dumps(list(get_all_tools()), default=str)
