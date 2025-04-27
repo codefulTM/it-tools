@@ -225,6 +225,7 @@ input[type=range]:focus {
     transform: translate(-50%, 0);
     border-radius: 6px;
 }
+
 .range-value span:before{
     content: "";
     position: absolute;
@@ -234,4 +235,12 @@ input[type=range]:focus {
     top: 100%;
     left: 50%;
     margin-left: -5px;
+}
+
+.measurement-unit-converter-container {
+    display: grid; 
+    grid-template-columns: 30% 30%;
+    column-gap: 10px;
+    row-gap: 16px;
+    border-radius: 5px;
 }

@@ -1,0 +1,110 @@
+{% extends "master.html" %}
+
+{% block content %}
+<h2 class="tool-name">Measurement unit convertor</h2>
+
+<p class="tool-des">
+    Convert between different types of units of measurement (length, temperature, pressure, etc.)
+</p>
+
+<div class="tool-body measurement-unit-converter-container">
+    {% csrf_token %}
+    <label class="normal-label-down">Unit Type</label>
+    <select class="normal-input" name="unit-type" id="unit-type" required>
+        <option value="length" selected>Length</option>
+        <option value="weight">Weight</option>
+        <option value="temperature">Temperature</option>
+        <option value="pressure">Pressure</option>
+    </select>
+
+    <!-- Length measurement -->
+    <label class="normal-label-down" id="meter-label">Meters:</label>
+    <div class="number-input" id="meter-container">
+        <button class="btn decrement" id="meter-decrease-btn">−</button>
+        <input type="number" id="meter" value="1.00" step="0.01" required>
+        <button class="btn increment" id="meter-increase-btn">+</button>
+    </div>
+
+    <label class="normal-label-down" id="inch-label">Inches:</label>
+    <div class="number-input" id="inch-container">
+        <button class="btn decrement" id="inch-decrease-btn">−</button>
+        <input type="number" id="inch" value="39.37" step="0.01" required>
+        <button class="btn increment" id="inch-increase-btn">+</button>
+    </div>
+
+    <label class="normal-label-down" id="yard-label">Yards:</label>
+    <div class="number-input" id="yard-container">
+        <button class="btn decrement" id="yard-decrease-btn">−</button>
+        <input type="number" id="yard" value="1.09" step="0.01" required>
+        <button class="btn increment" id="yard-increase-btn">+</button>
+    </div>
+
+    <!-- Weight measurement-->
+    <label class="normal-label-down" id="kilogram-label">Kilograms:</label>
+    <div class="number-input" id="kilogram-container">
+        <button class="btn decrement" id="kilogram-decrease-btn">−</button>
+        <input type="number" id="kilogram" value="1.00" step="0.01" required>
+        <button class="btn increment" id="kilogram-increase-btn">+</button>
+    </div>
+
+    <label class="normal-label-down" id="pound-label">Pounds:</label>
+    <div class="number-input" id="pound-container">
+        <button class="btn decrement" id="pound-decrease-btn">−</button>
+        <input type="number" id="pound" value="2.20" step="0.01" required>
+        <button class="btn increment" id="pound-increase-btn">+</button>
+    </div>
+
+    <label class="normal-label-down" id="ounce-label">Ounces:</label>
+    <div class="number-input" id="ounce-container">
+        <button class="btn decrement" id="ounce-decrease-btn">−</button>
+        <input type="number" id="ounce" value="35.27" step="0.01" required>
+        <button class="btn increment" id="ounce-increase-btn">+</button>
+    </div>
+
+    <!-- Temperature measurement -->
+    <label class="normal-label-down" id="celsius-label">Celsius:</label>
+    <div class="number-input" id="celsius-container">
+        <button class="btn decrement" id="celsius-decrease-btn">−</button>
+        <input type="number" id="celsius" value="1.90" step="0.01" required>
+        <button class="btn increment" id="celsius-increase-btn">+</button>
+    </div>
+
+    <label class="normal-label-down" id="fahrenheit-label">Fahrenheit:</label>
+    <div class="number-input" id="fahrenheit-container">
+        <button class="btn decrement" id="fahrenheit-decrease-btn">−</button>
+        <input type="number" id="fahrenheit" value="33.80" step="0.01" required>
+        <button class="btn increment" id="fahrenheit-increase-btn">+</button>
+    </div>
+
+    <label class="normal-label-down" id="kelvin-label">Kelvin:</label>
+    <div class="number-input" id="kelvin-container">
+        <button class="btn decrement" id="kelvin-decrease-btn">−</button>
+        <input type="number" id="kelvin" value="274.15" step="0.01" required>
+        <button class="btn increment" id="kelvin-increase-btn">+</button>
+    </div>
+
+    <!-- Pressure measurement-->
+    <label class="normal-label-down" id="pascal-label">Pascal:</label>
+    <div class="number-input" id="pascal-container">
+        <button class="btn decrement" id="pascal-decrease-btn">−</button>
+        <input type="number" id="pascal" value="1.00" step="0.01" required>
+        <button class="btn increment" id="pascal-increase-btn">+</button>
+    </div>
+
+    <label class="normal-label-down" id="atm-label">Atmosphere:</label>
+    <div class="number-input" id="atm-container">
+        <button class="btn decrement" id="atm-decrease-btn">−</button>
+        <input type="number" id="atm" value="0.00" step="0.01" required>
+        <button class="btn increment" id="atm-increase-btn">+</button>
+    </div>
+
+    <label class="normal-label-down" id="mmHg-label">Millimeters of mercury:</label>
+    <div class="number-input" id="mmHg-container">
+        <button class="btn decrement" id="mmHg-decrease-btn">−</button>
+        <input type="number" id="mmHg" value="0.01" step="0.01" required>
+        <button class="btn increment" id="mmHg-increase-btn">+</button>
+    </div>
+</div>
+{% load static %}
+<script src="{% static 'javascript/measurement_unit_converter.js' %}"></script>
+{% endblock %}
