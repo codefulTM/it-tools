@@ -1,6 +1,6 @@
 import os
 import importlib
-from classes.ToolComponent import ToolComponent
+from . import ToolComponent
 from data_service.services.tool_services import *
 
 class ToolManager:
@@ -31,13 +31,16 @@ class ToolManager:
             if isinstance(attr, type) and issubclass(attr, ToolComponent) and attr is not Tool:
                 return attr()
 
-    def add_tool(self, tool_config, html_content, js_content):                
+    def add_tool(self, tool_config, html_content, js_content): 
+        # Add the tool's information into the database
+        tool = create_tool(tool_config['name'], tool_config['description'], tool_config['category'], tool_config['is_premium'], tool_config['is_enabled'])
+
         # Create the content of the new file that includes the class that extends the ToolComponent class
         content = f'''
-            class Tool{tool_config['id']}(ToolComponent):
+            class Tool{tool.id}(ToolComponent):
                 def get_info(self):
                     return {{
-                        'id': {tool_config['id']},
+                        'id': {tool.id},
                         'name': {tool_config['name']},
                         'description': {tool_config['description']},
                         'category': {tool_config['category']},
@@ -53,12 +56,9 @@ class ToolManager:
         '''
 
         # Save the content into a file in the tools folder
-        file_path = f"../tools/Tool{tool_config['id']}.py"
+        file_path = f"../tools/Tool{tool.id}.py"
         with open(file_path, "w") as file:
             file.write(content)
-
-        # Add the tool's information into the database
-        create_tool(tool_config['name'], tool_config['description'], tool_config['category'], tool_config['is_premium'], tool_config['is_enabled'])
 
     def remove_tool(self, tool):
         # Remove the tool's information from the database

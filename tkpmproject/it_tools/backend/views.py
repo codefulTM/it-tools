@@ -4,6 +4,7 @@ from django.template import loader
 import bcrypt
 from backend.decorators import login_required
 from backend.classes.User import *
+from backend.classes.ToolManager import *
 # from data_service.services.user_services import *
 # from data_service.services.user_role_services import *
 from data_service.services.tool_services import *
@@ -117,3 +118,42 @@ def manage_tools(request):
     }
 
     return render(request, 'manage_tools.html', context)
+
+def add_tool(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        category = request.POST.get('category')
+        is_premium = 'isPremium' in request.POST
+
+        html_file = request.FILES.get('html_file')
+        js_file = request.FILES.get('js_file')
+
+        if not name or not description or not category:
+            return render(request, 'add_tool.html', {'message': 'All fields are required.'})
+
+        if html_file:
+            html_content = html_file.read().decode('utf-8')
+        else:
+            html_content = ''
+
+        if js_file:
+            js_content = js_file.read().decode('utf-8')
+        else:
+            js_content = ''
+
+        tool_config = {
+            'name': name,
+            'description': description,
+            'category': category,
+            'is_premium': is_premium,
+            'is_enabled': True  # Assuming new tools are enabled by default
+        }
+
+        tool_manager = ToolManager()
+        tool_manager.add_tool(tool_config, html_content, js_content)
+
+        return redirect('manage_tools')
+    else:
+        return render(request, 'add_tool.html')
+
