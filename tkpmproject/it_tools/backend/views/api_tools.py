@@ -6,5 +6,12 @@ def get_tools(request):
     API endpoint to get a list of tools.
     """
     tools = get_all_tools()
-    return JsonResponse(list(tools), safe=False)
+    data = []
+    for tool in tools:
+        data.append({
+            'id': tool.id,
+            'name': tool.name,
+            'description': tool.description
+        })
+    return JsonResponse(data, safe=False)
 

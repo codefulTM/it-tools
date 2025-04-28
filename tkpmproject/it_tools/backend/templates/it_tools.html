@@ -21,10 +21,12 @@
     </div>
     <h1>All the tools</h1>
     <div class="toolGallery">   
+        {% verbatim %}
         <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id)">
             <h2>{{ tool.name }}</h2>
             <p>{{ tool.description }}</p>
         </div>
+        {% endverbatim %}
     </div>
 </div>
 <script>
@@ -33,25 +35,29 @@
         menu.classList.toggle("show");
     }
 
-    const it_tools = None
-
     const app = Vue.createApp({
         data() {
             return {
                 search_keyword: '',
-                tools: it_tools
+                tools: []
             }
         },
         computed: {
             filteredTools() {
-                const keyword = this.search_keyword.toLowerCase()
-                return this.tools.filter(tool => tool.name.toLowerCase().includes(keyword))
+                const keyword = this.search_keyword.toLowerCase();  
+                return this.tools.filter(tool => tool.name.toLowerCase().includes(keyword));
             }
         },
         methods: {
             goToTool(id) {
                 window.location.href = `/tool/${id}`;
             }
+        },
+        created() {
+            fetch("/apis/tools")
+            .then(response => response.json())
+            .then(data => this.tools = data)
+            .catch(error => console.error(error))
         }
     });
 
