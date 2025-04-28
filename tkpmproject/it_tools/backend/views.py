@@ -89,3 +89,31 @@ def it_tools(request):
     }
 
     return render(request, 'it_tools.html', context)
+
+def manage_tools(request):
+    # Get all it tools
+    it_tools = get_all_tools()
+    # Convert query set to a list of objects
+    it_tools_list = list(it_tools)
+    
+    # Get user information in session
+    user_id = None
+    username = None
+    user_role = None
+    if 'user_id' in request.session:
+        user_id = request.session.get('user_id')
+        username = request.session.get('username')
+        user_role = request.session.get('user_role')
+
+    # Get all tool categories
+    tool_categories = list(get_all_tool_categories())
+
+    context = {
+        'it_tools': it_tools_list,
+        'user_id': user_id,
+        'username': username,
+        'user_role': user_role,
+        'tool_categories': tool_categories
+    }
+
+    return render(request, 'manage_tools.html', context)

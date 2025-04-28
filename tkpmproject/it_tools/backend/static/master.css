@@ -89,6 +89,13 @@ main {
     color: #006A71;   
 }
 
+#adminFeatures button {
+    background-color: #9ACBD0;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 10px;
+}
+
 .menu-wrapper {
     position: relative;
     background-color: red;
