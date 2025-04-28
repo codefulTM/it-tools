@@ -33,11 +33,13 @@
         menu.classList.toggle("show");
     }
 
+    const it_tools = None
+
     const app = Vue.createApp({
         data() {
             return {
                 search_keyword: '',
-                tools: JSON.parse('{{it_tools|safe|escapejs}}')
+                tools: it_tools
             }
         },
         computed: {

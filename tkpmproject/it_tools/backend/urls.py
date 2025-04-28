@@ -1,11 +1,13 @@
 from django.urls import path
-from . import views
+from .views import views_authentication
+from .views import views_main_page
+from .views import views_admin_page
 
 urlpatterns = [
-    path('login/', views.login, name="login"),
-    path('signup/', views.signup, name="signup"),
-    path('logout/', views.logout, name='logout'),
-    path('managetools/', views.manage_tools, name="manage_tool"),
-    path('addtool/', views.add_tool, name="add_tool"),
-    path('', views.it_tools, name="it_tools")
+    path('login/', views_authentication.login, name="login"),
+    path('signup/', views_authentication.signup, name="signup"),
+    path('logout/', views_authentication.logout, name='logout'),
+    path('managetools/', views_admin_page.manage_tools, name="manage_tools"),
+    path('addtool/', views_admin_page.add_tool, name="add_tool"),
+    path('', views_main_page.it_tools, name="it_tools")
 ]
