@@ -56,7 +56,11 @@ class ToolManager:
         '''
 
         # Save the content into a file in the tools folder
-        file_path = f"../tools/Tool{tool.id}.py"
+        dir_path = "../tools"
+        if not os.path.exists(dir_path):
+            os.makedirs(dir_path)
+
+        file_path = f"{dir_path}/Tool{tool.id}.py"
         with open(file_path, "w") as file:
             file.write(content)
 
