@@ -1,9 +1,11 @@
 import os
 import importlib
-from classes.Tool import Tool
+from classes.ToolComponent import Tool
+from data_service.services.tool_services import *
 
 class ToolManager:
     def __init__(self):
+        
         self.tools = None
 
         # From the files in the "tools" folder, get all the classes that extend the Tool 
@@ -19,18 +21,35 @@ class ToolManager:
                     attr = getattr(module, attr_name)
                     if isinstance(attr, type) and issubclass(attr, Tool) and attr is not Tool:
                         self.tools.append(attr())
-        
 
-    def add_tool(self, tool_config, html_file, js_file):                
-        # Get the content of the html_file 
-        
-        # Get the content of the js_file
+    def add_tool(self, tool_config, html_content, js_content):                
+        # Create the content of the new file that includes the class that extends the ToolComponent class
+        content = f'''
+            class Tool{tool_config['id']}(ToolComponent):
+                def get_info(self):
+                    return {{
+                        'id': {tool_config['id']},
+                        'name': {tool_config['name']},
+                        'description': {tool_config['description']},
+                        'category': {tool_config['category']},
+                        'is_premium': {tool_config['is_premium']},
+                        'is_enabled': {tool_config['is_enabled']}
+                    }}
 
-        # Create the content of the new file that includes the class that extends the Tool class
+                def get_html(self):
+                    return {html_content}
+                
+                def get_js(self):
+                    return {js_content}
+        '''
 
-        # Add the tool's information into the database, including the class name
+        # Save the content into a file in the tools folder
+        file_path = f"../tools/Tool{tool_config['id']}.py"
+        with open(file_path, "w") as file:
+            file.write(content)
 
-        pass
+        # Add the tool's information into the database
+        create_tool(tool_config['name'], tool_config['description'], tool_config['category'], tool_config['is_premium'], tool_config['is_enabled'])
 
     def remove_tool(self, tool):
         # Remove the tool's information from the database
