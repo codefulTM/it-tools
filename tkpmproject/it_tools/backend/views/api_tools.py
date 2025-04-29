@@ -21,5 +21,6 @@ def get_one_tool(request, tool_id):
     tool = tool_manager.get_tool(tool_id)
     data = tool.get_info()
     data['html'] = tool.get_html()
+    data['package'] = tool.get_package()
     data['js'] = tool.get_js()
     return JsonResponse(data)

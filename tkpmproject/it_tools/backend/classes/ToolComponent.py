@@ -7,3 +7,6 @@ class ToolComponent:
     
     def get_js(self):
         return None
+    
+    def get_package(self):
+        return None
