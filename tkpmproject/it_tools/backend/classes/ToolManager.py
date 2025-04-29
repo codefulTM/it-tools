@@ -40,21 +40,21 @@ class ToolManager:
 from backend.classes.ToolComponent import ToolComponent
 
 class Tool{tool.id}(ToolComponent):
-def get_info(self):
-    return {{
-        'id': {tool.id},
-        'name': '{tool_config['name']}',
-        'description': '{tool_config['description']}',
-        'category': '{tool_config['category']}',
-        'is_premium': {tool_config['is_premium']},
-        'is_enabled': {tool_config['is_enabled']}
-    }}
+    def get_info(self):
+        return {{
+            'id': {tool.id},
+            'name': '{tool_config['name']}',
+            'description': '{tool_config['description']}',
+            'category': '{tool_config['category']}',
+            'is_premium': {tool_config['is_premium']},
+            'is_enabled': {tool_config['is_enabled']}
+        }}
 
-def get_html(self):
-    return {html_content}
+    def get_html(self):
+        return """{html_content}"""
 
-def get_js(self):
-    return {js_content}
+    def get_js(self):
+        return """{js_content}"""
         '''
 
         # Save the content into a file in the tools folder
@@ -63,7 +63,7 @@ def get_js(self):
             os.makedirs(dir_path)
 
         file_path = f"{dir_path}/Tool{tool.id}.py"
-        with open(file_path, "w") as file:
+        with open(file_path, "w", encoding="utf-8") as file:
             file.write(content)
 
     def remove_tool(self, tool):

@@ -34,7 +34,6 @@ def add_tool(request):
 
         if html_file:
             html_content = html_file.read().decode('utf-8')
-            print(html_content)
         else:
             html_content = ''
 

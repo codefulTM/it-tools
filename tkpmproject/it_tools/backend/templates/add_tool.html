@@ -44,7 +44,7 @@
     </style>
 </head>
 <body>
-    <form action="/addtool/" method="post">
+    <form action="/addtool/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div>
             <label for="name">Enter tool name:</label>
