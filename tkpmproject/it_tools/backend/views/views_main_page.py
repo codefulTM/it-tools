@@ -7,8 +7,6 @@ def it_tools(request):
     user_id, username, user_role = get_user_from_session(request)
     it_tool_categories = list(get_all_tool_categories())
 
-    print(it_tool_categories)
-
     context = {
         'user_id': user_id,
         'username': username,
