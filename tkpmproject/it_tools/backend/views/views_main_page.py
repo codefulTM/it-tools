@@ -15,3 +15,16 @@ def it_tools(request):
     }
 
     return render(request, 'it_tools.html', context)
+
+def use_tool(request, tool_id):
+    # Get user information in session
+    user_id, username, user_role = get_user_from_session(request)
+
+    context = {
+        'user_id': user_id,
+        'username': username,
+        'user_role': user_role,
+        'tool_id': tool_id
+    }
+
+    return render(request, 'use_tool.html', context)

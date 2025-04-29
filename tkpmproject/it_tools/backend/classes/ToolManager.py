@@ -1,6 +1,6 @@
 import os
 import importlib
-from . import ToolComponent
+from .ToolComponent import ToolComponent
 from data_service.services.tool_services import *
 
 class ToolManager:
@@ -22,10 +22,10 @@ class ToolManager:
         #             if isinstance(attr, type) and issubclass(attr, ToolComponent) and attr is not Tool:
         #                 self.tools.append(attr())
 
-    def get_tool(tool_id):
+    def get_tool(self, tool_id):
         module_path = f"..tools.Tool{tool_id}"
-        module = importlib.import_module(module_path)
-        
+        module = importlib.import_module(module_path, package=__package__)
+
         for attr_name in dir(module):
             attr = getattr(module, attr_name)
             if isinstance(attr, type) and issubclass(attr, ToolComponent) and attr is not Tool:
