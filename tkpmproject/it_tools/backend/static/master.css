@@ -12,7 +12,8 @@ body {
 aside {
     background-color: #F2EFE7;
     height: 100vh;
-    flex-grow: 0.5;
+    /* flex-grow: 0.5; */
+    width: 30%;
 }
 
 #title {
@@ -61,7 +62,8 @@ nav a:hover {
 
 main {
     height: 100vh;
-    flex-grow: 3;
+    /* flex-grow: 3; */
+    width: 70%;
 }
 
 #toolbar {
