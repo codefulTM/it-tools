@@ -37,24 +37,24 @@ class ToolManager:
 
         # Create the content of the new file that includes the class that extends the ToolComponent class
         content = f'''
-from backend.classes.ToolComponent import ToolComponent
+            from backend.classes.ToolComponent import ToolComponent
 
-class Tool{tool.id}(ToolComponent):
-    def get_info(self):
-        return {{
-            'id': {tool.id},
-            'name': '{tool_config['name']}',
-            'description': '{tool_config['description']}',
-            'category': '{tool_config['category']}',
-            'is_premium': {tool_config['is_premium']},
-            'is_enabled': {tool_config['is_enabled']}
-        }}
+            class Tool{tool.id}(ToolComponent):
+                def get_info(self):
+                    return {{
+                        'id': {tool.id},
+                        'name': '{tool_config['name']}',
+                        'description': '{tool_config['description']}',
+                        'category': '{tool_config['category']}',
+                        'is_premium': {tool_config['is_premium']},
+                        'is_enabled': {tool_config['is_enabled']}
+                    }}
 
-    def get_html(self):
-        return """{html_content}"""
+                def get_html(self):
+                    return """{html_content}"""
 
-    def get_js(self):
-        return """{js_content}"""
+                def get_js(self):
+                    return """{js_content}"""
         '''
 
         # Save the content into a file in the tools folder

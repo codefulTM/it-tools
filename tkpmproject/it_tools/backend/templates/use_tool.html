@@ -20,8 +20,9 @@
         </div>
     </div>
     <h1 data-toolid="{{ tool_id }}">{{ tool.name }}</h1>
-    <script id="toolScript"></script>
     <div id="toolContent"></div>
+    <script id="packageScript"></script>
+    <script id="toolScript"></script>
 </div>
 <script>
 
@@ -36,6 +37,7 @@
         .then(response => response.json())
         .then(data => {
             document.querySelector("#toolContent").innerHTML = data.html;
+            document.querySelector("#packageScript").src = data.package;
             document.querySelector("#toolScript").innerHTML = data.js;
         })
         .catch(error => console.error(error));
