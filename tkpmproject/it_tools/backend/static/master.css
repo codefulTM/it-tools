@@ -18,7 +18,7 @@ aside {
 #title {
     text-align: center;
     margin: 40px 0px 40px 0px;
-    font-size: 48px;
+    font-size: 40px;
 }
 
 #title a {
@@ -65,7 +65,7 @@ main {
 }
 
 #toolbar {
-    margin: 40px 0px 40px 0px;
+    margin: 20px 0px;
     display: flex;
     justify-content: space-evenly;
 }
@@ -85,11 +85,12 @@ main {
 }
 
 #content {
-    padding: 20px;  
+    margin: 0 20px;
 }
 
 #content h1 {
     color: #006A71;   
+    font-size: 40px;
 }
 
 .toolGallery {
