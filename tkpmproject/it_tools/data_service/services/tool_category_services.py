@@ -11,13 +11,6 @@ def get_tool_category_by_name(name):
     except ToolCategory.DoesNotExist:
         return None
     
-# Get by id function
-def get_tool_category_by_id(id):
-    try: 
-        return ToolCategory.objects.get(id=id)
-    except ToolCategory.DoesNotExist:
-        return None
-
 # Create tool category
 def create_tool_category(name):
     if ToolCategory.objects.filter(name=name).exists():

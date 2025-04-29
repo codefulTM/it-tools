@@ -1,11 +1,5 @@
-import qrcode as qr
-import qrcode.image.svg
 from backend.classes.ToolComponent import ToolComponent
 from data_service.services.tool_services import get_tool_by_id
-from django.http import JsonResponse, HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-from io import BytesIO
-import json
 
 class Tool16(ToolComponent):
     def get_info(self):
