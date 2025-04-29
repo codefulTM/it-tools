@@ -1,0 +1,69 @@
+{% extends "master.html" %}
+
+{% block content %}
+<div id="content">
+    <div id="toolbar">
+        <a href="/"><i class="fa-solid fa-house"></i></a>
+        <input type="search" placeholder="Search for tools..." v-model="search_keyword"> 
+        <div class="menu_wrapper">
+            <i class="fa-solid fa-circle-user" onclick="toggleMenu()"></i>
+            <div class="menu">
+                <nav>
+                    {% if user_id %}
+                    <a href="/logout">Log out</a>
+                    {% endif %}
+                    {% if user_role == 'regular' %}
+                    <a href="#">Make a subscription</a>
+                    {% endif %}
+                </nav>
+            </div>
+        </div>
+    </div>
+    <h1 data-categoryid="{{ category.id }}">{{ category.name }}</h1>
+    <div class="toolGallery">   
+        {% verbatim %}
+        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id)">
+            <h2>{{ tool.name }}</h2>
+            <p>{{ tool.description }}</p>
+        </div>
+        {% endverbatim %}
+    </div>
+</div>
+<script>
+    function toggleMenu() {
+        const menu = document.querySelector(".menu");
+        menu.classList.toggle("show");
+    }
+
+    const category_id = document.querySelector("#content h1").dataset.categoryid;
+    console.log(category_id);
+
+    const app = Vue.createApp({
+        data() {
+            return {
+                search_keyword: '',
+                tools: []
+            }
+        },
+        computed: {
+            filteredTools() {
+                const keyword = this.search_keyword.toLowerCase();  
+                return this.tools.filter(tool => tool.name.toLowerCase().includes(keyword));
+            }
+        },
+        methods: {
+            goToTool(id) {
+                window.location.href = `/tools/${id}`;
+            }
+        },
+        created() {
+            fetch(`/apis/categories/${category_id}`)
+            .then(response => response.json())
+            .then(data => this.tools = data)
+            .catch(error => console.error(error))
+        }
+    });
+
+    app.mount("#content");
+</script>
+{% endblock %}

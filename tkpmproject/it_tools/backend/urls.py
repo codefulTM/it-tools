@@ -10,5 +10,6 @@ urlpatterns = [
     path('managetools/', views_admin_page.manage_tools, name="manage_tools"),
     path('addtool/', views_admin_page.add_tool, name="add_tool"),
     path('tools/<int:tool_id>/', views_main_page.use_tool, name="use_tool"),
+    path('categories/<int:category_id>/', views_main_page.it_tools_by_category, name="get_tools_by_category"),
     path('', views_main_page.it_tools, name="it_tools")
 ]
