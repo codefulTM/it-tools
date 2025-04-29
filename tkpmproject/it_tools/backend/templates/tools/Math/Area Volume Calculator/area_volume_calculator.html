@@ -1,0 +1,23 @@
+<h1 style="font-size: 24px;">📐 Area – Volume Calculator</h1>
+
+<label for="shape" style="display: block; margin-top: 20px;">Choose shape:</label>
+<select id="shape" onchange="showInputs()"
+    style="padding: 6px; border-radius: 5px; background-color: #333; color: white;">
+    <option value="">-- Select --</option>
+    <option value="circle">Circle (Area)</option>
+    <option value="triangle">Triangle (Area)</option>
+    <option value="rectangle">Rectangle/Square (Area)</option>
+    <option value="sphere">Sphere (Volume)</option>
+    <option value="cylinder">Cylinder (Volume)</option>
+    <option value="cone">Cone (Volume)</option>
+    <option value="box">Box (Volume)</option>
+</select>
+
+<div id="inputs" style="margin-top: 20px;"></div>
+
+<button onclick="calculate()"
+    style="margin-top: 20px; padding: 10px 15px; background-color: #444; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    Calculate
+</button>
+
+<div id="result" style="margin-top: 30px; font-size: 18px; color: #00ff99;"></div>

@@ -1,0 +1,46 @@
+{% extends "master.html" %}
+
+{% block content %}
+<div id="content">
+    <div id="toolbar">
+        <a href="/"><i class="fa-solid fa-house"></i></a>
+        <input disabled type="search" placeholder="Search for tools..." v-model="search_keyword"> 
+        <div class="menu_wrapper">
+            <i class="fa-solid fa-circle-user" onclick="toggleMenu()"></i>
+            <div class="menu">
+                <nav>
+                    {% if user_id %}
+                    <a href="/logout">Log out</a>
+                    {% endif %}
+                    {% if user_role == 'regular' %}
+                    <a href="#">Make a subscription</a>
+                    {% endif %}
+                </nav>
+            </div>
+        </div>
+    </div>
+    <h1 data-toolid="{{ tool_id }}">{{ tool.name }}</h1>
+    <script id="toolScript"></script>
+    <div id="toolContent"></div>
+</div>
+<script>
+
+    function toggleMenu() {
+        const menu = document.querySelector(".menu");
+        menu.classList.toggle("show");
+    }
+
+    function loadTool() {
+        const toolId = document.querySelector("#content h1").dataset.toolid;
+        fetch('/apis/tools/' + toolId)
+        .then(response => response.json())
+        .then(data => {
+            document.querySelector("#toolContent").innerHTML = data.html;
+            document.querySelector("#toolScript").innerHTML = data.js;
+        })
+        .catch(error => console.error(error));
+    }
+
+    loadTool();
+</script>
+{% endblock %}

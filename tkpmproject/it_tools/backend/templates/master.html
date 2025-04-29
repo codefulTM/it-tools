@@ -20,6 +20,11 @@
             <a href="/login">Login</a>
         </div>
         {% endif %}
+        {% if user_id %}
+        <div style="text-align: center; margin: 20px 0;">
+            <p>Hello, {{username}}!</p>
+        </div>
+        {% endif %}
         <nav>
             <ul>
                 {% if user_role == 'regular' or user_role == 'premium' or user_role == 'admin' %}
