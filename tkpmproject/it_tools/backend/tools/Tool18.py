@@ -258,4 +258,4 @@ class Tool18(ToolComponent):
         """
     
     def get_package(self):
-        return "https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"
+        return ""
