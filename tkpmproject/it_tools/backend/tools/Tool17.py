@@ -108,19 +108,18 @@ class Tool17(ToolComponent):
                     qrCodeOutput.src = dataUrl;
                 } catch (err) {
                     console.error('Failed to generate QR Code', err);
+                    alert('Failed to copy QR Code');
                 }
             });
 
             copyButton.addEventListener('click', async () => {
-                const qrImage = document.getElementById('qr-code');
-
-                if (!qrImage || !qrImage.src) {
+                if (!qrCodeOutput || !qrCodeOutput.src) {
                     alert('Please generate a QR code first!');
                     return;
                 }
 
                 try {
-                    const response = await fetch(qrImage.src);
+                    const response = await fetch(qrCodeOutput.src);
                     const blob = await response.blob();
 
                     const clipboardItem = new ClipboardItem({ [blob.type]: blob });
