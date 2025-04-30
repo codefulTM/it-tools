@@ -1,0 +1,58 @@
+<h2 style="border-bottom:1px solid #444; padding-bottom:5px;">IPv4 address converter</h2>
+<p style="color:#aaa; margin-top:5px;">
+    Convert an IP address into decimal, binary, hexadecimal, or even an IPv6 representation of it.
+</p>
+
+<label for="ip" style="display:block; margin-top:20px; font-weight:bold;">The ipv4 address:</label>
+<input id="ip" type="text" value="192.168.1.1"
+    style="width:100%; padding:8px; margin-top:5px; background:#222; border:1px solid #333; color:#eee;">
+
+<div id="results" style="margin-top:20px;">
+
+    <div style="display:flex; align-items:center; margin-bottom:10px;">
+        <div style="width:100px;">Decimal:</div>
+        <input id="outDec" readonly style="flex:1; padding:6px; background:#222; border:1px solid #333; color:#0f0;">
+        <button onclick="copyValue('outDec')"
+            style="margin-left:8px; padding:6px; background:#333; border:none; color:#eee; cursor:pointer;">
+            📋
+        </button>
+    </div>
+
+    <div style="display:flex; align-items:center; margin-bottom:10px;">
+        <div style="width:100px;">Hexadecimal:</div>
+        <input id="outHex" readonly style="flex:1; padding:6px; background:#222; border:1px solid #333; color:#0f0;">
+        <button onclick="copyValue('outHex')"
+            style="margin-left:8px; padding:6px; background:#333; border:none; color:#eee; cursor:pointer;">
+            📋
+        </button>
+    </div>
+
+    <div style="display:flex; align-items:center; margin-bottom:10px;">
+        <div style="width:100px;">Binary:</div>
+        <input id="outBin" readonly style="flex:1; padding:6px; background:#222; border:1px solid #333; color:#0f0;">
+        <button onclick="copyValue('outBin')"
+            style="margin-left:8px; padding:6px; background:#333; border:none; color:#eee; cursor:pointer;">
+            📋
+        </button>
+    </div>
+
+    <div style="display:flex; align-items:center; margin-bottom:10px;">
+        <div style="width:100px;">IPv6:</div>
+        <input id="outIPv6" readonly style="flex:1; padding:6px; background:#222; border:1px solid #333; color:#0f0;">
+        <button onclick="copyValue('outIPv6')"
+            style="margin-left:8px; padding:6px; background:#333; border:none; color:#eee; cursor:pointer;">
+            📋
+        </button>
+    </div>
+
+    <div style="display:flex; align-items:center;">
+        <div style="width:100px;">IPv6 (short):</div>
+        <input id="outIPv6short" readonly
+            style="flex:1; padding:6px; background:#222; border:1px solid #333; color:#0f0;">
+        <button onclick="copyValue('outIPv6short')"
+            style="margin-left:8px; padding:6px; background:#333; border:none; color:#eee; cursor:pointer;">
+            📋
+        </button>
+    </div>
+
+</div>

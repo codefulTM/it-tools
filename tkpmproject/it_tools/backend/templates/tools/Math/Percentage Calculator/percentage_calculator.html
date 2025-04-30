@@ -1,0 +1,37 @@
+<h1 style="font-size: 24px;">🧮 Percentage Calculator</h1>
+
+<!-- First Calculator -->
+<div style="background: #ccc; padding: 20px; border-radius: 10px; margin-top: 20px;">
+    <label>What is</label>
+    <input id="x1" type="number" style="width: 80px; margin: 0 5px;">
+    <label>% of</label>
+    <input id="y1" type="number" style="width: 80px; margin: 0 5px;">
+    <button onclick="calcPercentOf()"
+        style="margin-left:10px; padding: 5px 10px; border-radius: 5px; background: #444; color: white; border: none;">Result</button>
+    <input id="result1" type="text" readonly style="width: 100px; margin-left: 10px;">
+    <button onclick="copyResult('result1')" style="padding: 5px;">📋</button>
+</div>
+
+<!-- Second Calculator -->
+<div style="background: #ccc; padding: 20px; border-radius: 10px; margin-top: 20px;">
+    <input id="x2" type="number" style="width: 80px; margin: 0 5px;">
+    <label>is what percent of</label>
+    <input id="y2" type="number" style="width: 80px; margin: 0 5px;">
+    <button onclick="calcWhatPercent()"
+        style="margin-left:10px; padding: 5px 10px; border-radius: 5px; background: #444; color: white; border: none;">Result</button>
+    <input id="result2" type="text" readonly style="width: 100px; margin-left: 10px;">
+    <button onclick="copyResult('result2')" style="padding: 5px;">📋</button>
+</div>
+
+<!-- Third Calculator -->
+<div style="background: #ccc; padding: 20px; border-radius: 10px; margin-top: 20px;">
+    <label>What is the percentage increase/decrease</label><br><br>
+    <label>From</label>
+    <input id="from" type="number" style="width: 80px; margin: 0 5px;">
+    <label>To</label>
+    <input id="to" type="number" style="width: 80px; margin: 0 5px;">
+    <button onclick="calcIncreaseDecrease()"
+        style="margin-left:10px; padding: 5px 10px; border-radius: 5px; background: #444; color: white; border: none;">Result</button>
+    <input id="result3" type="text" readonly style="width: 100px; margin-left: 10px;">
+    <button onclick="copyResult('result3')" style="padding: 5px;">📋</button>
+</div>

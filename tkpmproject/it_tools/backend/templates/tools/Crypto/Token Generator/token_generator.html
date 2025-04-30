@@ -1,0 +1,26 @@
+<h2 style="text-align:center;">Random Password Generator</h2>
+
+<!-- Toggle options -->
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; margin-bottom: 20px;">
+    <label for="uppercase"><input type="checkbox" id="uppercase" checked> Uppercase (ABC...)</label>
+    <label for="lowercase"><input type="checkbox" id="lowercase"> Lowercase (abc...)</label>
+    <label for="numbers"><input type="checkbox" id="numbers" checked> Numbers (123...)</label>
+    <label for="symbols"><input type="checkbox" id="symbols" checked> Symbols (!@#...)</label>
+</div>
+
+<!-- Length slider -->
+<label for="length">Length (<span id="lengthValue">512</span>)</label>
+<input type="range" min="8" max="512" value="512" id="length" style="width:100%; margin-bottom:20px;"
+    oninput="document.getElementById('lengthValue').innerText = this.value">
+
+<!-- Output box -->
+<textarea id="output" rows="6" readonly
+    style="width:100%; padding:10px; font-family:monospace; background:#2a2a2a; color:#00ffb3; border:none; border-radius:5px; margin-bottom:20px;"></textarea>
+
+<!-- Buttons -->
+<div style="display:flex; justify-content:center; gap:10px;">
+    <button onclick="copyToken()"
+        style="padding:10px 20px; background:#444; color:white; border:none; border-radius:5px;">Copy</button>
+    <button onclick="generateToken()"
+        style="padding:10px 20px; background:#444; color:white; border:none; border-radius:5px;">Refresh</button>
+</div>

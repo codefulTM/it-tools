@@ -1,0 +1,20 @@
+<h2 style="margin-bottom:10px;">Hash text</h2>
+<p style="color:#aaa;">Hash a text string using the function you need: MD5, SHA1, SHA256, SHA224, SHA512, SHA384, SHA3
+    or RIPEMD160</p>
+
+<!-- Input -->
+<textarea id="input" placeholder="Your string to hash..." rows="4"
+    style="width:100%; padding:10px; margin:15px 0; background:#2a2a2a; color:#fff; border:none; border-radius:5px;"></textarea>
+
+<!-- Digest Encoding -->
+<label for="encoding">Digest encoding</label>
+<select id="encoding"
+    style="width:100%; padding:10px; margin:10px 0 20px 0; background:#2a2a2a; color:white; border:none; border-radius:5px;">
+    <option value="hex">Hexadecimal (base 16)</option>
+    <!-- Future support: base64, binary,... -->
+</select>
+
+<!-- Output list -->
+<div id="results"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>

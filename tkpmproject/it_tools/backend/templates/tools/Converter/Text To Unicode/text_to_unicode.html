@@ -1,0 +1,27 @@
+<h2>Text to Unicode</h2>
+<label>Enter text to convert to unicode</label><br>
+<textarea id="textInput" rows="3"
+    style="width: 100%; margin-top: 5px; margin-bottom: 10px; background: #1e1e1e; color: white; border: 1px solid #333;"></textarea>
+
+<label>Unicode from your text</label><br>
+<textarea id="unicodeOutput" rows="3" readonly
+    style="width: 100%; margin-top: 5px; margin-bottom: 10px; background: #1e1e1e; color: white; border: 1px solid #333;"></textarea>
+
+<button onclick="copyToClipboard('unicodeOutput')"
+    style="padding: 8px 16px; background: #333; color: white; border: none; cursor: pointer;">Copy unicode to
+    clipboard</button>
+
+<hr style="margin: 30px 0; border: 1px solid #333;">
+
+<h2>Unicode to Text</h2>
+<label>Enter unicode to convert to text</label><br>
+<textarea id="unicodeInput" rows="3"
+    style="width: 100%; margin-top: 5px; margin-bottom: 10px; background: #1e1e1e; color: white; border: 1px solid #333;"></textarea>
+
+<label>Text from your Unicode</label><br>
+<textarea id="textOutput" rows="3" readonly
+    style="width: 100%; margin-top: 5px; margin-bottom: 10px; background: #1e1e1e; color: white; border: 1px solid #333;"></textarea>
+
+<button onclick="copyToClipboard('textOutput')"
+    style="padding: 8px 16px; background: #333; color: white; border: none; cursor: pointer;">Copy text to
+    clipboard</button>
