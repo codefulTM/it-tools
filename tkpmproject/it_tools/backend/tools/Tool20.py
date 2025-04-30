@@ -1,7 +1,7 @@
 from backend.classes.ToolComponent import ToolComponent
 from data_service.services.tool_services import get_tool_by_id
 
-class Tool19(ToolComponent):
+class Tool20(ToolComponent):
     def get_info(self):
         info = get_tool_by_id(20)
 
@@ -21,7 +21,7 @@ class Tool19(ToolComponent):
             }
         
         else:
-            print("Error: Cannot retrieve the info for tool id 19")
+            print("Error: Cannot retrieve the info for tool id 20")
             return None
         
     def get_html(self):
