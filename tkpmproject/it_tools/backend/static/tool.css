@@ -16,9 +16,16 @@
     margin-left: 32px;
 }
 
+.tool-require-premium-or-enabled {
+    font-size: 40px;
+    margin-top: 52px;
+    text-align: center;
+    color: #f44
+}
+
 .qr-code-generator-container {
     display: grid; 
-    grid-template-columns: 20% 30%;
+    grid-template-columns: 20% 70%;
     column-gap: 10px;
     row-gap: 16px;
     border-radius: 5px;
