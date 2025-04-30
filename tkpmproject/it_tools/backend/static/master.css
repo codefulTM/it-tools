@@ -60,6 +60,11 @@ nav a:hover {
     background-color: #9ACBD0;
 }
 
+nav a:active {
+    background-color: #006A71;
+    color: white;
+}
+
 main {
     height: 100vh;
     /* flex-grow: 3; */
@@ -95,6 +100,19 @@ main {
     font-size: 40px;
 }
 
+#adminFeatures button {
+    background-color: #9ACBD0;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 10px;
+}
+
+#adminFeatures button:hover {
+    background-color: #006A71;
+    color: white;
+    cursor: pointer;
+}
+
 .toolGallery {
     display: flex;
     flex-wrap: wrap;
@@ -107,15 +125,16 @@ main {
     padding: 20px;
     margin: 10px;
     cursor: pointer;
-    width: 20%;
+    width: 30%;
+    transition: background-color 0.3s ease;
 }
 
-#adminFeatures button {
+.toolGallery div:hover {
     background-color: #9ACBD0;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px 10px;
 }
+
+
+
 
 .menu-wrapper {
     position: relative;
