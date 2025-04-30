@@ -1,38 +1,49 @@
 from backend.classes.ToolComponent import ToolComponent
 from data_service.services.tool_services import get_tool_by_id
 
-class Tool16(ToolComponent):
+class Tool17(ToolComponent):
     def get_info(self):
-        info = get_tool_by_id(16)
+        info = get_tool_by_id(17)
 
-        if (info != None):  
+        if (info != None):
             self.name = info.name
             self.description = info.description
             self.category = info.category.name
             self.is_premium = info.is_premium
             self.is_enabled = info.is_enabled
-
+            
             return {
-                'id': 16,
+                'id': 17, 
                 'name': self.name,
-                'description': self.description,
                 'category': self.category,
                 'is_premium': self.is_premium,
                 'is_enabled': self.is_enabled
             }
-
+        
         else:
-            print("Error: Cannot retrieve the info for tool id 16")
+            print("Error: Cannot retrieve the info for tool id 17")
             return None
-
+        
     def get_html(self):
         return f"""
             <h2 class="tool-name">{self.name}</h2>
-            <p class="tool-des">{self.description}</p>
+
+            <p class="tool-des">{self.description} </p>
 
             <div class="tool-body qr-code-generator-container">
-                <label class="normal-label">Text:</label>
-                <textarea class="normal-input" type="text" id="text" required></textarea>
+                <label class="normal-label-down">Encryption method:</label>
+                <select name="encryption-method" class="dropdown" id="encryption">
+                    <option value="">No password</option>
+                    <option value="WPA" selected>WPA/WPA2</option>
+                    <option value="WERP">WEP</option>
+                    <option value="EAP">WPA2-EAP</option>
+                </select>
+
+                <label class="normal-label">SSID:</label>
+                <input class="normal-input" type="text" id="ssid" required>
+                
+                <label class="normal-label" id="label-password">Password:</label>
+                <input class="normal-input" type="password" id="input-password" required>
             
                 <label class="normal-label-down">Foreground color:</label>
                 <div class="color-picker-wrapper">
@@ -46,20 +57,15 @@ class Tool16(ToolComponent):
                     <input type="text" id="background-hex" class="hex-value" readonly>
                 </div>
 
-                <label class="normal-label-down">Error resistance:</label>
-                <select name="error-resistance" class="dropdown" id="error-resistance">
-                    <option value="L">low (7%)</option>
-                    <option value="M">medium (15%)</option>
-                    <option value="Q">quartile (25%)</option>
-                    <option value="H">high (30%)</option>
-                </select>
+                <label class="normal-label">Hidden SSID</label>
+                <input type="checkbox" name="hidden-ssid" checked="checked" id="ssid-checkbox">
                 <img id="qr-code">
             </div>  
 
             <span>
-                <input type="button" value="Generate QR Code" class="normal-btn" id="generate-qr-code">
+                <input type="submit" value="Generate QR Code" class="normal-btn" id="generate-qr-code">
                 <input type="button" value="Copy QR Code" class="normal-btn" id="copy-qr-code">
-            </span>  
+            </span>
         """
     
     def get_js(self):
@@ -68,16 +74,25 @@ class Tool16(ToolComponent):
             const backgroundColorInput = document.getElementById('input-background');
             const foregroundHex = document.getElementById('foreground-hex');
             const backgroundHex = document.getElementById('background-hex');
-            const textInput = document.getElementById('text');
-            const errorResistance = document.getElementById('error-resistance');
+            const encryptionValue = document.getElementById('encryption');
+            const passwordLabel = document.getElementById('label-password');
+            const passwordInput = document.getElementById('input-password');
+            const ssidCheckbox = document.getElementById('ssid-checkbox');
+            const ssidInput = document.getElementById('ssid');
             const generateButton = document.getElementById('generate-qr-code');
             const copyButton = document.getElementById('copy-qr-code');
             const qrCodeOutput = document.getElementById('qr-code');
 
             generateButton.addEventListener('click', async () => {
                 try {
+                    var wifiString = ""
+                    if (encryption.value == "")
+                        wifiString = `WIFI:T:;S:${ssidInput.value};H:${ssidCheckbox.checked};;`;
+                    else
+                        wifiString = `WIFI:T:${encryptionValue.value};S:${ssidInput.value};P:${passwordInput.value};H:${ssidCheckbox.checked};;`;
+
                     const options = {
-                        errorCorrectionLevel: errorResistance.value,
+                        errorCorrectionLevel: 'Q',
                         color: {
                             dark: foregroundColorInput.value,
                             light: backgroundColorInput.value
@@ -85,9 +100,9 @@ class Tool16(ToolComponent):
                         width: 256
                     };
 
-                    const dataUrl = await QRCode.toDataURL(textInput.value, options);
+                    const dataUrl = await QRCode.toDataURL(wifiString, options);
 
-                    console.log('Generated QR Code Data URL:');
+                    console.log('Generated WiFi QR Code Data URL:');
                     console.log(dataUrl);
 
                     qrCodeOutput.src = dataUrl;
@@ -138,6 +153,25 @@ class Tool16(ToolComponent):
             });
 
             updateBackgroundColor(backgroundColorInput.value);
+
+            encryptionValue.addEventListener('change', (e) => {
+                changeEncryption();
+            });
+            
+            function changeEncryption() {
+                if (encryptionValue.value == "") {
+                    passwordInput.value = "";
+                    passwordInput.disabled = true;
+                    passwordInput.removeAttribute('required');
+                    passwordInput.setAttribute('hidden', true);
+                    passwordLabel.setAttribute('hidden', true);
+                } else {
+                    passwordInput.disabled = false;
+                    passwordInput.setAttribute('required', true);
+                    passwordInput.removeAttribute('hidden');
+                    passwordLabel.removeAttribute('hidden');
+                }
+            }
         """
     
     def get_package(self):
