@@ -31,13 +31,13 @@ class Tool22(ToolComponent):
 
             <div class="tool-body text-difference-checker-container">
                 <label class="normal-label-down">File 1:</label>
-                <input class="normal-input" type="file" name="file1" id="file1">
+                <input class="normal-input" type="file" name="file1" id="file1" accept=".txt">
 
                 <label class="normal-label"></label>
                 <textarea class="normal-input" name="text1" rows="5" id="text1" placeholder="Or paste text here..."></textarea>
 
                 <label class="normal-label-down">File 2:</label>
-                <input class="normal-input" type="file" name="file2" id="file2">
+                <input class="normal-input" type="file" name="file2" id="file2" accept=".txt"> 
 
                 <label class="normal-label"></label>
                 <textarea class="normal-input" name="text2" rows="5" id="text2" placeholder="Or paste text here..."></textarea>
