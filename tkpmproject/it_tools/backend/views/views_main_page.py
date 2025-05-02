@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from backend.utils import get_user_from_session
 from data_service.services.tool_category_services import *
+from data_service.services.tool_services import *
 
 def it_tools(request):
     # Get user information in session
@@ -44,11 +45,26 @@ def use_tool(request, tool_id):
     # Get user information in session
     user_id, username, user_role = get_user_from_session(request)
 
+    # Get the tool by id
+    tool = get_tool_by_id(tool_id)
+    
     context = {
         'user_id': user_id,
         'username': username,
         'user_role': user_role,
-        'tool_id': tool_id
+        'message': None
     }
+
+    # Check if the tool is disabled
+    if tool.is_enabled == False:
+        context['message'] = 'The tool you are trying to use is disabled.'
+        return render(request, 'it_tools.html', context)
+
+    # Check if the tool is premium
+    if tool.is_premium == True and user_role == 'regular':
+        context['message'] = 'The tool you are trying to use is premium and you are not a premium user.'
+        return render(request, 'it_tools.html', context)
+
+    context['tool_id'] = tool_id
 
     return render(request, 'use_tool.html', context)

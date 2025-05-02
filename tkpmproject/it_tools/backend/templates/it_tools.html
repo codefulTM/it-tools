@@ -20,6 +20,12 @@
         </div>
     </div>
     <h1>All the tools</h1>
+    {% if message %}
+    <div id="message">
+        <span>{{ message }}</span>
+        <i class="fa-solid fa-xmark" onclick="closeMessage()"></i>
+    </div>
+    {% endif %}
     <div class="toolGallery">   
         {% verbatim %}
         <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id)">
@@ -32,6 +38,11 @@
     </div>
 </div>
 <script>
+    function closeMessage() {
+        const message = document.querySelector("#message");
+        message.style.display = "none";
+    }
+
     function toggleMenu() {
         const menu = document.querySelector(".menu");
         menu.classList.toggle("show");
