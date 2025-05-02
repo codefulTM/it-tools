@@ -47,3 +47,13 @@ def toggle_tool_status(request, tool_id):
             return JsonResponse({"success": False, "message": "Tool status updated unsuccessfully."})
     except Exception as e:
         return JsonResponse({"success": False, "message": str(e)})
+    
+def toggle_tool_premium(request, tool_id):
+    try:
+        tool_manager = ToolManager()
+        if (tool_manager.toggle_premium(tool_id)):
+            return JsonResponse({"success": True, "message": "Tool premium updated successfully."})
+        else:    
+            return JsonResponse({"success": False, "message": "Tool premium updated unsuccessfully."})
+    except Exception as e:
+        return JsonResponse({"success": False, "message": str(e)})

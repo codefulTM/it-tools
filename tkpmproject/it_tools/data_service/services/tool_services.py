@@ -35,3 +35,13 @@ def toggle_enable_tool(tool_id):
         return True
     else:
         return False
+    
+# Toggle premium tool
+def toggle_premium_tool(tool_id):
+    tool = get_tool_by_id(tool_id)
+    if (tool != None):
+        tool.is_premium = not tool.is_premium
+        tool.save()
+        return True
+    else:
+        return False

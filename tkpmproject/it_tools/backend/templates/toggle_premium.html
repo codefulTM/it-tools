@@ -28,7 +28,7 @@
     </div>
     <div class="toolGallery">
         {% verbatim %}
-        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id">    
+        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="togglePremium(tool.id)">    
             <p class="toolStatusTag" :class="tool.is_premium ? 'premium-color' : 'regular-color'">
                 {{ tool.is_premium ? 'Premium' : 'Regular' }}
             </p>
@@ -61,7 +61,25 @@
         },
         methods: {
             togglePremium(id) {
-                
+                fetch(`/apis/tools/${id}/togglepremium/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update the tool's premium locally
+                        const tool = this.tools.find(t => t.id === id);
+                        if (tool) {
+                            tool.is_premium = !tool.is_premium;
+                        }
+                    } else {
+                        // Show alert message if the tool premium cannot be updated
+                        console.error(data.message);
+                        alert ('Failed to toggle tool premium');
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert ('Error when trying to toggle tool premium');
+                })
             }
         },
         created() {

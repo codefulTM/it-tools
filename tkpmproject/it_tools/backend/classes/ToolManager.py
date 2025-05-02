@@ -77,4 +77,9 @@ class Tool{tool.id}(ToolComponent):
         if(toggle_enable_tool(tool_id)):
             return True
         return False
+    
+    def toggle_premium(self, tool_id):
+        if(toggle_premium_tool(tool_id)):
+            return True
+        return False
             
