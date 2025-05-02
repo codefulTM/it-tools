@@ -28,9 +28,9 @@
     </div>
     <div class="toolGallery">
         {% verbatim %}
-        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id">
+        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="toggleEnable(tool.id)">
             <p class="toolEnableDisableTag" :class="tool.is_enabled ? 'enable-color' : 'disable-color'">
-                {{ tool.is_enabled ? 'Enable' : 'Disable' }}
+                {{ tool.is_enabled ? 'Enabled' : 'Disabled' }}
             </p>
             <h2>{{ tool.name }}</h2>
             <p>{{ tool.description }}</p>
@@ -60,8 +60,26 @@
             }
         },
         methods: {
-            goToTool(id) {
-                window.location.href = `/tool/${id}`;
+            toggleEnable(id) {
+                fetch(`/apis/tools/${id}/toggleenable/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update the tool's status locally
+                        const tool = this.tools.find(t => t.id === id);
+                        if (tool) {
+                            tool.is_enabled = !tool.is_enabled;
+                        }
+                    } else {
+                        // Show alert message if the tool enable status cannot be updated
+                        console.error(data.message);
+                        alert ('Failed to toggle tool enable');
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert ('Error when trying to toggle tool enable');
+                })
             }
         },
         created() {

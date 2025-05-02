@@ -37,3 +37,13 @@ def get_one_tool(request, tool_id):
     data['html'] = tool.get_html()
     data['js'] = tool.get_js()
     return JsonResponse(data)
+
+def toggle_tool_status(request, tool_id):
+    try:
+        tool_manager = ToolManager()
+        if (tool_manager.toggle_enable(tool_id)):
+            return JsonResponse({"success": True, "message": "Tool status updated successfully."})
+        else:    
+            return JsonResponse({"success": False, "message": "Tool status updated unsuccessfully."})
+    except Exception as e:
+        return JsonResponse({"success": False, "message": str(e)})

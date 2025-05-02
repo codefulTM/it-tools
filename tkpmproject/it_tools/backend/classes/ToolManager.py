@@ -72,3 +72,9 @@ class Tool{tool.id}(ToolComponent):
         # Remove the file that has the same name as the class name of the tool
 
         pass
+
+    def toggle_enable(self, tool_id):
+        if(toggle_enable_tool(tool_id)):
+            return True
+        return False
+            

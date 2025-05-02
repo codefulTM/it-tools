@@ -25,3 +25,13 @@ def create_tool(name, description, category_name, is_premium, is_enabled):
         tool = Tool(name=name, description=description, category=category, is_premium=is_premium, is_enabled=is_enabled)
         tool.save()
         return tool
+
+# Toggle enable/disable tool
+def toggle_enable_tool(tool_id):
+    tool = get_tool_by_id(tool_id)
+    if (tool != None):
+        tool.is_enabled = not tool.is_enabled
+        tool.save()
+        return True
+    else:
+        return False
