@@ -28,7 +28,9 @@
     </div>
     <div class="toolGallery">
         {% verbatim %}
-        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id">
+        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id)">
+            <div class="tag" v-if="tool.is_premium">Premium</div>
+            <div class="tag" v-if="tool.is_enabled == false">Disabled</div>
             <h2>{{ tool.name }}</h2>
             <p>{{ tool.description }}</p>
         </div>

@@ -118,7 +118,7 @@ main {
     flex-wrap: wrap;
 }
 
-.toolGallery div {
+.toolGallery > div {
     border-style: solid;
     border-width: 1px;
     border-color: #006A71;
@@ -133,7 +133,11 @@ main {
     background-color: #9ACBD0;
 }
 
-
+.tag {
+    background-color: #9ACBD0;
+    display: inline-block;
+    margin: 5px 5px;
+}
 
 
 .menu-wrapper {

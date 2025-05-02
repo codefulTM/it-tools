@@ -12,8 +12,12 @@ def get_tools(request):
         data.append({
             'id': tool.id,
             'name': tool.name,
-            'description': tool.description
+            'description': tool.description,
+            'category': tool.category.name,
+            'is_premium': tool.is_premium,
+            'is_enabled': tool.is_enabled
         })
+        print(data[-1])
     return JsonResponse(data, safe=False)
 
 def get_tools_by_category(request, category_id):
@@ -24,7 +28,10 @@ def get_tools_by_category(request, category_id):
             data.append({
                 'id': tool.id,
                 'name': tool.name,
-                'description': tool.description
+                'description': tool.description,
+                'category': tool.category.name,
+                'is_premium': tool.is_premium,
+                'is_enabled': tool.is_enabled
             })
     return JsonResponse(data, safe=False)
 
