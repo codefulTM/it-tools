@@ -83,3 +83,18 @@ class Tool{tool.id}(ToolComponent):
             return True
         return False
             
+    def delete_tool_file_and_info(self, tool_id):
+        dir_path = "backend/tools"
+        try:
+            if (not os.path.exists(f"{dir_path}/Tool{tool_id}.py")):
+                return (False, f"Tool File with id {tool_id} not found")
+            
+            if (get_tool_by_id(tool_id) == None):
+                return (False, f"Tool id {tool_id} does not exist in database")
+            
+            os.remove(f"{dir_path}/Tool{tool_id}.py")
+            remove_tool(tool_id)
+
+            return (True, f"Tool id {tool_id} is deleted successfully!")
+        except Exception as e:
+            return (False, f"An error occurred while deleting Tool id {tool_id}: {str(e)}")

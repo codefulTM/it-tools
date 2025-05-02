@@ -45,3 +45,11 @@ def toggle_premium_tool(tool_id):
         return True
     else:
         return False
+
+def remove_tool(tool_id):
+    tool = get_tool_by_id(tool_id)
+    if (tool != None):
+        tool.delete()
+        return True
+    else:
+        return False

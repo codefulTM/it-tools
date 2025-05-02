@@ -28,7 +28,7 @@
     </div>
     <div class="toolGallery">
         {% verbatim %}
-        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="removeTool(tool.id)">    
+        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="removeTool(tool.id, tool.name)">    
             <p class="toolStatusTag remove-color">Remove</p>
             <h2>{{ tool.name }}</h2>
             <p>{{ tool.description }}</p>
@@ -57,8 +57,26 @@
             }
         },
         methods: {
-            removeTool(id) {
-                
+            removeTool(id, name) {
+                confirmMessage = `WARNING: Delete tool "${name}" will pernamently remove it and you will not see this tool on the page anymore \nAre you sure to delete this tool?`
+                if (confirm(confirmMessage)) {
+                    fetch(`/apis/tools/${id}/deletetool/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert (`Tool ${name} is deleted successfully!`);
+                            location.reload();
+                        }
+                        else {
+                            console.error(data.message);
+                            alert (`Failed to delete Tool ${name}`);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert ('Error when trying to delete tool');
+                    })
+                }            
             }
         },
         created() {

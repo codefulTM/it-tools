@@ -57,3 +57,11 @@ def toggle_tool_premium(request, tool_id):
             return JsonResponse({"success": False, "message": "Tool premium updated unsuccessfully."})
     except Exception as e:
         return JsonResponse({"success": False, "message": str(e)})
+    
+def delete_tool(request, tool_id):
+    try:
+        tool_manager = ToolManager()
+        delete_result, delete_message = tool_manager.delete_tool_file_and_info(tool_id)
+        return JsonResponse({"success": delete_result, "message": delete_message})
+    except Exception as e:
+        return JsonResponse({"success": False, "message": {str(e)}})
