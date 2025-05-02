@@ -20,7 +20,6 @@
         </div>
     </div>
     <h1 data-toolid="{{ tool_id }}">{{ tool.name }}</h1>
-    <script id="toolScript"></script>
     <div id="toolContent"></div>
 </div>
 <script>
@@ -30,13 +29,40 @@
         menu.classList.toggle("show");
     }
 
+    function loadMainScript(data) {
+        const mainScript = document.createElement("script");
+        mainScript.innerHTML = data;
+        document.body.appendChild(mainScript);
+    }
+
     function loadTool() {
         const toolId = document.querySelector("#content h1").dataset.toolid;
         fetch('/apis/tools/' + toolId)
         .then(response => response.json())
         .then(data => {
-            document.querySelector("#toolContent").innerHTML = data.html;
-            document.querySelector("#toolScript").innerHTML = data.js;
+            const toolContent = document.querySelector("#toolContent");
+            toolContent.innerHTML = data.html;
+            
+            const scripts = toolContent.querySelectorAll("script");
+            if(scripts.length === 0) {
+                loadMainScript(data.js);
+                return;
+            }
+            else {
+                let loaded = 0;
+                scripts.forEach(script => {
+                    const newScript = document.createElement("script");
+                    newScript.src = script.src;
+                    newScript.onload = () => {
+                        loaded++;
+                        if (loaded === scripts.length) {
+                            loadMainScript(data.js);
+                        }
+                    }
+                    script.remove();
+                    document.body.appendChild(newScript);
+                });
+            }  
         })
         .catch(error => console.error(error));
     }
