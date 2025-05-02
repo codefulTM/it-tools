@@ -74,3 +74,8 @@ def toggle_premium_tool(request):
     context = get_context(request)
 
     return render(request, 'toggle_premium.html', context)
+
+def remove_tool(request):
+    context = get_context(request)
+
+    return render(request, 'remove_tool.html', context)

@@ -160,6 +160,11 @@ main {
     background-color: gray;
 }
 
+.remove-color {
+    background-color: crimson;
+    color: white;
+}
+
 .menu-wrapper {
     position: relative;
     background-color: red;
