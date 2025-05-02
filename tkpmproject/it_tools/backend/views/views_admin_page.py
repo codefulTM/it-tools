@@ -1,11 +1,13 @@
 from django.shortcuts import redirect, render
 from backend.classes.ToolManager import *
+from data_service.services.tool_category_services import get_all_tool_categories
 
 def manage_tools(request):
     # Get user information in session
     user_id = None
     username = None
     user_role = None
+    it_tool_categories = list(get_all_tool_categories())
     if 'user_id' in request.session:
         user_id = request.session.get('user_id')
         username = request.session.get('username')
@@ -14,7 +16,8 @@ def manage_tools(request):
     context = {
         'user_id': user_id,
         'username': username,
-        'user_role': user_role
+        'user_role': user_role,
+        'it_tool_categories': it_tool_categories
     }
 
     return render(request, 'manage_tools.html', context)
@@ -56,3 +59,22 @@ def add_tool(request):
         return redirect('manage_tools')
     else:
         return render(request, 'add_tool.html')
+    
+def enable_and_disable_tool(request):
+    user_id = None
+    username = None
+    user_role = None
+    it_tool_categories = list(get_all_tool_categories())
+    if 'user_id' in request.session:
+        user_id = request.session.get('user_id')
+        username = request.session.get('username')
+        user_role = request.session.get('user_role')
+
+    context = {
+        'user_id': user_id,
+        'username': username,
+        'user_role': user_role,
+        'it_tool_categories': it_tool_categories
+    }
+
+    return render(request, 'enable_and_disable_tool.html', context)

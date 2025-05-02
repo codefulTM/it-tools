@@ -19,22 +19,27 @@
             </div>
         </div>
     </div>
-    <h1>Manage tools</h1>
+    <h1>Enable/Disable tools</h1>
     <div id="adminFeatures">
         <button onclick="window.open('/addtool', '_blank')">Add</button>
         <button>Remove</button>
-        <button onClick="window.open('/enableanddisabletool', '_blank')">Enable/Disable</button>
+        <button disabled>Enable/Disable</button>
         <button>Toggle premium</button>
     </div>
     <div class="toolGallery">
         {% verbatim %}
         <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id">
+            <p class="toolEnableDisableTag" :class="tool.is_enabled ? 'enable-color' : 'disable-color'">
+                {{ tool.is_enabled ? 'Enable' : 'Disable' }}
+            </p>
             <h2>{{ tool.name }}</h2>
             <p>{{ tool.description }}</p>
+            <p>{{ tool.is_enabled }}</p>
         </div>
         {% endverbatim %}
     </div>
 </div>
+           
 <script>
     function toggleMenu() {
         const menu = document.querySelector(".menu");

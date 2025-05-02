@@ -133,8 +133,24 @@ main {
     background-color: #9ACBD0;
 }
 
+.toolEnableDisableTag {
+    border-style: solid;
+    border-width: 1px;
+    padding: 10px;
+    margin: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    width: 40%;
+}
 
+.disable-color {
+    background-color: red;
+}
 
+.enable-color {
+    background-color: green;
+}
 
 .menu-wrapper {
     position: relative;
