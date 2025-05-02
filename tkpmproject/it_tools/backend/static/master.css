@@ -133,7 +133,7 @@ main {
     background-color: #9ACBD0;
 }
 
-.toolEnableDisableTag {
+.toolStatusTag {
     border-style: solid;
     border-width: 1px;
     padding: 10px;
@@ -150,6 +150,14 @@ main {
 
 .enable-color {
     background-color: green;
+}
+
+.premium-color {
+    background-color: gold;
+}
+
+.regular-color {
+    background-color: gray;
 }
 
 .menu-wrapper {

@@ -23,14 +23,14 @@
     <div id="adminFeatures">
         <button onclick="window.location.href = '/addtool'">Add</button>
         <button>Remove</button>
-        <button disabled>Enable/Disable</button>
-        <button onclick="window.location.href = '/togglepremium'">Toggle premium</button>
+        <button onClick="window.location.href = '/enableanddisabletool'">Enable/Disable</button>
+        <button disabled>Toggle premium</button>
     </div>
     <div class="toolGallery">
         {% verbatim %}
-        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="toggleEnable(tool.id)">
-            <p class="toolStatusTag" :class="tool.is_enabled ? 'enable-color' : 'disable-color'">
-                {{ tool.is_enabled ? 'Enabled' : 'Disabled' }}
+        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id">    
+            <p class="toolStatusTag" :class="tool.is_premium ? 'premium-color' : 'regular-color'">
+                {{ tool.is_premium ? 'Premium' : 'Regular' }}
             </p>
             <h2>{{ tool.name }}</h2>
             <p>{{ tool.description }}</p>
@@ -60,26 +60,8 @@
             }
         },
         methods: {
-            toggleEnable(id) {
-                fetch(`/apis/tools/${id}/toggleenable/`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Update the tool's status locally
-                        const tool = this.tools.find(t => t.id === id);
-                        if (tool) {
-                            tool.is_enabled = !tool.is_enabled;
-                        }
-                    } else {
-                        // Show alert message if the tool enable status cannot be updated
-                        console.error(data.message);
-                        alert ('Failed to toggle tool enable');
-                    }
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    alert ('Error when trying to toggle tool enable');
-                })
+            togglePremium(id) {
+                
             }
         },
         created() {

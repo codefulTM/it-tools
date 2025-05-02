@@ -21,10 +21,10 @@
     </div>
     <h1>Manage tools</h1>
     <div id="adminFeatures">
-        <button onclick="window.open('/addtool', '_blank')">Add</button>
+        <button onclick="window.location.href = '/addtool'">Add</button>
         <button>Remove</button>
-        <button onClick="window.open('/enableanddisabletool', '_blank')">Enable/Disable</button>
-        <button>Toggle premium</button>
+        <button onClick="window.location.href = '/enableanddisabletool'">Enable/Disable</button>
+        <button onclick="window.location.href = '/togglepremium'">Toggle premium</button>
     </div>
     <div class="toolGallery">
         {% verbatim %}
