@@ -15,6 +15,9 @@
                     {% if user_role == 'regular' %}
                     <a href="#" onclick="showGetPremiumWindow()">Make a subscription</a>
                     {% endif %}
+                    {% if user_role == 'premium' %}
+                    <a href="#" onclick="showUnscribeWindow()">Unsubscribe to premium</a>
+                    {% endif %}
                 </nav>
             </div>
         </div>

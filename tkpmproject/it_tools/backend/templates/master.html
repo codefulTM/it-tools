@@ -60,8 +60,28 @@
             const info = document.querySelector("#info");
             fetch("/apis/users/getpremium/" + info.dataset.userid)
             .then(response => response.json())
-            .then(data => alert(data.message))
-            .catch(err => alert(err));
+            .then(data => {
+                alert(data.message);
+                location.reload();
+            })
+            .catch(err => {
+                alert(err);
+                location.reload();
+            });
+        }
+
+        function unsubscribe() {
+            const info = document.querySelector("#info");
+            fetch("/apis/users/unsubscribe/" + info.dataset.userid)
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                location.reload()
+            })
+            .catch(err => {
+                alert(err);
+                location.reload()
+            });
         }
 
         function showGetPremiumWindow() {
@@ -72,6 +92,19 @@
             <p>Are you sure you want to get premium?</p>
             <div style="display: flex; justify-content: center;">
                 <button onclick="getPremium();">Yes</button>
+                <button onclick="background.classList.remove('show');">No</button>
+            </div>
+            `;
+        }
+
+        function showUnscribeWindow() {
+            const background = document.querySelector("#background");
+            const dialogBox = document.querySelector("#dialogBox");
+            background.classList.add("show");
+            dialogBox.innerHTML = `
+            <p>Are you sure you want to unsubscribe to premium?</p>
+            <div style="display: flex; justify-content: center;">
+                <button onclick="unsubscribe();">Yes</button>
                 <button onclick="background.classList.remove('show');">No</button>
             </div>
             `;
