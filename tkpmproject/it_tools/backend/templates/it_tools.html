@@ -23,6 +23,12 @@
     <div class="toolGallery">   
         {% verbatim %}
         <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id)">
+            <i 
+                v-if="user_id != 'null'"
+                :class="tool.is_favorite ? 'fas fa-heart' : 'far fa-heart'" 
+                style="font-size: 24px; cursor: pointer;" 
+                @click.stop="toggleFavorite(tool.id, tool.is_favorite)">
+            </i>
             <h2>{{ tool.name }}</h2>
             <p>{{ tool.description }}</p>
         </div>
@@ -39,7 +45,8 @@
         data() {
             return {
                 search_keyword: '',
-                tools: []
+                tools: [],
+                user_id: "{{ user_id|default:'null' }}"
             }
         },
         computed: {
@@ -51,13 +58,60 @@
         methods: {
             goToTool(id) {
                 window.location.href = `/tools/${id}`;
+            },
+            toggleFavorite(toolId, isFavorite) {
+                if (this.userId === null) {
+                    alert("Please log in to mark as favorite.");
+                    return;
+                }
+                fetch(`/apis/favorites/toggle/${this.user_id}/${toolId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update the tool's favorite status locally
+                        const tool = this.tools.find(t => t.id === toolId);
+                        if (tool) {
+                            tool.is_favorite = !isFavorite;
+                        }
+                    } else {
+                        console.error(data.message);
+                        alert("Failed to toggle favorite status.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Error when trying to toggle favorite status.");
+                });
             }
         },
         created() {
             fetch("/apis/tools")
-            .then(response => response.json())
-            .then(data => this.tools = data)
-            .catch(error => console.error(error))
+                .then(response => response.json())
+                .then(data => {
+                    this.tools = data.map(tool => ({
+                        ...tool,
+                        is_favorite: false
+                    }));
+
+                    // Fetch favorite tools for the user
+                    if (this.user_id != 'null') {
+                        fetch(`/apis/favorites/${this.user_id}/`)
+                        .then(response => response.json())
+                        .then(favoritesData => {
+                            if (favoritesData.success) {
+                                const favoriteIds = favoritesData.favorites;
+                                this.tools.forEach(tool => {
+                                    if (favoriteIds.includes(tool.id)) {
+                                        tool.is_favorite = true;
+                                    }
+                                });
+                            }
+                        })
+                        .catch(error => console.error("Error fetching favorites:", error));
+                    }
+                   
+                })
+                .catch(error => console.error("Error fetching tools:", error));
         }
     });
 
