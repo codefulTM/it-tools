@@ -64,7 +64,7 @@ def toggle_tool_premium(request, tool_id):
 def delete_tool(request, tool_id):
     try:
         tool_manager = ToolManager()
-        delete_result, delete_message = tool_manager.delete_tool_file_and_info(tool_id)
+        delete_result, delete_message = tool_manager.remove_tool(tool_id)
         return JsonResponse({"success": delete_result, "message": delete_message})
     except Exception as e:
         return JsonResponse({"success": False, "message": {str(e)}})

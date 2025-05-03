@@ -67,11 +67,20 @@ class Tool{tool.id}(ToolComponent):
             file.write(content)
 
     def remove_tool(self, tool):
-        # Remove the tool's information from the database
+        dir_path = "backend/tools"
+        try:
+            if (not os.path.exists(f"{dir_path}/Tool{tool}.py")):
+                return (False, f"Tool File with id {tool} not found")
+            
+            if (get_tool_by_id(tool) == None):
+                return (False, f"Tool id {tool} does not exist in database")
+            
+            os.remove(f"{dir_path}/Tool{tool}.py")
+            remove_tool(tool)
 
-        # Remove the file that has the same name as the class name of the tool
-
-        pass
+            return (True, f"Tool id {tool} is deleted successfully!")
+        except Exception as e:
+            return (False, f"An error occurred while deleting Tool id {tool}: {str(e)}")
 
     def toggle_enable(self, tool_id):
         if(toggle_enable_tool(tool_id)):
@@ -82,19 +91,4 @@ class Tool{tool.id}(ToolComponent):
         if(toggle_premium_tool(tool_id)):
             return True
         return False
-            
-    def delete_tool_file_and_info(self, tool_id):
-        dir_path = "backend/tools"
-        try:
-            if (not os.path.exists(f"{dir_path}/Tool{tool_id}.py")):
-                return (False, f"Tool File with id {tool_id} not found")
-            
-            if (get_tool_by_id(tool_id) == None):
-                return (False, f"Tool id {tool_id} does not exist in database")
-            
-            os.remove(f"{dir_path}/Tool{tool_id}.py")
-            remove_tool(tool_id)
-
-            return (True, f"Tool id {tool_id} is deleted successfully!")
-        except Exception as e:
-            return (False, f"An error occurred while deleting Tool id {tool_id}: {str(e)}")
+        
