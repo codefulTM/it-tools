@@ -51,7 +51,11 @@
     </main>
     <script>
         function getPremium() {
-            
+            const info = document.querySelector("#info");
+            fetch("/apis/users/getpremium/" + info.dataset.userid)
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(err => alert(err));
         }
     </script>
 </body>
