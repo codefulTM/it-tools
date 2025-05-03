@@ -24,7 +24,6 @@
         {% verbatim %}
         <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id)">
             <i 
-                v-if="user_id != 'null'"
                 :class="tool.is_favorite ? 'fas fa-heart' : 'far fa-heart'" 
                 style="font-size: 24px; cursor: pointer;" 
                 @click.stop="toggleFavorite(tool.id, tool.is_favorite)">
@@ -60,28 +59,30 @@
                 window.location.href = `/tools/${id}`;
             },
             toggleFavorite(toolId, isFavorite) {
-                if (this.userId === null) {
-                    alert("Please log in to mark as favorite.");
+                if (this.user_id == 'null') {
+                    alert("Please log in to mark any tool as favorite.");
                     return;
                 }
-                fetch(`/apis/favorites/toggle/${this.user_id}/${toolId}/`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Update the tool's favorite status locally
-                        const tool = this.tools.find(t => t.id === toolId);
-                        if (tool) {
-                            tool.is_favorite = !isFavorite;
+                else {
+                    fetch(`/apis/favorites/toggle/${this.user_id}/${toolId}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Update the tool's favorite status locally
+                            const tool = this.tools.find(t => t.id === toolId);
+                            if (tool) {
+                                tool.is_favorite = !isFavorite;
+                            }
+                        } else {
+                            console.error(data.message);
+                            alert("Failed to toggle favorite status.");
                         }
-                    } else {
-                        console.error(data.message);
-                        alert("Failed to toggle favorite status.");
-                    }
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    alert("Error when trying to toggle favorite status.");
-                });
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("Error when trying to toggle favorite status.");
+                    });
+                }            
             }
         },
         created() {
@@ -106,10 +107,13 @@
                                     }
                                 });
                             }
+                            else {                   
+                                console.error("Failed to retrieve favorite tools", favoritesData.message);
+                                alert ("Failed to retrieve favorite tools");     
+                            }
                         })
                         .catch(error => console.error("Error fetching favorites:", error));
-                    }
-                   
+                    }        
                 })
                 .catch(error => console.error("Error fetching tools:", error));
         }

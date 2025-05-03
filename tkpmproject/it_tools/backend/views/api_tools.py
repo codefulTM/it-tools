@@ -81,7 +81,7 @@ def get_all_favorites(request, user_id):
     try:
         favorites = AccountUser.get_favorite(user_id)
         if (favorites != None):
-            favorite_tool_ids = [favorites.tool_id for favorite in favorites]
+            favorite_tool_ids = [favorite.tool.id for favorite in favorites]
             return JsonResponse({"success": True, "favorites": favorite_tool_ids})
         else:
             return JsonResponse({"success": False, "message": "Failed to get all favorite tools"})

@@ -29,7 +29,8 @@ def toggle_favorite_tool(user_id, tool_id):
 # Get all favorite tools from user
 def get_all_favorite_tools(user_id):
     try:
-        favorites = Favorite.objects.filter(user=user_id)
+        user = get_user_by_id(user_id)
+        favorites = Favorite.objects.filter(user=user)
         return favorites    
     except Favorite.DoesNotExist:
         return None
