@@ -12,6 +12,12 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
+    <div id="info" data-userid="{{user_id}}" data-username="{{user_role}}" data-userrole="{{user_role}}"></div>
+    <div id="background">
+        <div id="dialogBox">
+            
+        </div>
+    </div>
     <aside>
         <h1 id="title"><a href="/">IT Tools</a></h1>
         {% if not user_id %}
@@ -43,5 +49,11 @@
         {% block content %}
         {% endblock %}
     </main>
+    <script>
+        function getPremium() {
+            const info = document.querySelector('#info')
+            
+        }
+    </script>
 </body>
 </html>
