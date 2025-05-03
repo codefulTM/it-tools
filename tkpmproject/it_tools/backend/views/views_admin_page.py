@@ -1,20 +1,16 @@
 from django.shortcuts import redirect, render
 from backend.classes.ToolManager import *
+from data_service.services.user_services import *
 
 def manage_tools(request):
-    # Get user information in session
-    user_id = None
-    username = None
-    user_role = None
-    if 'user_id' in request.session:
-        user_id = request.session.get('user_id')
-        username = request.session.get('username')
-        user_role = request.session.get('user_role')
+    # Get user information
+    user_id = request.session.get('user_id')
+    user = get_user_by_id(user_id)
 
     context = {
         'user_id': user_id,
-        'username': username,
-        'user_role': user_role
+        'username': user.username,
+        'user_role': user.role.role
     }
 
     return render(request, 'manage_tools.html', context)
