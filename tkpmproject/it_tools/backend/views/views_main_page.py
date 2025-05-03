@@ -53,10 +53,14 @@ def use_tool(request, tool_id):
     # Get the tool by id
     tool = get_tool_by_id(tool_id)
     
+    # Get a list of all categories
+    it_tool_categories = list(get_all_tool_categories())
+
     context = {
         'user_id': user_id,
         'username': user.username,
         'user_role': user.role.role,
+        'it_tool_categories': it_tool_categories,
         'message': None
     }
 
