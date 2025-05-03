@@ -20,6 +20,12 @@
     </div>
     <aside>
         <h1 id="title"><a href="/">IT Tools</a></h1>
+        {% if user_role == 'premium' %}
+        <h2 id="subtitle">Premium</h2>
+        {% endif %}
+        {% if user_role == 'admin' %}
+        <h2 id="subtitle">Admin</h2>
+        {% endif %}
         {% if not user_id %}
         <div id="user_authentication_box">
             <a href="/signup">Sign up</a>
@@ -28,7 +34,7 @@
         {% endif %}
         {% if user_id %}
         <div style="text-align: center; margin: 20px 0;">
-            <p>Hello, {{username}}!</p>
+            <p>Hello, <b>{{username}}</b>!</p>
         </div>
         {% endif %}
         <nav>
