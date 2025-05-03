@@ -1,16 +1,21 @@
 from django.shortcuts import redirect, render
 from backend.classes.ToolManager import *
 from data_service.services.user_services import *
+from data_service.services.tool_category_services import *
 
 def manage_tools(request):
     # Get user information
     user_id = request.session.get('user_id')
     user = get_user_by_id(user_id)
 
+    # Get a list of all categories
+    it_tool_categories = list(get_all_tool_categories())
+
     context = {
         'user_id': user_id,
         'username': user.username,
-        'user_role': user.role.role
+        'user_role': user.role.role,
+        'it_tool_categories': it_tool_categories,
     }
 
     return render(request, 'manage_tools.html', context)
