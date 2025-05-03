@@ -17,6 +17,11 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
+    display: none;
+}
+
+#background.show {
+    display: block;
 }
 
 #dialogBox {
@@ -32,7 +37,6 @@ body {
 aside {
     background-color: #F2EFE7;
     height: 100vh;
-    /* flex-grow: 0.5; */
     width: 30%;
 }
 

@@ -57,6 +57,19 @@
             .then(data => alert(data.message))
             .catch(err => alert(err));
         }
+
+        function showGetPremiumWindow() {
+            const background = document.querySelector("#background");
+            const dialogBox = document.querySelector("#dialogBox");
+            background.classList.add("show");
+            dialogBox.innerHTML = `
+            <p>Are you sure you want to get premium?</p>
+            <div>
+                <button onclick="getPremium();">Yes</button>
+                <button onclick="background.classList.remove('show');">No</button>
+            </div>
+            `;
+        }
     </script>
 </body>
 </html>
