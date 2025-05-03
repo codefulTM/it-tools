@@ -27,7 +27,9 @@ def get_tools_by_category(request, category_id):
             data.append({
                 'id': tool.id,
                 'name': tool.name,
-                'description': tool.description
+                'description': tool.description,
+                'is_enabled': tool.is_enabled,
+                'is_premium': tool.is_premium
             })
     return JsonResponse(data, safe=False)
 

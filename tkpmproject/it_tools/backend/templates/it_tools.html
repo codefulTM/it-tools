@@ -51,7 +51,7 @@
         computed: {
             filteredTools() {
                 const keyword = this.search_keyword.toLowerCase();  
-                return this.tools.filter(tool => tool.name.toLowerCase().includes(keyword));
+                return this.tools.filter(tool => tool.name.toLowerCase().includes(keyword) && tool.is_enabled);
             }
         },
         methods: {
