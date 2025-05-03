@@ -22,11 +22,15 @@
     <h1>Favorite tools</h1>
     <div class="toolGallery">   
         {% verbatim %}
-        <div v-for="tool in filteredFavorTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id)">
+        <div v-for="tool in filteredFavorTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id, tool.is_premium)">
             <i 
                 class="fas fa-heart" 
                 style="font-size: 24px; cursor: pointer;" 
                 @click.stop="toggleFavorite(tool.id, tool.is_favorite)">
+            </i>
+            <i
+                :class="tool.is_premium ? 'fas fa-star': ''"
+                style="font-size: 24px; cursor: pointer; margin-left: 8px; color: gold" >
             </i>
             <h2>{{ tool.name }}</h2>
             <p>{{ tool.description }}</p>
@@ -45,7 +49,8 @@
             return {
                 search_keyword: '',
                 tools: [],
-                user_id: "{{ user_id|default:'null' }}"
+                user_id: "{{ user_id|default:'null' }}",
+                user_role: "{{ user_role|default:'null'}}"
             }
         },
         computed: {
@@ -55,7 +60,11 @@
             }
         },
         methods: {
-            goToTool(id) {
+            goToTool(id, premium) {
+                if (premium && this.user_role != "premium" && this.user_role != "admin") {
+                    alert ('This tool is only available for Premium user \nPlease upgrade your account first!');
+                    return;
+                }
                 window.location.href = `/tools/${id}`;
             },
             toggleFavorite(toolId, isFavorite) {
