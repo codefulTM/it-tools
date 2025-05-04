@@ -20,6 +20,9 @@ def get_context(request):
         'username': username,
         'user_role': user_role,
         'it_tool_categories': it_tool_categories
+    }
+
+    return context
 
 def manage_tools(request):
     # Get user information
@@ -36,12 +39,12 @@ def manage_tools(request):
         'it_tool_categories': it_tool_categories,
     }
 
-    return context
-
-def manage_tools(request):
-    context = get_context(request)
-
     return render(request, 'manage_tools.html', context)
+
+# def manage_tools(request):
+#     context = get_context(request)
+
+#     return render(request, 'manage_tools.html', context)
 
 def add_tool(request):
     if request.method == 'POST':
