@@ -12,9 +12,9 @@ def it_tools(request):
     it_tool_categories = list(get_all_tool_categories())
 
     context = {
-        'user_id': user_id,
-        'username': user.username,
-        'user_role': user.role.role,
+        'user_id': user_id if user_id else None,
+        'username': user.username if user else None,
+        'user_role': user.role.role if user else None,
         'it_tool_categories': it_tool_categories
     }
 
@@ -36,9 +36,9 @@ def it_tools_by_category(request, category_id):
             break
 
     context = {
-        'user_id': user_id,
-        'username': user.username,
-        'user_role': user.role.role,
+        'user_id': user_id if user_id else None,
+        'username': user.username if user else None,
+        'user_role': user.role.role if user else None,
         'it_tool_categories': it_tool_categories,
         'category': category
     }
@@ -57,9 +57,9 @@ def use_tool(request, tool_id):
     it_tool_categories = list(get_all_tool_categories())
 
     context = {
-        'user_id': user_id,
-        'username': user.username,
-        'user_role': user.role.role,
+        'user_id': user_id if user_id else None,
+        'username': user.username if user else None,
+        'user_role': user.role.role if user else None,
         'it_tool_categories': it_tool_categories,
         'message': None
     }
@@ -70,7 +70,7 @@ def use_tool(request, tool_id):
         return render(request, 'it_tools.html', context)
 
     # Check if the tool is premium
-    if tool.is_premium == True and user.role.role == 'regular':
+    if tool.is_premium == True and (not user or user.role.role == 'regular'):
         context['message'] = 'The tool you are trying to use is premium and you are not a premium user.'
         return render(request, 'it_tools.html', context)
 
