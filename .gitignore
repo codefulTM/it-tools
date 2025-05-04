@@ -174,4 +174,4 @@ cython_debug/
 .pypirc
 
 # tool files
-/it_tools/backend/tools/
+tools/

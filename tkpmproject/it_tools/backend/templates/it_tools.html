@@ -13,13 +13,22 @@
                     <a href="/logout">Log out</a>
                     {% endif %}
                     {% if user_role == 'regular' %}
-                    <a href="#">Make a subscription</a>
+                    <a href="#" onclick="showGetPremiumWindow()">Make a subscription</a>
+                    {% endif %}
+                    {% if user_role == 'premium' %}
+                    <a href="#" onclick="showUnscribeWindow()">Unsubscribe to premium</a>
                     {% endif %}
                 </nav>
             </div>
         </div>
     </div>
     <h1>All the tools</h1>
+    {% if message %}
+    <div id="message">
+        <span>{{ message }}</span>
+        <i class="fa-solid fa-xmark" onclick="closeMessage()"></i>
+    </div>
+    {% endif %}
     <div class="toolGallery">   
         {% verbatim %}
         <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id, tool.is_premium)">
@@ -32,6 +41,8 @@
                 :class="tool.is_premium ? 'fas fa-star': ''"
                 style="font-size: 24px; cursor: pointer; margin-left: 8px; color: gold" >
             </i>
+            <div class="tag" v-if="tool.is_premium">Premium</div>
+            <div class="tag" v-if="tool.is_enabled == false">Disabled</div>
             <h2>{{ tool.name }}</h2>
             <p>{{ tool.description }}</p>
         </div>
@@ -39,6 +50,11 @@
     </div>
 </div>
 <script>
+    function closeMessage() {
+        const message = document.querySelector("#message");
+        message.style.display = "none";
+    }
+
     function toggleMenu() {
         const menu = document.querySelector(".menu");
         menu.classList.toggle("show");

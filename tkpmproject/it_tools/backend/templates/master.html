@@ -12,8 +12,20 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
+    <div id="info" data-userid="{{user_id}}" data-username="{{username}}" data-userrole="{{user_role}}"></div>
+    <div id="background">
+        <div id="dialogBox">
+            
+        </div>
+    </div>
     <aside>
         <h1 id="title"><a href="/">IT Tools</a></h1>
+        {% if user_role == 'premium' %}
+        <h2 id="subtitle">Premium</h2>
+        {% endif %}
+        {% if user_role == 'admin' %}
+        <h2 id="subtitle">Admin</h2>
+        {% endif %}
         {% if not user_id %}
         <div id="user_authentication_box">
             <a href="/signup">Sign up</a>
@@ -22,7 +34,7 @@
         {% endif %}
         {% if user_id %}
         <div style="text-align: center; margin: 20px 0;">
-            <p>Hello, {{username}}!</p>
+            <p>Hello, <b>{{username}}</b>!</p>
         </div>
         {% endif %}
         <nav>
@@ -43,5 +55,60 @@
         {% block content %}
         {% endblock %}
     </main>
+    <script>
+        function getPremium() {
+            const info = document.querySelector("#info");
+            fetch("/apis/users/getpremium/" + info.dataset.userid)
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                location.reload();
+            })
+            .catch(err => {
+                alert(err);
+                location.reload();
+            });
+        }
+
+        function unsubscribe() {
+            const info = document.querySelector("#info");
+            fetch("/apis/users/unsubscribe/" + info.dataset.userid)
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                location.reload()
+            })
+            .catch(err => {
+                alert(err);
+                location.reload()
+            });
+        }
+
+        function showGetPremiumWindow() {
+            const background = document.querySelector("#background");
+            const dialogBox = document.querySelector("#dialogBox");
+            background.classList.add("show");
+            dialogBox.innerHTML = `
+            <p>Are you sure you want to get premium?</p>
+            <div style="display: flex; justify-content: center;">
+                <button onclick="getPremium();">Yes</button>
+                <button onclick="background.classList.remove('show');">No</button>
+            </div>
+            `;
+        }
+
+        function showUnscribeWindow() {
+            const background = document.querySelector("#background");
+            const dialogBox = document.querySelector("#dialogBox");
+            background.classList.add("show");
+            dialogBox.innerHTML = `
+            <p>Are you sure you want to unsubscribe to premium?</p>
+            <div style="display: flex; justify-content: center;">
+                <button onclick="unsubscribe();">Yes</button>
+                <button onclick="background.classList.remove('show');">No</button>
+            </div>
+            `;
+        }
+    </script>
 </body>
 </html>
