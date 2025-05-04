@@ -25,8 +25,7 @@
     <h1 data-categoryid="{{ category.id }}">{{ category.name }}</h1>
     <div class="toolGallery">   
         {% verbatim %}
-<<<<<<< Add-manage-tools
-        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id, tool.is_premium)">
+        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id)">
             <i 
                 :class="tool.is_favorite ? 'fas fa-heart' : 'far fa-heart'" 
                 style="font-size: 24px; cursor: pointer;" 
@@ -36,11 +35,8 @@
                 :class="tool.is_premium ? 'fas fa-star': ''"
                 style="font-size: 24px; cursor: pointer; margin-left: 8px; color: gold" >
             </i>
-=======
-        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id)">
             <div class="tag" v-if="tool.is_premium">Premium</div>
             <div class="tag" v-if="tool.is_enabled == false">Disabled</div>
->>>>>>> main
             <h2>{{ tool.name }}</h2>
             <p>{{ tool.description }}</p>
         </div>
@@ -72,11 +68,7 @@
             }
         },
         methods: {
-            goToTool(id, premium) {
-                if (premium && this.user_role != "premium" && this.user_role != "admin") {
-                    alert ('This tool is only available for Premium user \nPlease upgrade your account first!');
-                    return;
-                }
+            goToTool(id) {
                 window.location.href = `/tools/${id}`;
             },
             toggleFavorite(toolId, isFavorite) {
