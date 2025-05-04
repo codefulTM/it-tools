@@ -1,0 +1,58 @@
+<h2 class="tool-name">SVG Placeholder Generator</h2>
+
+<p class="tool-des">
+    Create SVG image to use as placeholder
+</p>
+
+<form action="/svg_placeholder_generator/" method="post">
+    <div class="svg-container tool-body">
+        {% csrf_token %}
+        <label class="normal-label-down">Width (in px):</label>
+        <div class="number-input">
+            <button class="btn decrement" id="width-decrease-btn">−</button>
+            <input type="number" id="svg-width" value="100" required>
+            <button class="btn increment" id="width-increase-btn">+</button>
+        </div>
+
+        <label class="normal-label-down">Text color:</label>
+        <div class="color-picker-wrapper">
+            <input type="color" id="input-foreground" value="#000000">
+            <input type="text" id="foreground-hex" class="hex-value">
+        </div>
+
+        <label class="normal-label-down">Height (in px):</label>
+        <div class="number-input">
+            <button class="btn decrement" id="height-decrease-btn">−</button>
+            <input type="number" id="svg-height" value="100" required>
+            <button class="btn increment" id="height-increase-btn">+</button>
+        </div>
+    
+        <label class="normal-label-down">Background:</label>
+        <div class="color-picker-wrapper">
+            <input type="color" id="input-background" value="#ffffff">
+            <input type="text" id="background-hex" class="hex-value" readonly>
+        </div>
+
+        <label class="normal-label-down">Font size:</label>
+        <div class="number-input">
+            <button class="btn decrement" id="size-decrease-btn">−</button>
+            <input type="number" id="font-size" value="20" required>
+            <button class="btn increment" id="size-increase-btn">+</button>
+        </div>
+
+        <label class="normal-label-down">Custom text</label>
+        <input class="normal-input" type="text" placeholder="Default" required>
+    </div>
+
+    <input type="submit" value="Generate SVG Placeholder" class="normal-btn">
+    <input type="button" value="Download SVG" class="normal-btn">
+    <input type="button" value="Copy SVG HTML" class="normal-btn">
+    <input type="button" value="Copy SVG base64" class="normal-btn">
+
+    <div class="svg-output-container tool-body">
+        <label class="normal-label-down">SVG HTML element</label>
+        <textarea class="normal-input" type="text" readonly></textarea>    
+        <label class="normal-label-down">SVG in Base64</label>
+        <textarea class="normal-input" type="text" readonly></textarea>
+    </div>
+</form>

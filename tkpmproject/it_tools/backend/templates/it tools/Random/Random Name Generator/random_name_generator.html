@@ -1,0 +1,39 @@
+<h2 class="tool-name">Random name generator</h2>
+
+<p class="tool-des">
+    Generate a random English name, user can choose the lengh for the name
+</p>
+
+<form action="/random_name_generator/" method="post">
+    <div class="tool-body name-generator-container">
+        {% csrf_token %}
+        <label class="normal-label-down">First letter limit:</label>
+        <select name="first-letter-limit" class="dropdown" id="first-letter">
+            <option value="from-to" selecteed>From leter to letter</option>
+            <option value="single">Single letter only</option>
+        </select>
+
+        <label class="normal-label-down">Length (1 to 100):</label>
+        <div class="number-input">
+            <button class="btn decrement" id="decrease-btn">−</button>
+            <input type="number" id="name-length" value="5" required>
+            <button class="btn increment" id="increase-btn">+</button>
+        </div>
+
+        <label class="normal-label-down" id="from-label">From:</label>
+        <input class="normal-input" type="text" id="from-letter" maxlength="1" pattern="[A-Z]" required>
+
+        <label class="normal-label-down" id="to-label">To:</label>
+        <input class="normal-input" type="text" id="to-letter" maxlength="1" pattern="[A-Z]" required>
+
+        <label class="normal-label-down" id="single-label" hidden>Letter:</label>
+        <input class="normal-input" type="text" id="single-letter" maxlength="1" pattern="[A-Z]" hidden>
+
+        <label class="normal-label-down">Name:</label>
+        <input class="normal-input" type="text" id="output" readonly>
+    </div>
+    <span>
+        <input type="submit" value="Generate Name" class="normal-btn">
+        <input type="button" value="Copy Name" class="normal-btn">
+    </span>
+</form>

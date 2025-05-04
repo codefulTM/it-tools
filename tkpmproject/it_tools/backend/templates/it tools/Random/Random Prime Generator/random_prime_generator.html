@@ -1,0 +1,31 @@
+<h2 class="tool-name">Random prime generator</h2>
+
+<p class="tool-des">
+    Generate a random prime within the limit that user chooses
+</p>
+
+<form action="/random_prime_generator/" method="post">
+    <div class="tool-body prime-generator-container">
+        {% csrf_token %}
+        <label class="normal-label">From:</label>
+        <div class="number-input">
+            <button class="btn decrement" id="prime-from-decrease-btn">−</button>
+            <input type="number" id="prime-from" value="2" required>
+            <button class="btn increment" id="prime-from-increase-btn">+</button>
+        </div>
+
+        <label class="normal-label">To:</label>
+        <div class="number-input">
+            <button class="btn decrement" id="prime-to-decrease-btn">−</button>
+            <input type="number" id="prime-to" value="10000" required>
+            <button class="btn increment" id="prime-to-increase-btn">+</button>
+        </div>
+
+        <label class="normal-label">Prime:</label>
+        <input class="normal-input" type="number" id="prime-output" readonly>
+    </div>
+    <span>
+        <input type="submit" value="Generate Prime" class="normal-btn">
+        <input type="button" value="Download Prime" class="normal-btn">
+    </span>
+</form>
