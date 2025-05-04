@@ -67,8 +67,28 @@ class Tool{tool.id}(ToolComponent):
             file.write(content)
 
     def remove_tool(self, tool):
-        # Remove the tool's information from the database
+        dir_path = "backend/tools"
+        try:
+            if (not os.path.exists(f"{dir_path}/Tool{tool}.py")):
+                return (False, f"Tool File with id {tool} not found")
+            
+            if (get_tool_by_id(tool) == None):
+                return (False, f"Tool id {tool} does not exist in database")
+            
+            os.remove(f"{dir_path}/Tool{tool}.py")
+            remove_tool(tool)
 
-        # Remove the file that has the same name as the class name of the tool
+            return (True, f"Tool id {tool} is deleted successfully!")
+        except Exception as e:
+            return (False, f"An error occurred while deleting Tool id {tool}: {str(e)}")
 
-        pass
+    def toggle_enable(self, tool_id):
+        if(toggle_enable_tool(tool_id)):
+            return True
+        return False
+    
+    def toggle_premium(self, tool_id):
+        if(toggle_premium_tool(tool_id)):
+            return True
+        return False
+        

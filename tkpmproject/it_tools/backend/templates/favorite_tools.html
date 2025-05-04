@@ -13,22 +13,18 @@
                     <a href="/logout">Log out</a>
                     {% endif %}
                     {% if user_role == 'regular' %}
-                    <a href="#" onclick="showGetPremiumWindow()">Make a subscription</a>
-                    {% endif %}
-                    {% if user_role == 'premium' %}
-                    <a href="#" onclick="showUnscribeWindow()">Unsubscribe to premium</a>
+                    <a href="#">Make a subscription</a>
                     {% endif %}
                 </nav>
             </div>
         </div>
     </div>
-    <h1 data-categoryid="{{ category.id }}">{{ category.name }}</h1>
+    <h1>Favorite tools</h1>
     <div class="toolGallery">   
         {% verbatim %}
-<<<<<<< Add-manage-tools
-        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id, tool.is_premium)">
+        <div v-for="tool in filteredFavorTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id, tool.is_premium)">
             <i 
-                :class="tool.is_favorite ? 'fas fa-heart' : 'far fa-heart'" 
+                class="fas fa-heart" 
                 style="font-size: 24px; cursor: pointer;" 
                 @click.stop="toggleFavorite(tool.id, tool.is_favorite)">
             </i>
@@ -36,11 +32,6 @@
                 :class="tool.is_premium ? 'fas fa-star': ''"
                 style="font-size: 24px; cursor: pointer; margin-left: 8px; color: gold" >
             </i>
-=======
-        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id)">
-            <div class="tag" v-if="tool.is_premium">Premium</div>
-            <div class="tag" v-if="tool.is_enabled == false">Disabled</div>
->>>>>>> main
             <h2>{{ tool.name }}</h2>
             <p>{{ tool.description }}</p>
         </div>
@@ -53,22 +44,19 @@
         menu.classList.toggle("show");
     }
 
-    const category_id = document.querySelector("#content h1").dataset.categoryid;
-    console.log(category_id);
-
     const app = Vue.createApp({
         data() {
             return {
                 search_keyword: '',
                 tools: [],
                 user_id: "{{ user_id|default:'null' }}",
-                user_role: "{{ user_role|default:'null' }}"
+                user_role: "{{ user_role|default:'null'}}"
             }
         },
         computed: {
-            filteredTools() {
+            filteredFavorTools() {
                 const keyword = this.search_keyword.toLowerCase();  
-                return this.tools.filter(tool => tool.name.toLowerCase().includes(keyword) && tool.is_enabled);
+                return this.tools.filter(tool => tool.name.toLowerCase().includes(keyword) && tool.is_favorite && tool.is_enabled);
             }
         },
         methods: {
@@ -107,36 +95,32 @@
             }
         },
         created() {
-            fetch(`/apis/categories/${category_id}`)
-            .then(response => response.json())
-            .then(data => {
-                this.tools = data.map(tool => ({
-                    ...tool,
-                    is_favorite: false
-                }));
+            fetch("/apis/tools")
+                .then(response => response.json())
+                .then(data => {
+                    this.tools = data.map(tool => ({
+                        ...tool,
+                        is_favorite: false
+                    }));
 
-                // Fetch favorite tools for the user
-                if (this.user_id != 'null') {
-                    fetch(`/apis/favorites/${this.user_id}/`)
-                    .then(response => response.json())
-                    .then(favoritesData => {
-                        if (favoritesData.success) {
-                            const favoriteIds = favoritesData.favorites;
-                            this.tools.forEach(tool => {
-                                if (favoriteIds.includes(tool.id)) {
-                                    tool.is_favorite = true;
-                                }
-                            });
-                        }
-                        else {                   
-                            console.error("Failed to retrieve favorite tools", favoritesData.message);
-                            alert ("Failed to retrieve favorite tools");     
-                        }
-                    })
-                    .catch(error => console.error("Error fetching favorites:", error));
-                }        
-            })
-            .catch(error => console.error(error))
+                    // Fetch favorite tools for the user
+                    if (this.user_id != 'null') {
+                        fetch(`/apis/favorites/${this.user_id}/`)
+                        .then(response => response.json())
+                        .then(favoritesData => {
+                            if (favoritesData.success) {
+                                const favoriteIds = favoritesData.favorites;
+                                this.tools.forEach(tool => {
+                                    if (favoriteIds.includes(tool.id)) {
+                                        tool.is_favorite = true;
+                                    }
+                                });
+                            }
+                        })
+                        .catch(error => console.error("Error fetching favorites:", error));
+                    }                 
+                })
+                .catch(error => console.error("Error fetching tools:", error));
         }
     });
 

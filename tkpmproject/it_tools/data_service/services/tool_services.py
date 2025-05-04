@@ -3,7 +3,7 @@ from . import tool_category_services
 
 # Get all function
 def get_all_tools():
-    return Tool.objects.all()
+    return Tool.objects.all().order_by("id")
 
 # Get tool by id function
 def get_tool_by_id(tool_id):
@@ -25,3 +25,31 @@ def create_tool(name, description, category_name, is_premium, is_enabled):
         tool = Tool(name=name, description=description, category=category, is_premium=is_premium, is_enabled=is_enabled)
         tool.save()
         return tool
+
+# Toggle enable/disable tool
+def toggle_enable_tool(tool_id):
+    tool = get_tool_by_id(tool_id)
+    if (tool != None):
+        tool.is_enabled = not tool.is_enabled
+        tool.save()
+        return True
+    else:
+        return False
+    
+# Toggle premium tool
+def toggle_premium_tool(tool_id):
+    tool = get_tool_by_id(tool_id)
+    if (tool != None):
+        tool.is_premium = not tool.is_premium
+        tool.save()
+        return True
+    else:
+        return False
+
+def remove_tool(tool_id):
+    tool = get_tool_by_id(tool_id)
+    if (tool != None):
+        tool.delete()
+        return True
+    else:
+        return False

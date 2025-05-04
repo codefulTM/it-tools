@@ -187,12 +187,43 @@ main {
     background-color: #9ACBD0;
 }
 
+.toolStatusTag {
+    border-style: solid;
+    border-width: 1px;
+    padding: 10px;
+    margin: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    width: 40%;
+}
+
+.disable-color {
+    background-color: red;
+}
+
 .tag {
     background-color: #9ACBD0;
     display: inline-block;
     margin: 5px 5px;
 }
 
+.enable-color {
+    background-color: green;
+}
+
+.premium-color {
+    background-color: gold;
+}
+
+.regular-color {
+    background-color: gray;
+}
+
+.remove-color {
+    background-color: crimson;
+    color: white;
+}
 
 .menu-wrapper {
     position: relative;

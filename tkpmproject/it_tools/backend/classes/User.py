@@ -1,5 +1,6 @@
 from data_service.services.user_services import *
 from data_service.services.user_role_services import *
+from data_service.services.favorite_services import *
 import bcrypt
 
 class User:
@@ -63,6 +64,12 @@ class AccountUser(User):
         self.username = username
         self.password = password
         self.role = None
+
+    def get_favorite(user_id):
+        return get_all_favorite_tools(user_id)
+    
+    def toggle_favorite(user_id, tool_id):
+        return toggle_favorite_tool(user_id, tool_id)
 
     def log_out(self):
         pass
