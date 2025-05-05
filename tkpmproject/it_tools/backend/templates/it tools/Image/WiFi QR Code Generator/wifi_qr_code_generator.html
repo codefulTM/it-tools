@@ -1,45 +1,39 @@
 <h2 class="tool-name">WiFi QR Code Generator</h2>
+<p class="tool-des">Generate QR code to quickly connect to WiFi</p>
 
-<p class="tool-des">
-    Generate QR code to quickly connect to WiFi networks.
-    <br> Just enter the SSID and password, and the QR code will be generated for you.
-</p>
+<div class="tool-body qr-code-generator-container">
+    <label class="normal-label-down">Encryption method:</label>
+    <select name="encryption-method" class="dropdown" id="encryption">
+        <option value="">No password</option>
+        <option value="WPA" selected>WPA/WPA2</option>
+        <option value="WERP">WEP</option>
+        <option value="EAP">WPA2-EAP</option>
+    </select>
 
-<form action="/generate_qr_code/" method="post">
-    <div class="tool-body qr-code-generator-container">
-        {% csrf_token %}
-        <label class="normal-label-down">Encryption method:</label>
-        <select name="encryption-method" class="dropdown" id="encryption">
-            <option value="no">No password</option>
-            <option value="wpa" selected>WPA/WPA2</option>
-            <option value="wep">WEP</option>
-            <option value="eap">WPA2-EAP</option>
-        </select>
-
-        <label class="normal-label">SSID:</label>
-        <input class="normal-input" type="text" required>
-        
-        <label class="normal-label" id="label-password">Password:</label>
-        <input class="normal-input" type="password" id="input-password" required>
+    <label class="normal-label">SSID:</label>
+    <input class="normal-input" type="text" id="ssid" required>
     
-        <label class="normal-label-down">Foreground color:</label>
-        <div class="color-picker-wrapper">
-            <input type="color" id="input-foreground" value="#000000">
-            <input type="text" id="foreground-hex" class="hex-value" readonly>
-        </div>
+    <label class="normal-label" id="label-password">Password:</label>
+    <input class="normal-input" type="password" id="input-password" required>
 
-        <label class="normal-label-down">Background color:</label>
-        <div class="color-picker-wrapper">
-            <input type="color" id="input-background" value="#ffffff">
-            <input type="text" id="background-hex" class="hex-value" readonly>
-        </div>
+    <label class="normal-label-down">Foreground color:</label>
+    <div class="color-picker-wrapper">
+        <input type="color" id="input-foreground" value="#000000">
+        <input type="text" id="foreground-hex" class="hex-value" readonly>
+    </div>
 
-        <label class="normal-label">Hidden SSID</label>
-        <input type="checkbox" name="hidden-ssid" checked="checked">
-    </div>  
+    <label class="normal-label-down">Background color:</label>
+    <div class="color-picker-wrapper">
+        <input type="color" id="input-background" value="#ffffff">
+        <input type="text" id="background-hex" class="hex-value" readonly>
+    </div>
 
-    <span>
-        <input type="submit" value="Generate QR Code" class="normal-btn">
-        <input type="button" value="Download QR Code" class="normal-btn">
-    </span>
-</form>
+    <label class="normal-label">Hidden SSID</label>
+    <input type="checkbox" name="hidden-ssid" checked="checked" id="ssid-checkbox">
+    <img id="qr-code">
+</div>  
+
+<span>
+    <input type="submit" value="Generate QR Code" class="normal-btn" id="generate-qr-code">
+    <input type="button" value="Copy QR Code" class="normal-btn" id="copy-qr-code">
+</span>
