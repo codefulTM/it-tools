@@ -111,6 +111,7 @@ main {
     height: 100vh;
     /* flex-grow: 3; */
     width: 70%;
+    overflow-y: auto;
 }
 
 #message {
