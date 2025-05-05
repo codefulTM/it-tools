@@ -66,149 +66,233 @@ function increaseValue(element, max) {
     return value;
 }
 
-meterDecrease.addEventListener("click", function() {
-    let meterValue = decreaseValue(meter, 0);
+function meterConverter (meterValue) {
     inch.value = (parseFloat(meterValue) * 39.3701).toFixed(2);
     yard.value = (parseFloat(meterValue) * 1.09361).toFixed(2);
+}
+
+function inchConverter (meterValue) {
+    meter.value = (parseFloat(inchValue) / 39.3701).toFixed(2);
+    yard.value = (parseFloat(inchValue) / 36).toFixed(2);
+}
+
+function yardConverter (yardValue) {
+    meter.value = (parseFloat(yardValue) / 1.09361).toFixed(2);
+    inch.value = (parseFloat(yardValue) * 36).toFixed(2);
+}
+
+function kilogramConverter (kilogramValue) {
+    pound.value = (parseFloat(kilogramValue) * 2.20462).toFixed(2);
+    ounce.value = (parseFloat(kilogramValue) * 35.274).toFixed(2);
+}
+
+function poundConverter (poundValue) {
+    kilogram.value = (parseFloat(poundValue) / 2.20462).toFixed(2);
+    ounce.value = (parseFloat(poundValue) * 16).toFixed(2);
+}
+
+function ounceConverter (ounceValue) {
+    kilogram.value = (parseFloat(ounceValue) / 35.274).toFixed(2);
+    pound.value = (parseFloat(ounceValue) / 16).toFixed(2);
+}
+
+function celsiusConverter (celsiusValue) {
+    fahrenheit.value = (parseFloat(celsiusValue) * 9/5 + 32).toFixed(2);
+    kelvin.value = (parseFloat(celsiusValue) + 273.15).toFixed(2);
+}
+
+function fahrenheitConverter (fahrenheitValue) {
+    celsius.value = ((parseFloat(fahrenheitValue) - 32) * 5/9).toFixed(2);
+    kelvin.value = ((parseFloat(fahrenheitValue) - 32) * 5/9 + 273.15).toFixed(2);
+}
+
+function kelvinConverter (kelvinConverter) {
+    celsius.value = (parseFloat(kelvinValue) - 273.15).toFixed(2);
+    fahrenheit.value = ((parseFloat(kelvinValue) - 273.15) * 9/5 + 32).toFixed(2);
+}
+
+function pascalConverter (pascalValue) {
+    atm.value = (parseFloat(pascalValue) / 101325).toFixed(2);
+    mmHg.value = (parseFloat(pascalValue) / 133.322).toFixed(2);
+}
+
+function atmConverter (atmValue) {
+    pascal.value = (parseFloat(atmValue) * 101325).toFixed(2);
+    mmHg.value = (parseFloat(atmValue) * 760).toFixed(2);
+}
+
+function mmHgConverter (mmHgValue) {
+    pascal.value = (parseFloat(mmHgValue) * 133.322).toFixed(2);
+    atm.value = (parseFloat(mmHgValue) / 760).toFixed(2);
+}
+
+meterDecrease.addEventListener("click", function() {
+    let meterValue = decreaseValue(meter, 0);
+    meterConverter(meterValue);
 });
 
 meterIncrease.addEventListener("click", function() {
     let meterValue = increaseValue(meter, 1000000);
-    inch.value = (parseFloat(meterValue) * 39.3701).toFixed(2);
-    yard.value = (parseFloat(meterValue) * 1.09361).toFixed(2);
+    meterConverter(meterValue);
 });
+
+meter.addEventListener("change", () => {
+    meterConverter(meter.value);
+})
 
 inchDecrease.addEventListener("click", function() {
     let inchValue = decreaseValue(inch, 0);
-    meter.value = (parseFloat(inchValue) / 39.3701).toFixed(2);
-    yard.value = (parseFloat(inchValue) / 36).toFixed(2);
+    inchConverter(inchValue);
 });
 
 inchIncrease.addEventListener("click", function() {
     let inchValue = increaseValue(inch, 1000000);
-    meter.value = (parseFloat(inchValue) / 39.3701).toFixed(2);
-    yard.value = (parseFloat(inchValue) / 36).toFixed(2);
+    inchConverter(inchValue);
 });
+
+inch.addEventListener("change", () => {
+    inchConverter(inch.value);
+})
 
 yardDecrease.addEventListener("click", function() {
     let yardValue = decreaseValue(yard, 0);
-    meter.value = (parseFloat(yardValue) / 1.09361).toFixed(2);
-    inch.value = (parseFloat(yardValue) * 36).toFixed(2);
+    yardConverter(yardValue);
 });
 
 yardIncrease.addEventListener("click", function() {
     let yardValue = increaseValue(yard, 1000000);
-    meter.value = (parseFloat(yardValue) / 1.09361).toFixed(2);
-    inch.value = (parseFloat(yardValue) * 36).toFixed(2);
+    yardConverter(yardValue);
 });
+
+yard.addEventListener("change", () => {
+    yardConverter(yard.value);
+})
 
 kilogramDecrease.addEventListener("click", function() {
     let kilogramValue = decreaseValue(kilogram, 0);
-    pound.value = (parseFloat(kilogramValue) * 2.20462).toFixed(2);
-    ounce.value = (parseFloat(kilogramValue) * 35.274).toFixed(2);
+    kilogramConverter(kilogramValue);
 });
 
 kilogramIncrease.addEventListener("click", function() {
     let kilogramValue = increaseValue(kilogram, 1000000);
-    pound.value = (parseFloat(kilogramValue) * 2.20462).toFixed(2);
-    ounce.value = (parseFloat(kilogramValue) * 35.274).toFixed(2);
+    kilogramConverter(kilogramValue);
+});
+
+kilogram.addEventListener("change", () => {
+    kilogramConverter(kilogram.value);
 });
 
 poundDecrease.addEventListener("click", function() {
     let poundValue = decreaseValue(pound, 0);
-    kilogram.value = (parseFloat(poundValue) / 2.20462).toFixed(2);
-    ounce.value = (parseFloat(poundValue) * 16).toFixed(2);
+    poundConverter(poundValue);
 });
 
 poundIncrease.addEventListener("click", function() {
     let poundValue = increaseValue(pound, 1000000);
-    kilogram.value = (parseFloat(poundValue) / 2.20462).toFixed(2);
-    ounce.value = (parseFloat(poundValue) * 16).toFixed(2);
+    poundConverter(poundValue);
 });
+
+pound.addEventListener("change", () => {
+    poundConverter(pound.value);
+})
 
 ounceDecrease.addEventListener("click", function() {
     let ounceValue = decreaseValue(ounce, 0);
-    kilogram.value = (parseFloat(ounceValue) / 35.274).toFixed(2);
-    pound.value = (parseFloat(ounceValue) / 16).toFixed(2);
+    ounceConverter(ounceValue);
 });
 
 ounceIncrease.addEventListener("click", function() {
     let ounceValue = increaseValue(ounce, 1000000);
-    kilogram.value = (parseFloat(ounceValue) / 35.274).toFixed(2);
-    pound.value = (parseFloat(ounceValue) / 16).toFixed(2);
+    ounceConverter(ounceValue);
 });
+
+ounce.addEventListener("change", () => {
+    ounceConverter(ounce.value);
+})
 
 celsiusDecrease.addEventListener("click", function() {
     let celsiusValue = decreaseValue(celsius, -273.15);
-    fahrenheit.value = (parseFloat(celsiusValue) * 9/5 + 32).toFixed(2);
-    kelvin.value = (parseFloat(celsiusValue) + 273.15).toFixed(2);
+    celsiusConverter(celsiusValue);
 });
 
 celsiusIncrease.addEventListener("click", function() {
     let celsiusValue = increaseValue(celsius, 1000000);
-    fahrenheit.value = (parseFloat(celsiusValue) * 9/5 + 32).toFixed(2);
-    kelvin.value = (parseFloat(celsiusValue) + 273.15).toFixed(2);
+    celsiusConverter(celsiusValue);
 });
+
+celsius.addEventListener("change", () => {
+    celsiusConverter(celsius.value);
+})
 
 fahrenheitDecrease.addEventListener("click", function() {
     let fahrenheitValue = decreaseValue(fahrenheit, -459.67);
-    celsius.value = ((parseFloat(fahrenheitValue) - 32) * 5/9).toFixed(2);
-    kelvin.value = ((parseFloat(fahrenheitValue) - 32) * 5/9 + 273.15).toFixed(2);
+    fahrenheitConverter(fahrenheitValue);
 });
 
 fahrenheitIncrease.addEventListener("click", function() {
     let fahrenheitValue = increaseValue(fahrenheit, 1000000);
-    celsius.value = ((parseFloat(fahrenheitValue) - 32) * 5/9).toFixed(2);
-    kelvin.value = ((parseFloat(fahrenheitValue) - 32) * 5/9 + 273.15).toFixed(2);
+    fahrenheitConverter(fahrenheitValue);
 });
+
+fahrenheit.addEventListener("change", () => {
+    fahrenheitConverter(fahrenheit.value);
+})
 
 kelvinDecrease.addEventListener("click", function() {
     let kelvinValue = decreaseValue(kelvin, 0);
-    celsius.value = (parseFloat(kelvinValue) - 273.15).toFixed(2);
-    fahrenheit.value = ((parseFloat(kelvinValue) - 273.15) * 9/5 + 32).toFixed(2);
+    kelvinConverter(kelvinValue);
 });
 
 kelvinIncrease.addEventListener("click", function() {
-    increaseValue(kelvin, 1000000);
-    celsius.value = (parseFloat(kelvin.value) - 273.15).toFixed(2);
-    fahrenheit.value = ((parseFloat(kelvin.value) - 273.15) * 9/5 + 32).toFixed(2);
+    let kelvinValue = increaseValue(kelvin, 1000000);
+    kelvinConverter(kelvinValue);
 });
 
+kelvin.addEventListener("click", () => {
+    kelvinConverter(kelvin.value);
+})
+
 pascalDecrease.addEventListener("click", function() {
-    decreaseValue(pascal, 0);
-    atm.value = (parseFloat(pascal.value) / 101325).toFixed(2);
-    mmHg.value = (parseFloat(pascal.value) / 133.322).toFixed(2);
+    let pascalValue = decreaseValue(pascal, 0);
+    pascalConverter(pascalValue);
 });
 
 pascalIncrease.addEventListener("click", function() {
-    increaseValue(pascal, 1000000);
-    atm.value = (parseFloat(pascal.value) / 101325).toFixed(2);
-    mmHg.value = (parseFloat(pascal.value) / 133.322).toFixed(2);
+    let pascalValue = increaseValue(pascal, 1000000);
+    pascalConverter(pascalValue);
 });
 
+pascal.addEventListener("click", () => {
+    pascalConverter(pascal.value);
+})
+
 atmDecrease.addEventListener("click", function() {
-    decreaseValue(mmHg, 0);
-    pascal.value = (parseFloat(mmHg.value) * 133.322).toFixed(2);
-    atm.value = (parseFloat(mmHg.value) / 760).toFixed(2);
+    let atmValue = decreaseValue(atm, 0);
+    atmConverter(atmValue);
 });
 
 atmIncrease.addEventListener("click", function() {
-    increaseValue(atm, 1000000);
-    pascal.value = (parseFloat(atm.value) * 101325).toFixed(2);
-    mmHg.value = (parseFloat(atm.value) * 760).toFixed(2);
+    let atmValue = increaseValue(atm, 1000000);
+    atmConverter(atmValue);
 });
 
+atm.addEventListener("click", () => {
+    atmConverter(atm.value);
+})
+
 mmHgDecrease.addEventListener("click", function() {
-    decreaseValue(mmHg, 0);
-    pascal.value = (parseFloat(mmHg.value) * 133.322).toFixed(2);
-    atm.value = (parseFloat(mmHg.value) / 760).toFixed(2);
+    let mmHgValue = decreaseValue(mmHg, 0);
+    mmHgConverter(mmHgValue);
 });
 
 mmHgIncrease.addEventListener("click", function() {
-    increaseValue(mmHg, 1000000);
-    pascal.value = (parseFloat(mmHg.value) * 133.322).toFixed(2);
-    atm.value = (parseFloat(mmHg.value) / 760).toFixed(2);
+    let mmHgValue = increaseValue(mmHg, 1000000);
+    mmHgConverter(mmHgValue);
 });
+
+mmHg.addEventListener("click", () => {
+    mmHgConverter(mmHg.value);
+})
 
 function changeUnitType() {
     const selectedUnit = unitType.value;
@@ -238,7 +322,5 @@ function changeUnitType() {
 unitType.addEventListener("change", function() {
     changeUnitType(); // Call the function when the unit type changes
 });
-
-document.addEventListener("DOMContentLoaded", function() {
-    changeUnitType(); // Call the function on page load to set the initial state
-});
+    
+changeUnitType();

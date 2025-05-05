@@ -1,41 +1,34 @@
-<h2 class="tool-name">Random date generator</h2>
+<h2 class="tool-name">Random Date Generator</h2>
+<p class="tool-des">Generate a random date and/or time, user can choose any format for the date and time</p>
 
-<p class="tool-des">
-    Generate a random date and/or time, user can choose any format for the date and time
-</p>
+<div class="tool-body date-generator-container">
+    <label class="normal-label-down">Format:</label>
+    <select name="date-time-format" class="dropdown" id="date-time-format">
+        <option value="dd/MM/yyyy" selecteed>(Date) dd/MM/yyyy</option>
+        <option value="yyyy/MM/dd">(Date) yyyy/MM/dd</option>
+        <option value="MM/dd/yyyy">(Date) MM/dd/yyyy</option>
+        <option value="hh:mm">(Time) hh:mm</option>
+        <option value="hh:mm:ss">(Time) hh:mm:ss</option>
+        <option value="hh:mm:ss aa">(Time) hh:mm:ss AM/PM</option>
+        <option value="dd/MM/yyyy hh:mm">(Date + Time) dd/MM/yyyy hh:mm</option>
+        <option value="dd/MM/yyyy hh:mm:ss">(Date + Time) dd/MM/yyyy hh:mm:ss</option>
+        <option value="dd/MM/yyyy hh:mm:ss aa">(Date + Time) dd/MM/yyyy hh:mm:ss AM/PM</option>
+        <option value="yyyy/MM/dd hh:mm">(Date + Time) yyyy/MM/dd hh:mm</option>
+        <option value="yyyy/MM/dd hh:mm:ss">(Date + Time) yyyy/MM/dd hh:mm:ss</option>
+        <option value="yyyy/MM/dd hh:mm:ss aa">(Date + Time) yyyy/MM/dd hh:mm:ss AM/PM</option>
+        <option value="MM/dd/yyyy hh:mm">(Date + Time) MM/dd/yyyy hh:mm</option>
+        <option value="MM/dd/yyyy hh:mm:ss">(Date + Time) MM/dd/yyyy hh:mm:ss</option>
+        <option value="MM/dd/yyyy hh:mm:ss aa">(Date + Time) MM/dd/yyyy hh:mm:ss AM/PM</option>
+    </select>
 
-<form action="/random_date_generator/" method="post">
-    <div class="tool-body date-generator-container">
-        {% csrf_token %}
-        <label class="normal-label-down">Format:</label>
-        <select name="date-time-format" class="dropdown" id="date-time-format">
-            <option value="dd/MM/yyyy" selecteed>(Date) dd/MM/yyyy</option>
-            <option value="yyyy/MM/dd">(Date) yyyy/MM/dd</option>
-            <option value="MM/dd/yyyy">(Date) MM/dd/yyyy</option>
-            <option value="hh:mm">(Time) hh:mm</option>
-            <option value="hh:mm:ss">(Time) hh:mm:ss</option>
-            <option value="hh:mm:ss AM/PM">(Time) hh:mm:ss AM/PM</option>
-            <option value="dd/MM/yyyy hh:mm">(Date + Time) dd/MM/yyyy hh:mm</option>
-            <option value="dd/MM/yyyy hh:mm:ss">(Date + Time) dd/MM/yyyy hh:mm:ss</option>
-            <option value="dd/MM/yyyy hh:mm:ss AM/PM">(Date + Time) dd/MM/yyyy hh:mm:ss AM/PM</option>
-            <option value="yyyy/MM/dd hh:mm">(Date + Time) yyyy/MM/dd hh:mm</option>
-            <option value="yyyy/MM/dd hh:mm:ss">(Date + Time) yyyy/MM/dd hh:mm:ss</option>
-            <option value="yyyy/MM/dd hh:mm:ss AM/PM">(Date + Time) yyyy/MM/dd hh:mm:ss AM/PM</option>
-            <option value="MM/dd/yyyy hh:mm">(Date + Time) MM/dd/yyyy hh:mm</option>
-            <option value="MM/dd/yyyy hh:mm:ss">(Date + Time) MM/dd/yyyy hh:mm:ss</option>
-            <option value="MM/dd/yyyy hh:mm:ss AM/PM">(Date + Time) MM/dd/yyyy hh:mm:ss AM/PM</option>
-        </select>
+    <label class="normal-label">Time zone</label>
+    <input type="checkbox" id="time-zone" checked>
 
-        <label class="normal-label">Time zone</label>
-        <input type="checkbox" id="time-zone" checked>
+    <label class="normal-label-down" id="date-time-output-label">Date/Time:</label>
+    <input class="normal-input" type="text" id="date-time-output" readonly>
+</div>
 
-        <label class="normal-label-down" id="date-time-output-label">Date/Time:</label>
-        <input class="normal-input" type="text" id="date-time-output-label" readonly>
-
-    </div>
-
-    <span>
-        <input type="submit" value="Generate Date" class="normal-btn">
-        <input type="button" value="Copy Date" class="normal-btn">
-    </span>
-</form>
+<span>
+    <input type="submit" value="Generate Date" class="normal-btn" id="generate-date">
+    <input type="button" value="Copy Date" class="normal-btn" id="copy-date">
+</span>

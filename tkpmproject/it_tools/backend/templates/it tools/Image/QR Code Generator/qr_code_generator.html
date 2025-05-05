@@ -1,38 +1,33 @@
 <h2 class="tool-name">QR Code Generator</h2>
+<p class="tool-des">Create QR code from a URL or text</p>
 
-<p class="tool-des">
-    Create QR code from a URL or text
-</p>
+<div class="tool-body qr-code-generator-container">
+    <label class="normal-label">Text:</label>
+    <textarea class="normal-input" type="text" id="text" required></textarea>
 
-<form action="/generate_qr_code/" method="post">
-    <div class="tool-body qr-code-generator-container">
-        {% csrf_token %}
-        <label class="normal-label">Text:</label>
-        <textarea class="normal-input" type="text" required></textarea>
-    
-        <label class="normal-label-down">Foreground color:</label>
-        <div class="color-picker-wrapper">
-            <input type="color" id="input-foreground" value="#000000">
-            <input type="text" id="foreground-hex" class="hex-value" readonly>
-        </div>
+    <label class="normal-label-down">Foreground color:</label>
+    <div class="color-picker-wrapper">
+        <input type="color" id="input-foreground" value="#000000">
+        <input type="text" id="foreground-hex" class="hex-value" readonly>
+    </div>
 
-        <label class="normal-label-down">Background color:</label>
-        <div class="color-picker-wrapper">
-            <input type="color" id="input-background" value="#ffffff">
-            <input type="text" id="background-hex" class="hex-value" readonly>
-        </div>
+    <label class="normal-label-down">Background color:</label>
+    <div class="color-picker-wrapper">
+        <input type="color" id="input-background" value="#ffffff">
+        <input type="text" id="background-hex" class="hex-value" readonly>
+    </div>
 
-        <label class="normal-label-down">Error resistance:</label>
-        <select name="error-resistance" class="dropdown">
-            <option value="low">low (7%)</option>
-            <option value="medium">medium (15%)</option>
-            <option value="quartile">quartile (25%)</option>
-            <option value="high">high (30%)</option>
-        </select>
-    </div>  
+    <label class="normal-label-down">Error resistance:</label>
+    <select name="error-resistance" class="dropdown" id="error-resistance">
+        <option value="L">low (7%)</option>
+        <option value="M">medium (15%)</option>
+        <option value="Q">quartile (25%)</option>
+        <option value="H">high (30%)</option>
+    </select>
+    <img id="qr-code">
+</div>  
 
-    <span>
-        <input type="submit" value="Generate QR Code" class="normal-btn">
-        <input type="button" value="Download QR Code" class="normal-btn">
-    </span>
-</form>
+<span>
+    <input type="button" value="Generate QR Code" class="normal-btn" id="generate-qr-code">
+    <input type="button" value="Copy QR Code" class="normal-btn" id="copy-qr-code">
+</span>
