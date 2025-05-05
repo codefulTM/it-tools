@@ -1,41 +1,35 @@
 <h2 class="tool-name">Lorem Ipsum Generator</h2>
+<p class="tool-des">Generate lorem ipsum placeholder string of given length</p>
 
-<p class="tool-des">
-    Generate lorem ipsum placeholder string of given length
-</p>
-
-<form action="/lorem_ipsum_generator/" method="post">
-    <div class="tool-body lorem-ipsum-generator-container">
-        {% csrf_token %}
-        <label class="normal-label-down">Paragraphs</label>
-        <div class="range-wrap">
-            <div class="range-value" id="paragraphV"></div>
-            <input type="range" name="paragraph" id="paragraph" min="1" max="20" value="2">
-        </div>
-
-        <label class="normal-label-down">Sentences per paragraph</label>
-        <div class="range-wrap">
-            <div class="range-value" id="sentenceV"></div>
-            <input type="range" name="sentence" id="sentence" min="1" max="50" value="5">
-        </div>
-
-        <label class="normal-label-down">Words per sentence</label>
-        <div class="range-wrap">
-            <div class="range-value" id="wordV"></div>
-            <input type="range" name="word" id="word" min="1" max="50" value="10">
-        </div>
-
-        <label class="normal-label">Start with lorem ipsum?</label>
-        <input type="checkbox" id="start-with-lorem" name="start-with-lorem" checked>
-
-        <label class="normal-label">As HTML?</label>
-        <input type="checkbox" id="as-html" name="as-html">
-
-        <label class="normal-label">Text</label>
-        <textarea class="normal-input" name="output" rows="5" id="output" placeholder="Lorem ipsum..." readonly></textarea>
+<div class="tool-body lorem-ipsum-generator-container">
+    <label class="normal-label-down">Paragraphs</label>
+    <div class="range-wrap">
+        <div class="range-value" id="paragraphV"></div>
+        <input type="range" name="paragraph" id="paragraph" min="1" max="20" value="2">
     </div>
-    <span>
-        <input type="submit" value="Generate Text" class="normal-btn">
-        <input type="button" value="Copy Text" class="normal-btn">
-    </span>
-</form>
+
+    <label class="normal-label-down">Sentences per paragraph</label>
+    <div class="range-wrap">
+        <div class="range-value" id="sentenceV"></div>
+        <input type="range" name="sentence" id="sentence" min="1" max="50" value="5">
+    </div>
+
+    <label class="normal-label-down">Words per sentence</label>
+    <div class="range-wrap">
+        <div class="range-value" id="wordV"></div>
+        <input type="range" name="word" id="word" min="1" max="50" value="10">
+    </div>
+
+    <label class="normal-label">Start with lorem ipsum?</label>
+    <input type="checkbox" id="start-with-lorem" name="start-with-lorem" checked>
+
+    <label class="normal-label">As HTML?</label>
+    <input type="checkbox" id="as-html" name="as-html">
+
+    <label class="normal-label">Text</label>
+    <textarea class="normal-input" id="text-output" name="output" rows="10" id="output" placeholder="Lorem ipsum..." readonly></textarea>
+</div>
+<span>
+    <input type="submit" value="Generate Text" class="normal-btn" id="generate-text">
+    <input type="button" value="Copy Text" class="normal-btn" id="copy-text">
+</span>
