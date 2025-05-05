@@ -51,10 +51,10 @@ class Tool{tool.id}(ToolComponent):
         }}
 
     def get_html(self):
-        return """{html_content}"""
+        return r"""{html_content}"""
 
     def get_js(self):
-        return """{js_content}"""
+        return r"""{js_content}"""
         '''
 
         # Save the content into a file in the tools folder
