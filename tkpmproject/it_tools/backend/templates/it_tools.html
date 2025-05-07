@@ -31,7 +31,7 @@
     {% endif %}
     <div class="toolGallery">   
         {% verbatim %}
-        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id, tool.is_premium)">
+        <div v-for="tool in filteredTools" :id="tool.id" :key="tool.id" @click="goToTool(tool.id)">
             <i 
                 :class="tool.is_favorite ? 'fas fa-heart' : 'far fa-heart'" 
                 style="font-size: 24px; cursor: pointer;" 
@@ -76,11 +76,7 @@
             }
         },
         methods: {
-            goToTool(id, premium) {
-                if (premium && this.user_role != "premium" && this.user_role != "admin") {
-                    alert ('This tool is only available for Premium user \nPlease upgrade your account first!');
-                    return;
-                }
+            goToTool(id) {
                 window.location.href = `/tools/${id}`;
             },
             toggleFavorite(toolId, isFavorite) {
